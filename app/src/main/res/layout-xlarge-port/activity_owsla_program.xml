@@ -1,0 +1,835 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/custom_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="30sp"
+        android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/OWSLAProgramParagraph"
+                            android:textColor="@color/White"
+                            android:textAlignment="center"
+                            android:textSize="20sp"
+                            android:gravity="center_horizontal">
+
+                        </TextView>
+
+                    </LinearLayout>//Paragraph
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/DaysOfTheWeek"
+                                android:textSize="20sp"
+                                android:textColor="@color/White"
+                                android:textAlignment="center"
+                                android:gravity="center_horizontal">
+                            </TextView>
+
+                            <TextView
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:text="@string/MenuShiftTypeMorning"
+                                android:textSize="20sp"
+                                android:textColor="@color/White"
+                                android:textAlignment="center"
+                                android:gravity="center_horizontal">
+                            </TextView>
+
+                            <TextView
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:text="@string/MenuShiftTypeNoon"
+                                android:textSize="20sp"
+                                android:textColor="@color/White"
+                                android:textAlignment="center"
+                                android:gravity="center_horizontal">
+                            </TextView>
+
+                            <TextView
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:text="@string/MenuShiftTypeNight"
+                                android:textSize="20sp"
+                                android:textColor="@color/White"
+                                android:textAlignment="center"
+                                android:gravity="center_horizontal">
+                            </TextView>
+
+                        </LinearLayout>//Header
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="5sp"
+                            android:background="@color/White"
+                            tools:ignore="SmallSp">
+
+                        </LinearLayout>//White
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/Monday"
+                                android:textSize="20sp"
+                                android:textColor="@color/White"
+                                android:textAlignment="center"
+                                android:gravity="center_horizontal">
+                            </TextView>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramMondayMorning"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramMondayNoon"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramMondayNight"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+                        </LinearLayout>//1
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5sp"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/Tuesday"
+                                android:textSize="20sp"
+                                android:textColor="@color/White"
+                                android:textAlignment="center"
+                                android:gravity="center_horizontal">
+                            </TextView>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramTuesdayMorning"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramTuesdayNoon"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramTuesdayNight"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+                        </LinearLayout>//2
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5sp"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/Wednesday"
+                                android:textSize="20sp"
+                                android:textColor="@color/White"
+                                android:textAlignment="center"
+                                android:gravity="center_horizontal">
+                            </TextView>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramWednesdayMorning"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramWednesdayNoon"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramWednesdayNight"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+                        </LinearLayout>//3
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5sp"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/Thursday"
+                                android:textSize="20sp"
+                                android:textColor="@color/White"
+                                android:textAlignment="center"
+                                android:gravity="center_horizontal">
+                            </TextView>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramThursdayMorning"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramThursdayNoon"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramThursdayNight"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+                        </LinearLayout>//4
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5sp"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/Friday"
+                                android:textSize="20sp"
+                                android:textColor="@color/White"
+                                android:textAlignment="center"
+                                android:gravity="center_horizontal">
+                            </TextView>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramFridayMorning"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramFridayNoon"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramFridayNight"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+                        </LinearLayout>//5
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5sp"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/Saturday"
+                                android:textSize="20sp"
+                                android:textColor="@color/White"
+                                android:textAlignment="center"
+                                android:gravity="center_horizontal">
+                            </TextView>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramSaturdayMorning"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramSaturdayNoon"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramSaturdayNight"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+                        </LinearLayout>//6
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5sp"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/Sunday"
+                                android:textSize="20sp"
+                                android:textColor="@color/White"
+                                android:textAlignment="center"
+                                android:gravity="center_horizontal">
+                            </TextView>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramSundayMorning"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramSundayNoon"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramSundayNight"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+                        </LinearLayout>//7
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/Sunday"
+                                android:textSize="20sp"
+                                android:textColor="@color/White"
+                                android:textAlignment="center"
+                                android:gravity="center_horizontal"
+                                android:visibility="invisible">
+                            </TextView>
+
+                            <EditText
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:visibility="invisible"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+
+                            <Button
+                                android:id="@+id/OWSLAProgramConfirm"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:text="@string/RegisterConfirm">
+                            </Button>
+
+                            <EditText
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5sp"
+                                android:visibility="invisible"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+
+
+                        </LinearLayout>//Button
+
+                    </LinearLayout>//Program
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5sp"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="350sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="15sp"
+                                android:text="@string/OWSLAProgramTotalEmployees"
+                                android:textColor="@color/White"
+                                android:textSize="20sp"
+                                android:textAlignment="center"
+                                android:gravity="center_horizontal">
+
+                            </TextView>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramTotalEmployees"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:clickable="false"
+                                android:focusable="false"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+
+                        </LinearLayout>//1
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5sp"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="350sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="15sp"
+                                android:text="@string/OWSLAProgramTotalEmployeesHours"
+                                android:textColor="@color/White"
+                                android:textSize="20sp"
+                                android:textAlignment="center"
+                                android:gravity="center_horizontal">
+
+                            </TextView>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramTotalEmployeesHours"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:clickable="false"
+                                android:focusable="false"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+
+                        </LinearLayout>//2
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5sp"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="350sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="15sp"
+                                android:text="@string/OWSLAProgramPercentageMorning"
+                                android:textColor="@color/White"
+                                android:textSize="20sp"
+                                android:textAlignment="center"
+                                android:gravity="center_horizontal">
+
+                            </TextView>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramPercentageMorning"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:clickable="false"
+                                android:focusable="false"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+
+                        </LinearLayout>//3
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5sp"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="350sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="15sp"
+                                android:text="@string/OWSLAProgramPercentageNoon"
+                                android:textColor="@color/White"
+                                android:textSize="20sp"
+                                android:textAlignment="center"
+                                android:gravity="center_horizontal">
+
+                            </TextView>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramPercentageNoon"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:clickable="false"
+                                android:focusable="false"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+
+                        </LinearLayout>//4
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5sp"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="350sp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="15sp"
+                                android:text="@string/OWSLAProgramPercentageNight"
+                                android:textColor="@color/White"
+                                android:textSize="20sp"
+                                android:textAlignment="center"
+                                android:gravity="center_horizontal">
+
+                            </TextView>
+
+                            <EditText
+                                android:id="@+id/OWSLAProgramPercentageNight"
+                                android:layout_width="160sp"
+                                android:layout_height="wrap_content"
+                                android:clickable="false"
+                                android:focusable="false"
+                                android:layout_marginLeft="5sp"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:textAlignment="center"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
+
+                            </EditText>
+
+                        </LinearLayout>//5
+
+                    </LinearLayout>//Information
+                </LinearLayout>//Do not touch
+            </ScrollView>//Scroll
+    </LinearLayout>//Main Linear
+</LinearLayout>

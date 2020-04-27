@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@drawable/custom_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10sp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/WorkerDateLeaveConfirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/WorkerLeave"
+                        android:textSize="20sp">
+
+                    </Button>//WorkerDateLeaveConfirm
+
+                    <EditText
+                        android:id="@+id/WorkerDateLeave"
+                        android:layout_width="160sp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:inputType="date"
+                        android:maxLines="1"
+                        android:imeOptions="actionGo"
+                        android:textAlignment="center"
+                        android:textColor="@color/White"
+                        android:textSize="25sp"
+                        android:hint="@string/DATE"
+                        android:textColorHint="@color/Gray"
+                        android:background="@color/BlackTransparent">
+
+                    </EditText>//WorkerDateLeave
+                    
+                </LinearLayout>//WorkerDateLeave/Confirm
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5sp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/WorkerProgramVisualizer"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/BlackTransparent"
+                        android:textSize="20sp"
+                        android:textColor="@color/White"
+                        android:text="@string/Test">
+                    </TextView>
+
+                </LinearLayout>//WorkerProgramVisualizer
+
+            </LinearLayout>You can touch this
+        </ScrollView>//Scroll
+    </LinearLayout>//Main Linear
+</LinearLayout>
