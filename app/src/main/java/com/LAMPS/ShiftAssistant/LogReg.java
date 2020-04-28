@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -562,12 +563,15 @@ public class LogReg extends AppCompatActivity {
 
                                     }
                                     if (url.equals(Login_URL)) {
+                                        Intent LoginEmployee = new Intent(LogReg.this, Worker.class);
+                                        LoginEmployee.putExtra("DeadMauFive",name);
+                                        startActivity(LoginEmployee);
 
                                     }
                                     else{
-                                        Intent intent = new Intent(LogReg.this, OWSLA.class);
-                                        intent.putExtra("DeadMau5", name);
-                                        startActivity(intent);
+                                        Intent LoginOwner = new Intent(LogReg.this, OWSLA.class);
+                                        LoginOwner.putExtra("DeadMau5", name);
+                                        startActivity(LoginOwner);
                                     }
 
                                 }else{

@@ -64,6 +64,7 @@
     <string name="WorkerLeave">Ρεπό</string>
     <string name="WorkerUnPaidLeave">Ρεπό άνευ αποδοχών</string>
     <string name="WorkerPaidLeave">Ρεπό με αποδοχές</string>
+    <string name="WorkerVacation">Διακοπές</string>
     ================================Months==========================================================
     <string name="Month">Μήνας</string>
     <string name="January">Ιανουάριος</string>

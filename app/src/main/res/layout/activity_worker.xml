@@ -8,7 +8,47 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10sp">
+        android:layout_margin="10sp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end">
+
+            <TextView
+                android:id="@+id/WorkerDateTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30sp"
+                android:text="Time is too valuable"
+                android:textStyle="bold"
+                android:textColor="@color/White"
+                android:textSize="13sp">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5sp"
+                android:text="@string/OWSLAConnect"
+                android:textColor="@color/White"
+                android:textSize="13sp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/WorkerUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UserName"
+                android:textStyle="bold|italic"
+                android:textColor="@color/Blue"
+                android:textSize="13sp">
+            </TextView>
+
+        </LinearLayout>//WorkerUserName WorkerDateTime
 
         <ScrollView
             android:layout_width="match_parent"
@@ -51,6 +91,40 @@
 
                     </EditText>//WorkerDateLeave
                     
+                </LinearLayout>//WorkerDateLeave/Confirm
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/WorkerDateVacationConfirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/WorkerVacation"
+                        android:textSize="20sp">
+
+                    </Button>//WorkerDateLeaveConfirm
+
+                    <EditText
+                        android:id="@+id/WorkerDateVacation"
+                        android:layout_width="160sp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:inputType="date"
+                        android:maxLines="1"
+                        android:imeOptions="actionGo"
+                        android:textAlignment="center"
+                        android:textColor="@color/White"
+                        android:textSize="25sp"
+                        android:hint="@string/DATE"
+                        android:textColorHint="@color/Gray"
+                        android:background="@color/BlackTransparent">
+
+                    </EditText>//WorkerDateLeave
+
                 </LinearLayout>//WorkerDateLeave/Confirm
 
                 <LinearLayout

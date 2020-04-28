@@ -64,6 +64,7 @@
     <string name="WorkerLeave">Leave</string>
     <string name="WorkerUnPaidLeave">Unpaid leave</string>
     <string name="WorkerPaidLeave">Paid leave</string>
+    <string name="WorkerVacation">Vacation</string>
     ==============================Months============================================================
     <string name="Month">Month</string>
     <string name="January">January</string>

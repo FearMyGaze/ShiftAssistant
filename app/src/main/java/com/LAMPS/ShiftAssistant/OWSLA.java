@@ -48,11 +48,9 @@ public class OWSLA extends AppCompatActivity {
         //Getter's
 
         String UserName = getIntent().getStringExtra("DeadMau5");
-
-
-
-
         OWSLAUserName.setText(UserName);
+
+
 
 
         //ByPassers
