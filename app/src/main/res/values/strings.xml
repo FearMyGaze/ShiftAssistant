@@ -1,5 +1,5 @@
 <resources>
-=================================LogReg=============================================================
+    =================================LogReg=============================================================
     <string name="app_name" translatable="false">ShiftAssistant</string>
     <string name="Name">Welcome to Shift Assistant</string>
     <string name="Log">Login</string>

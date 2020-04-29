@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -21,19 +22,20 @@ public class Worker extends AppCompatActivity {
 
     EditText WorkerDateLeave;
 
-    TextView WorkerProgramVisualizer , WorkerUserName , WorkerDateTime;
+    TextView WorkerUserName , WorkerDateTime;
+
+    ListView WorkerProgramListView;
+
+    String LeavingDate;//We sent the date that the worker wants to leave
 
     int WorkerDaysOff = 2;//Coming from different Class
-    String LeavingDate;//We sent the date that the worker wants to leave
+
     boolean Trust = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_worker);
-
-        //Handler's
-        final Handler WorkerHandlerDateTime = new Handler(getMainLooper());
 
         //Button's
 
@@ -43,11 +45,55 @@ public class Worker extends AppCompatActivity {
 
         WorkerUserName = findViewById(R.id.WorkerUserName);
         WorkerDateTime = findViewById(R.id.OWSLADateTime);
-        WorkerProgramVisualizer = findViewById(R.id.WorkerProgramVisualizer);
 
         //EditText's
 
         WorkerDateLeave = findViewById(R.id.WorkerDateLeave);
+
+        //List View's
+
+        WorkerProgramListView = findViewById(R.id.WorkerProgramListView);
+
+        //Handler's
+
+        final Handler WorkerHandlerDateTime = new Handler(getMainLooper());
+
+        //ArrayList's
+
+
+
+
+
+
+
+
+
+
+
+
+        ProgramGetterSetter test1 = new ProgramGetterSetter("test1","2",3,4,5);
+        ProgramGetterSetter test2 = new ProgramGetterSetter("test2","2",3,4,5);
+        ProgramGetterSetter test3 = new ProgramGetterSetter("test3","2",3,4,5);
+        ProgramGetterSetter test4 = new ProgramGetterSetter("test4","2",3,4,5);
+        ProgramGetterSetter test5 = new ProgramGetterSetter("test5","2",3,4,5);
+        ProgramGetterSetter test6 = new ProgramGetterSetter("test6","2",3,4,5);
+        ProgramGetterSetter test7 = new ProgramGetterSetter("test7","2",3,4,5);
+        ProgramGetterSetter test8 = new ProgramGetterSetter("test8","2",3,4,5);
+
+
+        ArrayList<ProgramGetterSetter> ProgramArrayList = new ArrayList<>();
+        ProgramArrayList.add(test1);
+        ProgramArrayList.add(test2);
+        ProgramArrayList.add(test3);
+        ProgramArrayList.add(test4);
+        ProgramArrayList.add(test5);
+        ProgramArrayList.add(test6);
+        ProgramArrayList.add(test7);
+        ProgramArrayList.add(test8);
+
+        ProgramListAdapter adapter = new ProgramListAdapter(this,R.layout.adapter_worker_program,ProgramArrayList);
+        WorkerProgramListView.setAdapter(adapter);
+
 
         TrustMe();
 
@@ -76,21 +122,18 @@ public class Worker extends AppCompatActivity {
             }
         });
 
-        WorkerProgramVisualizer.setText("");
-
-
 
 
         //Handler's
-/*
+
         WorkerHandlerDateTime.postDelayed(new Runnable() {
             @Override
             public void run() {
-                WorkerDateTime.setText(new SimpleDateFormat("dd-MM-yyyy" + " " + "HH:mm:ss",Locale.getDefault()).format(new Date()));
-                WorkerHandlerDateTime.postDelayed(this,1000);
+                WorkerDateTime.setText(new SimpleDateFormat("dd-MM-yyyy"+ "  " + "HH:mm:ss", Locale.getDefault()).format(new Date()));
+                WorkerHandlerDateTime.postDelayed(this, 1000);
             }
         },10);
-*/
+
     }
 
     private void TrustMe(){
