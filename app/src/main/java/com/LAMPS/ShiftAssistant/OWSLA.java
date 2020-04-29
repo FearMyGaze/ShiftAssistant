@@ -47,7 +47,9 @@ public class OWSLA extends AppCompatActivity {
 
         //Getter's
 
-        String UserName = getIntent().getStringExtra("DeadMau5");
+        final String UserName = getIntent().getStringExtra("DeadMau5");
+        final String UserEmail = getIntent().getStringExtra("GOATdm5");
+
         OWSLAUserName.setText(UserName);
 
 
@@ -74,6 +76,8 @@ public class OWSLA extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent Activity = new Intent(OWSLA.this, OWSLAProgram.class);
+                Activity.putExtra("DeadMau5", UserName);
+                Activity.putExtra("GOATdm5",UserEmail);
                 startActivity(Activity);
             }
         });

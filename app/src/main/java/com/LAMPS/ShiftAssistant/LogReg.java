@@ -78,7 +78,6 @@ public class LogReg extends AppCompatActivity {
     private String LoginOwner_URL ="http://192.168.1.8/Shifts/LoginOwner.php";
     private String Register_URL = "http://192.168.1.8/Shifts/RegisterEmployees.php";
     private String RegisterOwners_URL = "http://192.168.1.8/Shifts/RegisterOwners.php";
-    private String FetchEmployeesData_URL = "http://192.168.1.8/Shifts/FetchEmployees.php";
 
     //Json
 
@@ -150,7 +149,6 @@ public class LogReg extends AppCompatActivity {
         LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FetchEmployeesData();
                 ClearText();
                 LoginForm.setVisibility(View.VISIBLE);
                 RegisterForm.setVisibility(View.GONE);
@@ -302,82 +300,6 @@ public class LogReg extends AppCompatActivity {
 
 
 
-    }
-
-    private void FetchEmployeesData(){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, FetchEmployeesData_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        if(response.isEmpty()){
-                            Toast.makeText(LogReg.this,
-                                    "This account does not exist.", Toast.LENGTH_SHORT)
-                                    .show();
-                        } else {
-                            try {
-                                JSONObject jsonObject = new JSONObject(response);
-                                String success = jsonObject.getString("success");
-                                if (success.equals("1")) {
-                                    FileOutputStream fos = null;
-                                    JSONObject object = new JSONObject();
-                                    try
-                                    {
-                                        fos = openFileOutput(File_Name,MODE_PRIVATE);
-                                        try {
-                                            object.put("Employees",jsonObject.get("Employees"));
-                                            fos.write(object.toString().getBytes());
-                                            fos.flush();
-                                            //Toast.makeText(getApplicationContext(),"Saved to" + getFilesDir() + "/" + File_Name,Toast.LENGTH_LONG).show();
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-
-                                    }
-                                    catch(FileNotFoundException e){
-                                        e.printStackTrace();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                    finally {
-                                        if (fos != null){
-                                            try {
-                                                fos.close();
-                                            } catch (IOException e) {
-                                                e.printStackTrace();
-                                            }
-                                        }
-                                    }
-                                }
-                                else{
-                                    Toast.makeText(LogReg.this,
-                                            "There are no records in the Database", Toast.LENGTH_SHORT)
-                                            .show();
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                                Toast.makeText(LogReg.this, "An Error came through" +e.toString(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(LogReg.this, "Failed connection" +error.toString(), Toast.LENGTH_SHORT).show();
-
-                    }
-                })
-        {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-
-                return params;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
     }
 
     private void RegisterEmployees(){
@@ -550,6 +472,10 @@ public class LogReg extends AppCompatActivity {
                                 if (success.equals("1")) {
                                     String name = "0";
                                     String email = "0";
+                                    String id = "0";
+                                    String shift_type = "0";
+                                    String vacation_status = "0";
+                                    String Teams_Code = "0";
                                     for (int i = 0; i < jsonArray.length(); i++) {
 
                                         JSONObject object = jsonArray.getJSONObject(i);
@@ -557,6 +483,14 @@ public class LogReg extends AppCompatActivity {
                                         name = object.getString("name").trim();
 
                                         email = object.getString("email").trim();
+
+                                        id = object.getString("ID").trim();
+
+                                        shift_type = object.getString("Shift_Type").trim();
+
+                                        vacation_status = object.getString("VacationStatus").trim();
+
+                                        Teams_Code = object.getString("team_code").trim();
 
                                         Toast.makeText(LogReg.this,
                                                 "Success Login. Welcome "+name, Toast.LENGTH_SHORT)
@@ -566,12 +500,18 @@ public class LogReg extends AppCompatActivity {
                                     if (url.equals(Login_URL)) {
                                         Intent LoginEmployee = new Intent(LogReg.this, Worker.class);
                                         LoginEmployee.putExtra("DeadMauFive",name);
+                                        LoginEmployee.putExtra("TestPilot",email);
+                                        LoginEmployee.putExtra("goat1",id);
+                                        LoginEmployee.putExtra("goat2",shift_type);
+                                        LoginEmployee.putExtra("goat3",vacation_status);
+                                        LoginEmployee.putExtra("goat4",Teams_Code);
                                         startActivity(LoginEmployee);
 
                                     }
                                     else{
                                         Intent LoginOwner = new Intent(LogReg.this, OWSLA.class);
                                         LoginOwner.putExtra("DeadMau5", name);
+                                        LoginOwner.putExtra("GOATdm5",email);
                                         startActivity(LoginOwner);
                                     }
 

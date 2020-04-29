@@ -3,10 +3,19 @@ package com.LAMPS.ShiftAssistant;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,6 +26,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import static java.lang.Boolean.FALSE;
 
@@ -24,7 +35,9 @@ public class OWSLAProgram extends AppCompatActivity {
 
     protected ArrayList<String> Shifts = new ArrayList<>();
     protected ArrayList<JSONObject> Employees = new ArrayList<>();
-
+    protected ArrayList<JSONObject> Morning = new ArrayList<>();
+    protected ArrayList<JSONObject> Noon = new ArrayList<>();
+    protected ArrayList<JSONObject> Night = new ArrayList<>();
     protected int TotalEmployees = 0, TotalWorkHours = 0, finalMonday = 0,  finalTuesday = 0,  finalWednesday = 0,  finalThursday = 0,  finalFriday = 0,  finalSaturday = 0,  finalSunday = 0 ;
     protected double MorningRate = 0, NoonRate = 0, NightRate = 0;
 
@@ -40,7 +53,8 @@ public class OWSLAProgram extends AppCompatActivity {
 
     private static final String File_Name = "AlgorithmTest.json";
     private static final String GeneratedSchedule = "Program.json";
-
+    private String FetchEmployeesData_URL = "http://192.168.1.8/Shifts/FetchEmployees.php";
+    final String VACcheck_URL = "http://192.168.1.8/Shifts/ProgramGen.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +92,10 @@ public class OWSLAProgram extends AppCompatActivity {
         //Button's
 
         OWSLAProgramConfirm = findViewById(R.id.OWSLAProgramConfirm);
+        String UserName = getIntent().getStringExtra("DeadMau5");
+        final String UserEmail = getIntent().getStringExtra("GOATdm5");
+
+
 
         OWSLAProgramConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +104,9 @@ public class OWSLAProgram extends AppCompatActivity {
                 GetText();
                 if(!weHaveMissingFields()) {
                     if(restriction(Shifts)){
+                        FetchEmployeesData(UserEmail);
                         ProgramEntry(finalMonday,finalTuesday,finalWednesday,finalThursday,finalFriday,finalSaturday,finalSunday);
+                        vacationcheck(UserEmail);
                         ClearText();
                     } else {
                         Toast.makeText(getApplicationContext(),"Υou have exceeded the limit of available employees, Please check the fields and try again",Toast.LENGTH_LONG).show();
@@ -147,17 +167,19 @@ public class OWSLAProgram extends AppCompatActivity {
             for(int i = 0; i < object.getJSONArray("Employees").length();i++) {
                 if(object.getJSONArray("Employees").getJSONObject(i).getString("Shift_Type").equals("MORNING")){
                     this.MorningRate++;
-
+                    //   this.Morning.add(object.getJSONArray("Employees").getJSONObject(i));
                 } else if (object.getJSONArray("Employees").getJSONObject(i).getString("Shift_Type").equals("NOON")) {
                     this.NoonRate++;
-
+                    //    this.Noon.add(object.getJSONArray("Employees").getJSONObject(i));
                 } else {
                     this.NightRate++;
-
+                    //   this.Night.add(object.getJSONArray("Employees").getJSONObject(i));
                 }
-
                 this.TotalWorkHours = Integer.valueOf(object.getJSONArray("Employees").getJSONObject(i).getString("WorkHours")) + this.TotalWorkHours;
                 this.Employees.add(object.getJSONArray("Employees").getJSONObject(i));
+//                if (object.getJSONArray("Employees").getJSONObject(i).getString("VacationStatus").equals("1")) {
+//                    this.Employees.remove(i);
+//                }
             }
 
 
@@ -239,6 +261,7 @@ public class OWSLAProgram extends AppCompatActivity {
         JSONArray Friday = new JSONArray();
         JSONArray Saturday = new JSONArray();
         JSONArray Sunday = new JSONArray();
+
         try
         {
             fos = openFileOutput(GeneratedSchedule,MODE_PRIVATE);
@@ -251,6 +274,8 @@ public class OWSLAProgram extends AppCompatActivity {
                 object.put("Friday",Friday);
                 object.put("Saturday",Saturday);
                 object.put("Sunday",Sunday);
+
+
                 for(int i = 0; i<monday; i++){
                     Monday.put(this.Employees.get(i));
                 }
@@ -334,4 +359,148 @@ public class OWSLAProgram extends AppCompatActivity {
             return true;
         }
     }
+
+
+    private void FetchEmployeesData(final String Email){
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, FetchEmployeesData_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if(response.isEmpty()){
+                            Toast.makeText(OWSLAProgram.this,
+                                    "This account does not exist.", Toast.LENGTH_SHORT)
+                                    .show();
+                        } else {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                String success = jsonObject.getString("success");
+                                if (success.equals("1")) {
+                                    FileOutputStream fos = null;
+                                    JSONObject object = new JSONObject();
+                                    try
+                                    {
+                                        fos = openFileOutput(File_Name,MODE_PRIVATE);
+                                        try {
+                                            object.put("Employees",jsonObject.get("Employees"));
+                                            fos.write(object.toString().getBytes());
+                                            fos.flush();
+                                            //Toast.makeText(getApplicationContext(),"Saved to" + getFilesDir() + "/" + File_Name,Toast.LENGTH_LONG).show();
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                    }
+                                    catch(FileNotFoundException e){
+                                        e.printStackTrace();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                    finally {
+                                        if (fos != null){
+                                            try {
+                                                fos.close();
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }
+                                }
+                                else{
+                                    Toast.makeText(OWSLAProgram.this,
+                                            "There are no records in the Database", Toast.LENGTH_SHORT)
+                                            .show();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Toast.makeText(OWSLAProgram.this, "An Error came through" +e.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(OWSLAProgram.this, "Failed connection" +error.toString(), Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Email",Email);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void vacationcheck(final String Email){
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,  VACcheck_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            if (success.equals("1")) {
+                                Toast.makeText(getApplicationContext(), "Program generated successfully", Toast.LENGTH_LONG).show();
+                            }
+                            else if (success.equals("0")) {
+                                Toast.makeText(getApplicationContext(), "Program generated unsuccessfully", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getApplicationContext(), "Field trash." + e.toString(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Failed connection" + error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Email",Email);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
 }
+
+//                OverTime(monday,Monday);
+//                OverTime(tuesday,Tuesday);
+//                OverTime(wednesday,Wednesday);
+//                OverTime(thursday,Thursday);
+//                OverTime(friday,Friday);
+//                OverTime(saturday,Saturday);
+//                OverTime(sunday,Sunday);
+//    private void OverTime(int day,JSONArray Day){
+//
+//        for(int i = 0; i<this.Morning.size(); i++){
+//            Day.put(this.Employees.get(i));
+//        }
+//        for(int i = 0; i<this.Noon.size(); i++){
+//            Day.put(this.Employees.get(i));
+//        }
+//        for(int i = 0; i<this.Night.size(); i++){
+//            Day.put(this.Employees.get(i));
+//        }
+//        remaining = this.TotalEmployees - day;
+//        if(remaining > 0){
+//            for(int i = 0; i<remaining; i++){
+//                Day.put(this.Employees.get(i));
+//            }
+//        }
+//    }

@@ -14,13 +14,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50sp"
+            android:layout_gravity="center"
             android:orientation="horizontal"
             android:layout_weight="50"
             android:gravity="center">
 
             <TextView
                 android:id="@+id/WorkerAdapterDate"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="dd-mm-yyyy"
@@ -33,13 +34,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="65sp"
+            android:layout_height="60sp"
             android:orientation="horizontal"
             android:layout_weight="50">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="65sp"
+                android:layout_height="60sp"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:layout_weight="25">
@@ -63,7 +64,6 @@
 
                 </LinearLayout>
 
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="30sp"
@@ -86,11 +86,10 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="65sp"
+                android:layout_height="60sp"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:layout_weight="25">
-
 
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -58,7 +58,7 @@
 
             <Button
                 android:id="@+id/WorkerDateLeaveConfirm"
-                android:layout_width="130sp"
+                android:layout_width="150sp"
                 android:layout_height="wrap_content"
                 android:text="@string/WorkerLeave"
                 android:textSize="20sp">
@@ -92,7 +92,7 @@
 
             <Button
                 android:id="@+id/WorkerDateVacationConfirm"
-                android:layout_width="130sp"
+                android:layout_width="150sp"
                 android:layout_height="wrap_content"
                 android:text="@string/WorkerVacation"
                 android:textSize="20sp">
