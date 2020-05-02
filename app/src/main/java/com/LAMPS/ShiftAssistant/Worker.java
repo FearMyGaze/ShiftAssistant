@@ -41,13 +41,16 @@ public class Worker extends AppCompatActivity {
     TextView WorkerUserName , WorkerDateTime;
 
     ListView WorkerProgramListView;
-    private static final String File_Name = "Program.json";
 
     String LeavingDate;//We sent the date that the worker wants to leave
+
     String paramEmail;
+
     int WorkerDaysOff = 2;//Coming from different Class
 
     boolean Trust = true;
+
+    private static final String File_Name = "Program.json";
 
     final String VAC_URL = "http://192.168.1.8/Shifts/Vacation.php";
 

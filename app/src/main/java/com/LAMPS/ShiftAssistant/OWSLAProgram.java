@@ -54,7 +54,7 @@ public class OWSLAProgram extends AppCompatActivity {
     private static final String File_Name = "AlgorithmTest.json";
     private static final String GeneratedSchedule = "Program.json";
     private String FetchEmployeesData_URL = "http://192.168.1.8/Shifts/FetchEmployees.php";
-    final String VACcheck_URL = "http://192.168.1.8/Shifts/ProgramGen.php";
+    final String VAC_Check_URL = "http://192.168.1.8/Shifts/ProgramGen.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -440,7 +440,7 @@ public class OWSLAProgram extends AppCompatActivity {
 
     private void vacationcheck(final String Email){
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,  VACcheck_URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,  VAC_Check_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

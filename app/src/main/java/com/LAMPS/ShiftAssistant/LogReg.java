@@ -83,11 +83,11 @@ public class LogReg extends AppCompatActivity {
 
     private static final String File_Name = "AlgorithmTest.json";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_reg);
+
 
         //Switch's
 
@@ -143,6 +143,7 @@ public class LogReg extends AppCompatActivity {
         LoginForgotText = findViewById(R.id.LoginForgotText);
         ForgetName = findViewById(R.id.ForgetName);
         ForgetSend = findViewById(R.id.ForgetSend);
+
 
         //ClickListener 's
 
@@ -295,9 +296,6 @@ public class LogReg extends AppCompatActivity {
                 ShiftType.show();
             }
         });
-
-
-
 
 
     }
@@ -484,13 +482,15 @@ public class LogReg extends AppCompatActivity {
 
                                         email = object.getString("email").trim();
 
-                                        id = object.getString("ID").trim();
+                                        if (url.equals(Login_URL)) {
+                                            id = object.getString("ID").trim();
 
-                                        shift_type = object.getString("Shift_Type").trim();
+                                            shift_type = object.getString("Shift_Type").trim();
 
-                                        vacation_status = object.getString("VacationStatus").trim();
+                                            vacation_status = object.getString("VacationStatus").trim();
 
-                                        Teams_Code = object.getString("team_code").trim();
+                                            Teams_Code = object.getString("team_code").trim();
+                                        }
 
                                         Toast.makeText(LogReg.this,
                                                 "Success Login. Welcome "+name, Toast.LENGTH_SHORT)

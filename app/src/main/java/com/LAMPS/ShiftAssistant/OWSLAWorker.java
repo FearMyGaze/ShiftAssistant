@@ -23,12 +23,8 @@ public class OWSLAWorker extends AppCompatActivity {
 
     ImageButton OWSLAWorkerPrevious , OWSLAWorkerNext , OWSLAWorkerAdd , OWSLAWorkerRemove;
 
-    //Links
-
-    private String LOGIN_URL = "http://192.168.1.8/Shifts/Login.php";
-    private String REGISTER_URL = "http://192.168.1.8/Shifts/Register.php";
-
     //String Update's
+
     private String PHP_OWSLAWorkerName , PHP_OWSLAWorkerSurname , PHP_OWSLAWorkerAFM , PHP_OWSLAWorkerEmail , PHP_OWSLAWorkerPassword ,
             PHP_OWSLAWorkerGender , PHP_OWSLAWorkerLandLine , PHP_OWSLAWorkerCellPhone , PHP_OWSLAWorkerStreetAddress ,
             PHP_OWSLAWorkerNumber , PHP_OWSLAWorkerPostalCode , PHP_OWSLAWorkerTeamCode , PHP_OWSLAWorkerBirthDate , PHP_OWSLANationality,

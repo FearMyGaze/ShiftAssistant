@@ -17,6 +17,8 @@ public class ProgramGetterSetter {
         TilVAC = tilVAC;
     }
 
+//==================================================Getters=========================================
+
     protected String getDate() {
         return Date;
     }
@@ -36,6 +38,8 @@ public class ProgramGetterSetter {
     protected int getTilVAC() {
         return TilVAC;
     }
+
+//==================================================Setters=========================================
 
     public void setDate(String date) {
         Date = date;
