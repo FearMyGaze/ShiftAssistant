@@ -4,15 +4,16 @@ public class GlobalVariables {
 
     //Setup
     private String Protocol = "http://";
-    private String IP = "192.168.1.8";
+    private String IP = "192.168.1.8";//Change with your IP
+
 
     private String LoginEmployees = "/Shifts/LoginEmployee.php";
-    private String LoginOwners ="/Shifts/LoginOwner.php";
     private String RegisterEmployees = "/Shifts/RegisterEmployees.php";
-    private String RegisterOwners = "/Shifts/RegisterOwners.php";
-    private String ProgramGenerate = "/Shifts/ProgramGen.php";
     private String FetchEmployees = "/Shifts/FetchEmployees.php";
+    private String LoginOwners ="/Shifts/LoginOwner.php";
+    private String RegisterOwners = "/Shifts/RegisterOwners.php";
     private String FetchOwners = "0";
+    private String ProgramGenerate = "/Shifts/ProgramGen.php";
     private String Teams = "0";
     private String DeleteTeams = "/shifts/DeleteTeams.php";
     private String RegisterTeams = "/Shifts/RegisterTeams.php";
@@ -35,12 +36,7 @@ public class GlobalVariables {
     private String Empty = "0";
     private String Empty_URL = Protocol + IP + Empty;
 
-    //==================================================Getters=========================================
-
-
-    protected String getIP() {
-        return IP;
-    }
+    //==================================================Getters=====================================
 
     protected String getLoginEmployees_URL() {
         return LoginEmployees_URL;
@@ -85,8 +81,7 @@ public class GlobalVariables {
     }
 
 
-
-
+    //toliptseT
     public String getEmpty_URL() {
         return Empty_URL;
     }

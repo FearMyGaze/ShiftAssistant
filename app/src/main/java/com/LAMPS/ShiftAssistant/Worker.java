@@ -42,6 +42,8 @@ public class Worker extends AppCompatActivity {
 
     ListView WorkerProgramListView;
 
+    //Variable's
+
     String LeavingDate;//We sent the date that the worker wants to leave
 
     String paramEmail;
@@ -50,14 +52,21 @@ public class Worker extends AppCompatActivity {
 
     boolean Trust = true;
 
+
+
+    //Link's
+
+    private String VAC_URL;
+
+    //File's
+
     private static final String File_Name = "Program.json";
 
-    final String VAC_URL = "http://192.168.1.8/Shifts/Vacation.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        String UserName = getIntent().getStringExtra("DeadMauFive");
+        final String UserName = getIntent().getStringExtra("DeadMauFive");
         final String UserEmail = getIntent().getStringExtra("TestPilot");
         final String shift_type = getIntent().getStringExtra("goat2");
         final String vacation_status = getIntent().getStringExtra("goat3");
@@ -66,6 +75,9 @@ public class Worker extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_worker);
+
+        GlobalVariables Links = new GlobalVariables();
+
 
         //Button's
         WorkerDateVacation = findViewById(R.id.WorkerDateVacation);
@@ -85,37 +97,38 @@ public class Worker extends AppCompatActivity {
 
         WorkerProgramListView = findViewById(R.id.WorkerProgramListView);
 
+        //Links
+        VAC_URL = Links.getVacation_URL();
 
-        //ArrayList'sΗ
+        //Worker name on the TopBar
+        WorkerUserName.setText(UserName);
+
+        //ArrayList's
 
 
-        ProgramGetterSetter test1 = new ProgramGetterSetter("Monday", shift_type,  Integer.valueOf(Teams_Code),  Integer.valueOf(id),Integer.valueOf(vacation_status));
-        ProgramGetterSetter test2 = new ProgramGetterSetter("Tuesday", shift_type,  Integer.valueOf(Teams_Code), Integer.valueOf(id), Integer.valueOf(vacation_status));
-        ProgramGetterSetter test3 = new ProgramGetterSetter("Wednesday", shift_type,  Integer.valueOf(Teams_Code),  Integer.valueOf(id),Integer.valueOf(vacation_status));
-        ProgramGetterSetter test4 = new ProgramGetterSetter("Thursday", shift_type,  Integer.valueOf(Teams_Code),  Integer.valueOf(id),Integer.valueOf(vacation_status));
-        ProgramGetterSetter test5 = new ProgramGetterSetter("Friday", shift_type,  Integer.valueOf(Teams_Code),  Integer.valueOf(id),Integer.valueOf(vacation_status));
-        ProgramGetterSetter test6 = new ProgramGetterSetter("Saturday", shift_type,  Integer.valueOf(Teams_Code),  Integer.valueOf(id),Integer.valueOf(vacation_status));
-        ProgramGetterSetter test7 = new ProgramGetterSetter("Sunday", shift_type,Integer.valueOf(Teams_Code),  Integer.valueOf(id),  Integer.valueOf(vacation_status));
+        ProgramGetterSetter Monday = new ProgramGetterSetter("Monday", shift_type,  Integer.valueOf(Teams_Code),  Integer.valueOf(id),Integer.valueOf(vacation_status));
+        ProgramGetterSetter Tuesday = new ProgramGetterSetter("Tuesday", shift_type,  Integer.valueOf(Teams_Code), Integer.valueOf(id), Integer.valueOf(vacation_status));
+        ProgramGetterSetter Wednesday = new ProgramGetterSetter("Wednesday", shift_type,  Integer.valueOf(Teams_Code),  Integer.valueOf(id),Integer.valueOf(vacation_status));
+        ProgramGetterSetter Thursday = new ProgramGetterSetter("Thursday", shift_type,  Integer.valueOf(Teams_Code),  Integer.valueOf(id),Integer.valueOf(vacation_status));
+        ProgramGetterSetter Friday = new ProgramGetterSetter("Friday", shift_type,  Integer.valueOf(Teams_Code),  Integer.valueOf(id),Integer.valueOf(vacation_status));
+        ProgramGetterSetter Saturday = new ProgramGetterSetter("Saturday", shift_type,  Integer.valueOf(Teams_Code),  Integer.valueOf(id),Integer.valueOf(vacation_status));
+        ProgramGetterSetter Sunday = new ProgramGetterSetter("Sunday", shift_type,Integer.valueOf(Teams_Code),  Integer.valueOf(id),  Integer.valueOf(vacation_status));
 
 //            System.out.println(vacation_status+id+Teams_Code+shift_type);
         ArrayList<ProgramGetterSetter> ProgramArrayList = new ArrayList<>();
-        ProgramArrayList.add(test1);
-        ProgramArrayList.add(test2);
-        ProgramArrayList.add(test3);
-        ProgramArrayList.add(test4);
-        ProgramArrayList.add(test5);
-        ProgramArrayList.add(test6);
-        ProgramArrayList.add(test7);
+        ProgramArrayList.add(Monday);
+        ProgramArrayList.add(Tuesday);
+        ProgramArrayList.add(Wednesday);
+        ProgramArrayList.add(Thursday);
+        ProgramArrayList.add(Friday);
+        ProgramArrayList.add(Saturday);
+        ProgramArrayList.add(Sunday);
 
         ProgramListAdapter adapter = new ProgramListAdapter(this,R.layout.adapter_worker_program,ProgramArrayList);
         WorkerProgramListView.setAdapter(adapter);
 
 
         TrustMe();
-
-
-
-        WorkerUserName.setText(UserName);
 
 
         WorkerDateLeaveConfirm.setOnClickListener(new View.OnClickListener() {
@@ -141,8 +154,7 @@ public class Worker extends AppCompatActivity {
 
         WorkerDateVacationConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Vacation(UserEmail);
+            public void onClick(View v) { Vacation(UserEmail);
             }
         });
 

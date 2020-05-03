@@ -55,7 +55,7 @@ public class LogReg extends AppCompatActivity {
 
     EditText RegisterName , RegisterSurname , RegisterAFM , RegisterEmail , RegisterPassword , RegisterConfirmPassword ,
             RegisterGender , RegisterLandLine , RegisterCellPhone , RegisterStreetAddress , RegisterNumber , RegisterPostalCode ,
-            RegisterBirthDate , RegisterNationality , RegisterTeamCode , RegisterWorkHours , RegisterShiftType;
+            RegisterBirthDate , RegisterNationality , RegisterTeamCode , RegisterWorkHours;
 
     Button RegisterButton , RegisterConfirmButton;
 
@@ -81,16 +81,14 @@ public class LogReg extends AppCompatActivity {
 
     //URL's
 
-
     private String LoginEmployees_URL;
     private String LoginOwner_URL;
-    private String RegisterEmployess_URL;
+    private String RegisterEmployees_URL;
     private String RegisterOwners_URL;
 
-    protected String Errors;
-    //Json
+    //Variables
 
-    private static final String File_Name = "AlgorithmTest.json";
+    protected String Errors;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,9 +142,7 @@ public class LogReg extends AppCompatActivity {
         RegisterNationality = findViewById(R.id.RegisterNationality);
         RegisterTeamCode = findViewById(R.id.RegisterTeamCode);
         RegisterWorkHours = findViewById(R.id.RegisterWorkHours);
-        RegisterShiftType =findViewById(R.id.RegisterShiftType);
         RegisterWorkHoursForm = findViewById(R.id.RegisterWorkHoursForm);
-        RegisterShiftTypeForm = findViewById(R.id.RegisterShiftTypeForm);
         RegisterTeamCodeForm = findViewById(R.id.RegisterTeamCodeForm);
 
         //Forget Form
@@ -159,7 +155,7 @@ public class LogReg extends AppCompatActivity {
 
         LoginEmployees_URL = Links.getLoginEmployees_URL();
         LoginOwner_URL = Links.getLoginOwners_URL();
-        RegisterEmployess_URL = Links.getRegisterEmployees_URL();
+        RegisterEmployees_URL = Links.getRegisterEmployees_URL();
         RegisterOwners_URL = Links.getRegisterOwners_URL();
 
         //ClickListener 's
@@ -307,36 +303,6 @@ public class LogReg extends AppCompatActivity {
             }
         });
 
-        RegisterShiftType.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final PopupMenu ShiftType = new PopupMenu(LogReg.this,v);
-                ShiftType.getMenuInflater().inflate(R.menu.shift_type_menu,ShiftType.getMenu());
-
-                ShiftType.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-
-                        switch (item.getItemId()){
-
-                            case R.id.MenuShiftTypeMorning:
-                                RegisterShiftType.setText(R.string.MenuShiftTypeMorningIF);
-                                return true;
-                            case R.id.MenuShiftTypeNoon:
-                                RegisterShiftType.setText(R.string.MenuShiftTypeNoonIF);
-                                return true;
-                            case R.id.MenuShiftTypeNight:
-                                RegisterShiftType.setText(R.string.MenuShiftTypeNightIF);
-                                return true;
-                        }
-                        return true;
-                    }
-                });
-                ShiftType.show();
-            }
-        });
-
-
     }
 
     private void RegisterEmployees(){
@@ -355,9 +321,8 @@ public class LogReg extends AppCompatActivity {
         final String RegisterNationality = this.RegisterNationality.getText().toString().trim();
         final String RegisterTeamCode = this.RegisterTeamCode.getText().toString().trim();
         final String RegisterWorkHours = this.RegisterWorkHours.getText().toString().trim();
-        final String RegisterShiftType = this.RegisterShiftType.getText().toString().trim();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,  RegisterEmployess_URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,  RegisterEmployees_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -410,7 +375,6 @@ public class LogReg extends AppCompatActivity {
                 params.put("RegisterBirthDate",RegisterBirthDate);
                 params.put("RegisterNationality",RegisterNationality);
                 params.put("RegisterTeamCode",RegisterTeamCode);
-                params.put("RegisterShiftType",RegisterShiftType);
                 params.put("RegisterWorkHours",RegisterWorkHours);
                 return params;
             }
@@ -608,7 +572,6 @@ public class LogReg extends AppCompatActivity {
         RegisterBirthDate.setText("");
         RegisterNationality.setText("");
         RegisterWorkHours.setText("");
-        RegisterShiftType.setText("");
         ForgetName.setText("");
     }
 }

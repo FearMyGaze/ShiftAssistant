@@ -18,17 +18,6 @@
             android:gravity="end">
 
             <TextView
-                android:id="@+id/WorkerDateTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="30sp"
-                android:text="Time is too valuable"
-                android:textStyle="bold"
-                android:textColor="@color/White"
-                android:textSize="13sp">
-            </TextView>
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5sp"
@@ -58,7 +47,7 @@
 
             <Button
                 android:id="@+id/WorkerDateLeaveConfirm"
-                android:layout_width="150sp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/WorkerLeave"
                 android:textSize="20sp">
@@ -92,7 +81,7 @@
 
             <Button
                 android:id="@+id/WorkerDateVacationConfirm"
-                android:layout_width="150sp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/WorkerVacation"
                 android:textSize="20sp">
@@ -100,21 +89,12 @@
             </Button>//WorkerDateLeaveConfirm
 
             <EditText
-                android:id="@+id/WorkerDateVacation"
                 android:layout_width="160sp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="date"
-                android:maxLines="1"
-                android:imeOptions="actionGo"
-                android:textAlignment="center"
+                android:layout_height="30sp"
                 android:textColor="@color/White"
                 android:textSize="25sp"
-                android:hint="@string/DATE"
-                android:textColorHint="@color/Gray"
-                android:background="@color/BlackTransparent">
-
-            </EditText>//WorkerDateLeave
+                android:visibility="invisible">
+            </EditText>
 
         </LinearLayout>//WorkerDateLeave/Confirm
 

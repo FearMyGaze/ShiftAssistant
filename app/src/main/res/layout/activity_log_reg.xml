@@ -990,55 +990,6 @@
 
                         </LinearLayout>//sixteenth Row
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10sp"
-                            android:orientation="horizontal"
-                            android:gravity="center">
-
-                            <LinearLayout
-                                android:id="@+id/RegisterShiftTypeForm"
-                                android:layout_width="300sp"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_gravity="center"
-                                android:visibility="visible">
-
-                                <TextView
-                                    android:id="@+id/RegisterShiftTypeTranslate"
-                                    android:layout_width="125sp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginRight="15sp"
-                                    android:textColor="@color/White"
-                                    android:text="@string/RegisterShiftType"
-                                    android:textAlignment="center"
-                                    android:textSize="20sp"
-                                    android:gravity="center_horizontal">
-
-                                </TextView>
-
-                                <EditText
-                                    android:id="@+id/RegisterShiftType"
-                                    android:layout_width="160sp"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:inputType="text"
-                                    android:focusable="false"
-                                    android:clickable="false"
-                                    android:maxLines="1"
-                                    android:imeOptions="actionDone"
-                                    android:textAlignment="center"
-                                    android:textColor="@color/White"
-                                    android:textSize="25sp"
-                                    android:background="@color/BlackTransparent">
-
-                                </EditText>
-
-                            </LinearLayout>//ShiftType
-
-
-                        </LinearLayout>//Fifteenth Row
 
                     </LinearLayout>
 

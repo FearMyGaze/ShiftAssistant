@@ -193,6 +193,7 @@ public class OWSLAWorker extends AppCompatActivity {
 
 
     }
+
     public void GUI_Update(){
         this.OWSLAWorkerName.setText(PHP_OWSLAWorkerName);
         this.OWSLAWorkerSurname.setText(PHP_OWSLAWorkerSurname);
@@ -211,6 +212,7 @@ public class OWSLAWorker extends AppCompatActivity {
         this.OWSLAWorkerShiftType.setText(PHP_OWSLAWorkerShiftType);
         this.OWSLAWorkerWorkHours.setText(PHP_OWSLAWorkerWorkerHours);
     }
+
     public void NextWorker(){
 
     }

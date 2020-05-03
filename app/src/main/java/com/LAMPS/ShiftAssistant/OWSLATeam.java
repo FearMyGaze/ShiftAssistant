@@ -35,9 +35,6 @@ public class OWSLATeam extends AppCompatActivity {
     //Links
     private String CreateTeam , DeleteTeam , SearchTeam , NextPreviousTeam ;
 
-    //Return
-    String Switcher;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +81,7 @@ public class OWSLATeam extends AppCompatActivity {
                 OWSLATeamConfirm.setVisibility(View.VISIBLE);
             }
         });
+
         OWSLATeamRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,15 +96,18 @@ public class OWSLATeam extends AppCompatActivity {
                 NewTeams(CreateTeam,"0");
             }
         });
+
         OWSLATeamRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                DelTeams(DeleteTeam);
             }
         });
 
 
     }
+
+
     protected void NewTeams(String CreateLink , final String Switcher){
         final String TeamName = this.OWSLATeamName.getText().toString().trim();
         final String TeamCapacity = this.OWSLATeamCapacity.getText().toString().trim();
@@ -157,5 +158,9 @@ public class OWSLATeam extends AppCompatActivity {
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+    protected void DelTeams(String DeleteLink){
+
     }
 }

@@ -45,7 +45,7 @@ public class OWSLA extends AppCompatActivity {
         OWSLAWorkers = findViewById(R.id.OWSLAWorkers);
         OWSLASettings = findViewById(R.id.OWSLASettings);
 
-        //Getter's
+        //Intend's
 
         final String UserName = getIntent().getStringExtra("DeadMau5");
         final String UserEmail = getIntent().getStringExtra("GOATdm5");
