@@ -1,14 +1,15 @@
-<resources>
-    =================================LogReg=============================================================
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name" translatable="false">ShiftAssistant</string>
     <string name="Name">Welcome to Shift Assistant</string>
+    =================================LogReg=========================================================
     <string name="Log">Login</string>
     <string name="Reg">Register</string>
+    ================================Login===========================================================
     <string name="LoginName">Email</string>
     <string name="LoginPassword">Password</string>
     <string name="LoginForgotPassword">Forgot Password</string>
     <string name="LoginForgotPasswordNew">New Password</string>
-    <string name="Confirm">Confirm</string>
+    ================================Register========================================================
     <string name="RegisterName">Name</string>
     <string name="RegisterSurname">Surname</string>
     <string name="RegisterAFM">TIN</string>
@@ -30,7 +31,7 @@
     <string name="RegisterOwnerPassword">Owner Pass.</string>
     <string name="ForgetSend">Send</string>
     ======================================Random====================================================
-
+    <string name="Confirm">Confirm</string>
     <string name="Test">This is a test</string>
     <string name="ForgotText"><u>Forgot my password</u>.</string>
     ===============================OWSLA============================================================
@@ -42,18 +43,24 @@
     <string name="OWSLASearch">Search</string>
     <string name="OWSLAWorkerHindAFM">TIN</string>
     <string name="OWSLAHindID">ID</string>
+    ==============================OWSLATeam=========================================================
     <string name="OWSLATeamID">Team ID</string>
     <string name="OWSLATeamName">Name</string>
     <string name="OWSLATeamCapacity">Capacity</string>
     <string name="OWSLATeamStartShift">Start shift</string>
     <string name="OWSLATeamEndShift">End shift</string>
+    <string name="OWSLATeamConfirmButtonADD">Confirm</string>
+    <string name="OWSLATeamConfirmButtonDEL">Delete</string>
+    =============================OWSLACalendar======================================================
     <string name="OWSLACalendarID">Year</string>
     <string name="OWSLACalendarMonth">Month</string>
     <string name="OWSLACalendarYear">Year</string>
     <string name="OWSLACalendarExist">Exist</string>
     <string name="OWSLACalendarShow">Preview</string>
     <string name="OWSLACalendarShowItem">Show</string>
+    =============================Settings===========================================================
     <string name="OWSLASettings">Settings</string>
+    =============================OWSLAProgram=======================================================
     <string name="OWSLAProgramParagraph">Covering empty space so i can have something to see</string>
     <string name="OWSLAProgramTotalEmployees">Total Number of Employees</string>
     <string name="OWSLAProgramTotalEmployeesHours">Total Workforce (Hours): </string>
@@ -112,4 +119,10 @@
     ============================Paragraphs==========================================================
     <string name="WelcomeParagraph">Test</string>
     <string name="ForgetParagraph">YeetUs</string>
+    ============================Errors==============================================================
+    <string name="LoginErrorEmail">Incorrect email</string>
+    <string name="LoginErrorPassword">Incorrect password</string>
+    <string name="RegisterErrorEmail">This email already exists</string>
+    <string name="RegisterErrorAFM">This AFM already exists</string>
+    <string name="RegisterErrorDep">This Dep Code doesnt exist</string>
 </resources>

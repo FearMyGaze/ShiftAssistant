@@ -3,6 +3,7 @@ package com.LAMPS.ShiftAssistant;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.icu.text.IDNA;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -35,6 +36,12 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.LAMPS.ShiftAssistant.R.string.LoginErrorEmail;
+import static com.LAMPS.ShiftAssistant.R.string.LoginErrorPassword;
+import static com.LAMPS.ShiftAssistant.R.string.RegisterErrorAFM;
+import static com.LAMPS.ShiftAssistant.R.string.RegisterErrorDep;
+import static com.LAMPS.ShiftAssistant.R.string.RegisterErrorEmail;
 
 public class LogReg extends AppCompatActivity {
 
@@ -74,11 +81,13 @@ public class LogReg extends AppCompatActivity {
 
     //URL's
 
-    private String Login_URL = "http://192.168.1.8/Shifts/LoginEmployee.php";
-    private String LoginOwner_URL ="http://192.168.1.8/Shifts/LoginOwner.php";
-    private String Register_URL = "http://192.168.1.8/Shifts/RegisterEmployees.php";
-    private String RegisterOwners_URL = "http://192.168.1.8/Shifts/RegisterOwners.php";
 
+    private String LoginEmployees_URL;
+    private String LoginOwner_URL;
+    private String RegisterEmployess_URL;
+    private String RegisterOwners_URL;
+
+    protected String Errors;
     //Json
 
     private static final String File_Name = "AlgorithmTest.json";
@@ -87,6 +96,8 @@ public class LogReg extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_reg);
+
+        GlobalVariables Links = new GlobalVariables();
 
 
         //Switch's
@@ -144,6 +155,12 @@ public class LogReg extends AppCompatActivity {
         ForgetName = findViewById(R.id.ForgetName);
         ForgetSend = findViewById(R.id.ForgetSend);
 
+        //Links
+
+        LoginEmployees_URL = Links.getLoginEmployees_URL();
+        LoginOwner_URL = Links.getLoginOwners_URL();
+        RegisterEmployess_URL = Links.getRegisterEmployees_URL();
+        RegisterOwners_URL = Links.getRegisterOwners_URL();
 
         //ClickListener 's
 
@@ -204,15 +221,7 @@ public class LogReg extends AppCompatActivity {
                     if(LoginUserType.isChecked() ) {
                         Login(mEmail,mPass,LoginOwner_URL);
                     }else{
-                        Login(mEmail,mPass,Login_URL);
-                    }
-                } else {
-                    if(LoginUserType.isChecked()){
-                        LoginName.setError("Please fill the username field");
-                        LoginPassword.setError("Please fill the password field");
-                    }else {
-                        LoginName.setError("Please fill the username field");
-                        LoginPassword.setError("Please fill the password field");
+                        Login(mEmail,mPass,LoginEmployees_URL);
                     }
                 }
             }
@@ -223,10 +232,40 @@ public class LogReg extends AppCompatActivity {
             public void onClick(View v) {
                 if(RegisterUserType.isChecked()){
                     RegisterOwners();
+                    switch (Errors){
+                        case "D":
+                            RegisterEmail.setError("" + RegisterErrorEmail);
+                            break;
+                        case "E":
+                            RegisterAFM.setError("" + RegisterErrorAFM);
+                            break;
+                        case "DONE":
+                            ClearText();
+                            RegisterForm.setVisibility(View.GONE);
+                            LoginForm.setVisibility(View.VISIBLE);
+                            break;
+                    }
                 }
                 else{
                     RegisterEmployees();
+                    switch (Errors) {
+                        case "A":
+                            RegisterEmail.setError("" + RegisterErrorEmail);
+                            break;
+                        case "B":
+                            RegisterAFM.setError("" + RegisterErrorAFM);
+                            break;
+                        case "C":
+                            RegisterTeamCode.setError("" + RegisterErrorDep);
+                            break;
+                        case "DONE":
+                            ClearText();
+                            RegisterForm.setVisibility(View.GONE);
+                            LoginForm.setVisibility(View.VISIBLE);
+                            break;
+                    }
                 }
+
 
             }
         });
@@ -318,7 +357,7 @@ public class LogReg extends AppCompatActivity {
         final String RegisterWorkHours = this.RegisterWorkHours.getText().toString().trim();
         final String RegisterShiftType = this.RegisterShiftType.getText().toString().trim();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,  Register_URL,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,  RegisterEmployess_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -326,19 +365,20 @@ public class LogReg extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("success");
                             if (success.equals("0")) {
+                                Errors = "DONE";
                                 Toast.makeText(getApplicationContext(), "Registration succeed.", Toast.LENGTH_LONG).show();
                             }
                             else if (success.equals("1")) {
                                 Toast.makeText(getApplicationContext(), "Registration failed!", Toast.LENGTH_LONG).show();
                             }
                             else if (success.equals("2")) {
-                                Toast.makeText(getApplicationContext(), "Registration failed. Invalid Email.", Toast.LENGTH_LONG).show();
+                                Errors = "A";
                             }
                             else if (success.equals("3")) {
-                                Toast.makeText(getApplicationContext(), "Registration failed. Invalid ΤΙΝ.", Toast.LENGTH_LONG).show();
+                                Errors = "B";
                             }
                             else if (success.equals("4")) {
-                                Toast.makeText(getApplicationContext(), "Registration failed. Invalid Department.", Toast.LENGTH_LONG).show();
+                                Errors = "C";
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -403,16 +443,17 @@ public class LogReg extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("success");
                             if (success.equals("0")) {
+                                Errors = "DONE";
                                 Toast.makeText(getApplicationContext(), "Registration succeed.", Toast.LENGTH_LONG).show();
                             }
                             else if (success.equals("1")) {
                                 Toast.makeText(getApplicationContext(), "Registration failed!", Toast.LENGTH_LONG).show();
                             }
                             else if (success.equals("2")) {
-                                Toast.makeText(getApplicationContext(), "Registration failed. Invalid Email.", Toast.LENGTH_LONG).show();
+                                Errors = "D";
                             }
                             else if (success.equals("3")) {
-                                Toast.makeText(getApplicationContext(), "Registration failed. Invalid ΤΙΝ.", Toast.LENGTH_LONG).show();
+                                Errors = "E";
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -482,7 +523,7 @@ public class LogReg extends AppCompatActivity {
 
                                         email = object.getString("email").trim();
 
-                                        if (url.equals(Login_URL)) {
+                                        if (url.equals(LoginEmployees_URL)) {
                                             id = object.getString("ID").trim();
 
                                             shift_type = object.getString("Shift_Type").trim();
@@ -497,7 +538,7 @@ public class LogReg extends AppCompatActivity {
                                                 .show();
 
                                     }
-                                    if (url.equals(Login_URL)) {
+                                    if (url.equals(LoginEmployees_URL)) {
                                         Intent LoginEmployee = new Intent(LogReg.this, Worker.class);
                                         LoginEmployee.putExtra("DeadMauFive",name);
                                         LoginEmployee.putExtra("TestPilot",email);

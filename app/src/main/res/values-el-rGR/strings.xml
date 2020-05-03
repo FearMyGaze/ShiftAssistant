@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    =================================LogReg=========================================================
     <string name="Name">Καλώς ήρθατε στο Shift Assistant</string>
+    =================================LogReg=========================================================
     <string name="Log">Σύνδεση</string>
     <string name="Reg">Εγραφή</string>
+    ================================Login===========================================================
     <string name="LoginName">Email</string>
     <string name="LoginPassword">Κωδικός χρήστη</string>
     <string name="LoginForgotPassword">Επανάλ. κωδικού</string>
     <string name="LoginForgotPasswordNew">Νέος Κωδικός</string>
-    <string name="Confirm">Επιβεβαίωση</string>
+    ================================Register========================================================
     <string name="RegisterName">Όνομα</string>
     <string name="RegisterSurname">Επώνυμο</string>
     <string name="RegisterAFM">ΑΦΜ</string>
@@ -30,7 +31,7 @@
     <string name="RegisterOwnerPassword">Κωδ. ιδιοκτ.</string>
     <string name="ForgetSend">Αποστόλη</string>
     ===================================Random=======================================================
-
+    <string name="Confirm">Επιβεβαίωση</string>
     <string name="Test">This is a test</string>
     <string name="ForgotText"><u>Ξέχασα των κωδικό πρόσβασης</u>.</string>
     ===============================OWSLA============================================================
@@ -42,18 +43,24 @@
     <string name="OWSLAWorkerHindAFM">ΑΦΜ</string>
     <string name="OWSLASearch">Αναζήτηση</string>
     <string name="OWSLAHindID">Κωδικός</string>
+    ==============================OWSLATeam=========================================================
     <string name="OWSLATeamID">Κωδ τμήματος</string>
     <string name="OWSLATeamName">Όνομα</string>
     <string name="OWSLATeamCapacity">Χωρητικότητα</string>
     <string name="OWSLATeamStartShift">Έναρξη Εργ.</string>
     <string name="OWSLATeamEndShift">Λήξη Εργ.</string>
+    <string name="OWSLATeamConfirmButtonADD">Εγγραφή</string>
+    <string name="OWSLATeamConfirmButtonDEL">Διαγραφή</string>
+    =============================OWSLACalendar======================================================
     <string name="OWSLACalendarID">Χρονία</string>
     <string name="OWSLACalendarMonth">Μήνας</string>
     <string name="OWSLACalendarYear">Χρονία</string>
     <string name="OWSLACalendarExist">Υπάρχει</string>
     <string name="OWSLACalendarShow">Προβολή</string>
     <string name="OWSLACalendarShowItem">Προβολή</string>
+    =============================Settings===========================================================
     <string name="OWSLASettings">Ρυθμίσεις</string>
+    =============================OWSLAProgram=======================================================
     <string name="OWSLAProgramParagraph">Κάλυψη κενού για να υπάρχει κάτι εδώ μέσα</string>
     <string name="OWSLAProgramTotalEmployees">Συνολικός αριθμός εργαζομένων: </string>
     <string name="OWSLAProgramTotalEmployeesHours">Εργατικό δυναμικό (Ώρες): </string>
@@ -112,4 +119,10 @@
     ============================Paragraphs==========================================================
     <string name="WelcomeParagraph">Τεστ Τεστ</string>
     <string name="ForgetParagraph">Yeet</string>
+    ============================Errors==============================================================
+    <string name="LoginErrorEmail">Λάθος email</string>
+    <string name="LoginErrorPassword">Λάθος κωδικός</string>
+    <string name="RegisterErrorEmail">Το email αυτό υπάρχει ήδη</string>
+    <string name="RegisterErrorAFM">Το ΑΦΜ αυτό υπάρχει ήδη</string>
+    <string name="RegisterErrorDep">Ο κωδικός αυτός δεν υπάρχει</string>
 </resources>

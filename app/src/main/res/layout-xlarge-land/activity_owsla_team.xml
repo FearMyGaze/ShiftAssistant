@@ -225,7 +225,7 @@
 
 
             <EditText
-                android:id="@+id/OWSLATeamCapacity1"
+                android:id="@+id/OWSLATeamShiftStart"
                 android:layout_width="180sp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -261,7 +261,7 @@
 
 
             <EditText
-                android:id="@+id/OWSLATeamCapacity2"
+                android:id="@+id/OWSLATeamShiftEnd"
                 android:layout_width="180sp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -291,7 +291,8 @@
                 android:layout_width="160sp"
                 android:layout_height="wrap_content"
                 android:text="@string/RegisterConfirm"
-                android:textSize="20sp">
+                android:textSize="20sp"
+                android:visibility="invisible">
 
             </Button>
 

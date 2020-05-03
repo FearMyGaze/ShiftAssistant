@@ -14,6 +14,8 @@ public class GlobalVariables {
     private String FetchEmployees = "/Shifts/FetchEmployees.php";
     private String FetchOwners = "0";
     private String Teams = "0";
+    private String DeleteTeams = "/shifts/DeleteTeams.php";
+    private String RegisterTeams = "/Shifts/RegisterTeams.php";
     private String Vacation = "/Shifts/Vacation.php";
 
     //Output
@@ -24,11 +26,16 @@ public class GlobalVariables {
     private String RegisterOwners_URL = Protocol + IP + RegisterOwners;
     private String FetchOwners_URL = Protocol + IP + FetchOwners;
     private String Teams_URL = Protocol + IP + Teams;
+    private String DeleteTeams_URL = Protocol + IP + DeleteTeams;
+    private String RegisterTeams_URL = Protocol + IP + RegisterTeams;
     private String ProgramGenerate_URL = Protocol + IP + ProgramGenerate;
     private String Vacation_URL = Protocol + IP + Vacation;
 
+    //TestPilot
+    private String Empty = "0";
+    private String Empty_URL = Protocol + IP + Empty;
 
-//==================================================Getters=========================================
+    //==================================================Getters=========================================
 
 
     protected String getIP() {
@@ -61,6 +68,14 @@ public class GlobalVariables {
         return Teams_URL;
     }
 
+    public String getDeleteTeams_URL() {
+        return DeleteTeams_URL;
+    }
+
+    public String getRegisterTeams_URL() {
+        return RegisterTeams_URL;
+    }
+
     protected String getProgramGenerate_URL() {
         return ProgramGenerate_URL;
     }
@@ -68,5 +83,12 @@ public class GlobalVariables {
     public String getVacation_URL() {
         return Vacation_URL;
     }
-    
+
+
+
+
+    public String getEmpty_URL() {
+        return Empty_URL;
+    }
+
 }
