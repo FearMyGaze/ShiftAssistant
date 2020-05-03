@@ -2,8 +2,8 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="115sp"
-    android:background="@color/Blue">
+    android:layout_height="120sp"
+    android:background="@drawable/adapter_styler">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
 
             <TextView
                 android:id="@+id/WorkerAdapterDate"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="dd-mm-yyyy"
@@ -53,8 +53,19 @@
                     android:gravity="center">
 
                     <TextView
+                        android:layout_width="115sp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10sp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/Black"
+                        android:text="@string/WorkerName">
+
+                    </TextView>
+
+                    <TextView
                         android:id="@+id/WorkerAdapterWorkerID"
-                        android:layout_width="match_parent"
+                        android:layout_width="200sp"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="Worker id"
@@ -71,8 +82,19 @@
                     android:gravity="center">
 
                     <TextView
+                        android:layout_width="115sp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10sp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/Black"
+                        android:text="@string/WorkerTeamName">
+
+                    </TextView>
+
+                    <TextView
                         android:id="@+id/WorkerAdapterTeamID"
-                        android:layout_width="match_parent"
+                        android:layout_width="200sp"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="Team ID"
@@ -98,12 +120,23 @@
                     android:gravity="center">
 
                     <TextView
+                        android:layout_width="115sp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10sp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/Black"
+                        android:text="@string/WorkerShiftType">
+
+                    </TextView>
+
+                    <TextView
                         android:id="@+id/WorkerAdapterShiftID"
-                        android:layout_width="match_parent"
+                        android:layout_width="200sp"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="Shift type"
-                        android:textStyle="italic|bold"
+                        android:textStyle="italic"
                         android:textSize="14sp"
                         android:textColor="@color/Black">
 
@@ -118,8 +151,18 @@
                     android:gravity="center">
 
                     <TextView
+                        android:layout_width="115sp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10sp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="@color/Black"
+                        android:text="@string/WorkerTilVacation">
+
+                    </TextView>
+                    <TextView
                         android:id="@+id/WorkerAdapterTilVacation"
-                        android:layout_width="match_parent"
+                        android:layout_width="200sp"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="Days Til Vacation"

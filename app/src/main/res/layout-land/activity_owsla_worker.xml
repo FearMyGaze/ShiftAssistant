@@ -722,7 +722,8 @@
                                 android:layout_width="300sp"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:layout_gravity="center">
+                                android:layout_gravity="center"
+                                android:visibility="invisible">
 
                                 <TextView
                                     android:layout_width="125sp"
@@ -737,7 +738,6 @@
                                 </TextView>
 
                                 <EditText
-                                    android:id="@+id/OWSLAWorkerShiftType"
                                     android:layout_width="160sp"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"

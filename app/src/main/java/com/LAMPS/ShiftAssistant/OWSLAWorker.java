@@ -16,7 +16,7 @@ public class OWSLAWorker extends AppCompatActivity {
 
     EditText OWSLAWorkerName, OWSLAWorkerSurname , OWSLAWorkerAFM , OWSLAWorkerEmail , OWSLAWorkerPassword , OWSLAWorkerGender ,
             OWSLAWorkerLandLine , OWSLAWorkerCellPhone , OWSLAWorkerStreetAddress , OWSLAWorkerNumber , OWSLAWorkerPostalCode ,
-            OWSLAWorkerTeamCode , OWSLAWorkerBirthDate , OWSLAWorkerNationality , OWSLAWorkerShiftType , OWSLAWorkerWorkHours ,
+            OWSLAWorkerTeamCode , OWSLAWorkerBirthDate , OWSLAWorkerNationality , OWSLAWorkerWorkHours ,
             OWSLAWorkerSearchBox;
 
     Button OWSLAWorkerConfirmButton , OWSLAWorkerSearchButton;
@@ -28,7 +28,7 @@ public class OWSLAWorker extends AppCompatActivity {
     private String PHP_OWSLAWorkerName , PHP_OWSLAWorkerSurname , PHP_OWSLAWorkerAFM , PHP_OWSLAWorkerEmail , PHP_OWSLAWorkerPassword ,
             PHP_OWSLAWorkerGender , PHP_OWSLAWorkerLandLine , PHP_OWSLAWorkerCellPhone , PHP_OWSLAWorkerStreetAddress ,
             PHP_OWSLAWorkerNumber , PHP_OWSLAWorkerPostalCode , PHP_OWSLAWorkerTeamCode , PHP_OWSLAWorkerBirthDate , PHP_OWSLANationality,
-            PHP_OWSLAWorkerShiftType , PHP_OWSLAWorkerWorkerHours;
+            PHP_OWSLAWorkerWorkerHours;
 
 
     @Override
@@ -52,7 +52,6 @@ public class OWSLAWorker extends AppCompatActivity {
         OWSLAWorkerTeamCode = findViewById(R.id.OWSLAWorkerTeamCode);
         OWSLAWorkerBirthDate = findViewById(R.id.OWSLAWorkerBirthDate);
         OWSLAWorkerNationality = findViewById(R.id.OWSLAWorkerNationality);
-        OWSLAWorkerShiftType = findViewById(R.id.OWSLAWorkerShiftType);
         OWSLAWorkerWorkHours = findViewById(R.id.OWSLAWorkerWorkHours);
         OWSLAWorkerSearchBox = findViewById(R.id.OWSLAWorkerSearchBox);
 
@@ -145,33 +144,6 @@ public class OWSLAWorker extends AppCompatActivity {
             }
         });
 
-        OWSLAWorkerShiftType.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final PopupMenu ShiftType = new PopupMenu(OWSLAWorker.this,v);
-                ShiftType.getMenuInflater().inflate(R.menu.shift_type_menu,ShiftType.getMenu());
-
-                ShiftType.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-
-                        switch (item.getItemId()){
-                            case R.id.MenuShiftTypeMorning:
-                                OWSLAWorkerShiftType.setText(R.string.MenuShiftTypeMorningIF);
-                                return true;
-                            case R.id.MenuShiftTypeNoon:
-                                OWSLAWorkerShiftType.setText(R.string.MenuShiftTypeNoonIF);
-                                return true;
-                            case R.id.MenuShiftTypeNight:
-                                OWSLAWorkerShiftType.setText(R.string.MenuShiftTypeNightIF);
-                                return true;
-                        }
-                        return true;
-                    }
-                });
-                ShiftType.show();
-            }
-        });
     }
     public void PHP_Update() {
         PHP_OWSLAWorkerName = this.OWSLAWorkerName.getText().toString().trim();
@@ -188,7 +160,6 @@ public class OWSLAWorker extends AppCompatActivity {
         PHP_OWSLAWorkerTeamCode = this.OWSLAWorkerTeamCode.getText().toString().trim();
         PHP_OWSLAWorkerBirthDate = this.OWSLAWorkerBirthDate.getText().toString().trim();
         PHP_OWSLANationality = this.OWSLAWorkerNationality.getText().toString().trim();
-        PHP_OWSLAWorkerShiftType = this.OWSLAWorkerShiftType.getText().toString().trim();
         PHP_OWSLAWorkerWorkerHours = this.OWSLAWorkerWorkHours.getText().toString().trim();
 
 
@@ -209,7 +180,6 @@ public class OWSLAWorker extends AppCompatActivity {
         this.OWSLAWorkerTeamCode.setText(PHP_OWSLAWorkerTeamCode);
         this.OWSLAWorkerBirthDate.setText(PHP_OWSLAWorkerBirthDate);
         this.OWSLAWorkerNationality.setText(PHP_OWSLANationality);
-        this.OWSLAWorkerShiftType.setText(PHP_OWSLAWorkerShiftType);
         this.OWSLAWorkerWorkHours.setText(PHP_OWSLAWorkerWorkerHours);
     }
 
@@ -240,7 +210,6 @@ public class OWSLAWorker extends AppCompatActivity {
         OWSLAWorkerTeamCode.setText("");
         OWSLAWorkerBirthDate.setText("");
         OWSLAWorkerNationality.setText("");
-        OWSLAWorkerShiftType.setText("");
         OWSLAWorkerWorkHours.setText("");
     }
 }

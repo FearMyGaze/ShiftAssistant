@@ -72,6 +72,10 @@
     <string name="WorkerUnPaidLeave">Ρεπό άνευ αποδοχών</string>
     <string name="WorkerPaidLeave">Ρεπό με αποδοχές</string>
     <string name="WorkerVacation">Διακοπές</string>
+    <string name="WorkerShiftType">Βάρδια :</string>
+    <string name="WorkerTilVacation">Δικαίωμα αδείας</string>
+    <string name="WorkerTeamName">Όνομα ομάδας</string>
+    <string name="WorkerName">Όνομα</string>
     ================================Months==========================================================
     <string name="Month">Μήνας</string>
     <string name="January">Ιανουάριος</string>
@@ -119,10 +123,5 @@
     ============================Paragraphs==========================================================
     <string name="WelcomeParagraph">Τεστ Τεστ</string>
     <string name="ForgetParagraph">Yeet</string>
-    ============================Errors==============================================================
-    <string name="LoginErrorEmail">Λάθος email</string>
-    <string name="LoginErrorPassword">Λάθος κωδικός</string>
-    <string name="RegisterErrorEmail">Το email αυτό υπάρχει ήδη</string>
-    <string name="RegisterErrorAFM">Το ΑΦΜ αυτό υπάρχει ήδη</string>
-    <string name="RegisterErrorDep">Ο κωδικός αυτός δεν υπάρχει</string>
+
 </resources>

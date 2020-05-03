@@ -36,7 +36,7 @@ public class Worker extends AppCompatActivity {
 
     Button WorkerDateLeaveConfirm , WorkerDateVacationConfirm;
 
-    EditText WorkerDateLeave , WorkerDateVacation;
+    EditText WorkerDateLeave;
 
     TextView WorkerUserName , WorkerDateTime;
 
@@ -70,7 +70,7 @@ public class Worker extends AppCompatActivity {
         final String UserEmail = getIntent().getStringExtra("TestPilot");
         final String shift_type = getIntent().getStringExtra("goat2");
         final String vacation_status = getIntent().getStringExtra("goat3");
-        final String id = getIntent().getStringExtra("goat1");
+        final String Name = getIntent().getStringExtra("goat1");
         final String Teams_Code = getIntent().getStringExtra("goat4");
 
         super.onCreate(savedInstanceState);
@@ -80,7 +80,7 @@ public class Worker extends AppCompatActivity {
 
 
         //Button's
-        WorkerDateVacation = findViewById(R.id.WorkerDateVacation);
+
         WorkerDateVacationConfirm = findViewById(R.id.WorkerDateVacationConfirm);
         WorkerDateLeaveConfirm = findViewById(R.id.WorkerDateLeaveConfirm);
 
@@ -106,15 +106,15 @@ public class Worker extends AppCompatActivity {
         //ArrayList's
 
 
-        ProgramGetterSetter Monday = new ProgramGetterSetter("Monday", shift_type,  Integer.valueOf(Teams_Code),  Integer.valueOf(id),Integer.valueOf(vacation_status));
-        ProgramGetterSetter Tuesday = new ProgramGetterSetter("Tuesday", shift_type,  Integer.valueOf(Teams_Code), Integer.valueOf(id), Integer.valueOf(vacation_status));
-        ProgramGetterSetter Wednesday = new ProgramGetterSetter("Wednesday", shift_type,  Integer.valueOf(Teams_Code),  Integer.valueOf(id),Integer.valueOf(vacation_status));
-        ProgramGetterSetter Thursday = new ProgramGetterSetter("Thursday", shift_type,  Integer.valueOf(Teams_Code),  Integer.valueOf(id),Integer.valueOf(vacation_status));
-        ProgramGetterSetter Friday = new ProgramGetterSetter("Friday", shift_type,  Integer.valueOf(Teams_Code),  Integer.valueOf(id),Integer.valueOf(vacation_status));
-        ProgramGetterSetter Saturday = new ProgramGetterSetter("Saturday", shift_type,  Integer.valueOf(Teams_Code),  Integer.valueOf(id),Integer.valueOf(vacation_status));
-        ProgramGetterSetter Sunday = new ProgramGetterSetter("Sunday", shift_type,Integer.valueOf(Teams_Code),  Integer.valueOf(id),  Integer.valueOf(vacation_status));
+        ProgramGetterSetter Monday = new ProgramGetterSetter("Monday", shift_type , Name , Integer.valueOf(Teams_Code),Integer.valueOf(vacation_status));
+        ProgramGetterSetter Tuesday = new ProgramGetterSetter("Tuesday", shift_type, Name , Integer.valueOf(Teams_Code),Integer.valueOf(vacation_status));
+        ProgramGetterSetter Wednesday = new ProgramGetterSetter("Wednesday", shift_type, Name , Integer.valueOf(Teams_Code),Integer.valueOf(vacation_status));
+        ProgramGetterSetter Thursday = new ProgramGetterSetter("Thursday", shift_type, Name , Integer.valueOf(Teams_Code),Integer.valueOf(vacation_status));
+        ProgramGetterSetter Friday = new ProgramGetterSetter("Friday", shift_type, Name , Integer.valueOf(Teams_Code),Integer.valueOf(vacation_status));
+        ProgramGetterSetter Saturday = new ProgramGetterSetter("Saturday", shift_type, Name , Integer.valueOf(Teams_Code),Integer.valueOf(vacation_status));
+        ProgramGetterSetter Sunday = new ProgramGetterSetter("Sunday", shift_type, Name , Integer.valueOf(Teams_Code),Integer.valueOf(vacation_status));
 
-//            System.out.println(vacation_status+id+Teams_Code+shift_type);
+//            System.out.println(vacation_status+Name+Teams_Code+shift_type);
         ArrayList<ProgramGetterSetter> ProgramArrayList = new ArrayList<>();
         ProgramArrayList.add(Monday);
         ProgramArrayList.add(Tuesday);

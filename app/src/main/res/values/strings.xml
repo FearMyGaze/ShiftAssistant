@@ -72,6 +72,10 @@
     <string name="WorkerUnPaidLeave">Unpaid day off</string>
     <string name="WorkerPaidLeave">Paid day off</string>
     <string name="WorkerVacation">Vacation</string>
+    <string name="WorkerShiftType">Shift :</string>
+    <string name="WorkerTilVacation">Vacation Rights</string>
+    <string name="WorkerTeamName">Team name</string>
+    <string name="WorkerName">Name</string>
     ==============================Months============================================================
     <string name="Month">Month</string>
     <string name="January">January</string>
@@ -119,10 +123,5 @@
     ============================Paragraphs==========================================================
     <string name="WelcomeParagraph">Test</string>
     <string name="ForgetParagraph">YeetUs</string>
-    ============================Errors==============================================================
-    <string name="LoginErrorEmail">Incorrect email</string>
-    <string name="LoginErrorPassword">Incorrect password</string>
-    <string name="RegisterErrorEmail">This email already exists</string>
-    <string name="RegisterErrorAFM">This AFM already exists</string>
-    <string name="RegisterErrorDep">This Dep Code doesnt exist</string>
+
 </resources>
