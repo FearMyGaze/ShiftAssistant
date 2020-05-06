@@ -710,6 +710,7 @@
                     </LinearLayout>//2
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5sp"
@@ -749,6 +750,7 @@
                     </LinearLayout>//3
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5sp"
@@ -788,6 +790,7 @@
                     </LinearLayout>//4
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5sp"

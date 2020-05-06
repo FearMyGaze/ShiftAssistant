@@ -43,13 +43,13 @@ public class OWSLA extends AppCompatActivity {
     //Links
     String FetchEmployees_URL;
 
-    private static final String File_Name = "AlgorithmTest.json";
+    GlobalVariables Links;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owsla);
 
-        GlobalVariables Links = new GlobalVariables();
+        Links = new GlobalVariables();
 
         //Handler's
         final Handler DateTime = new Handler(getMainLooper());
@@ -150,7 +150,7 @@ public class OWSLA extends AppCompatActivity {
                                     JSONObject object = new JSONObject();
                                     try
                                     {
-                                        fos = openFileOutput(File_Name,MODE_PRIVATE);
+                                        fos = openFileOutput(Links.getFileEmployees(),MODE_PRIVATE);
                                         try {
                                             object.put("Employees",jsonObject.get("Employees"));
                                             fos.write(object.toString().getBytes());

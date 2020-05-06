@@ -51,7 +51,8 @@ public class GlobalVariables {
 
     //Files
 
-    private String TestFile = "Skata.json";
+    private String FileProgram = "Program.json";
+    private String FileEmployees = "Employees.json";
 
     //=================Output======================================================================
 
@@ -128,68 +129,68 @@ public class GlobalVariables {
 
     //Teams
 
-    public String getDeleteTeams_URL() {
+    protected String getDeleteTeams_URL() {
         return DeleteTeams_URL;
     }
 
-    public String getSearchTeams_URL() {
+    protected String getSearchTeams_URL() {
         return SearchTeams_URL;
     }
 
-    public String getNextTeam_URL() {
+    protected String getNextTeam_URL() {
         return NextTeam_URL;
     }
 
-    public String getPreviousTeam_URL() {
+    protected String getPreviousTeam_URL() {
         return PreviousTeam_URL;
     }
 
-    public String getNewTeams_URL() {
+    protected String getNewTeams_URL() {
         return NewTeams_URL;
     }
 
     //Assistants
 
-    public String getDeleteAssistants() {
+    protected String getDeleteAssistants() {
         return DeleteAssistants;
     }
 
-    public String getSearchAssistants() {
+    protected String getSearchAssistants() {
         return SearchAssistants;
     }
 
-    public String getNextAssistant() {
+    protected String getNextAssistant() {
         return NextAssistant;
     }
 
-    public String getPreviousAssistant() {
+    protected String getPreviousAssistant() {
         return PreviousAssistant;
     }
 
-    public String getNewAssistant() {
+    protected String getNewAssistant() {
         return NewAssistant;
     }
 
 
     //Workers
 
-    public String getDeleteWorker_URL() {
+    protected String getDeleteWorker_URL() {
         return DeleteWorker_URL;
     }
 
-    public String getSearchWorker_URL() {
+    protected String getSearchWorker_URL() {
         return SearchWorker_URL;
     }
 
-    public String getNextWorker_URL() {
+    protected String getNextWorker_URL() {
         return NextWorker_URL;
     }
 
-    public String getPreviousWorker_URL() {
+    protected String getPreviousWorker_URL() {
         return PreviousWorker_URL;
     }
 
-    public String getNewWorker_URL() {
+    protected String getNewWorker_URL() {
         return NewWorker_URL;
     }
 
@@ -200,13 +201,22 @@ public class GlobalVariables {
         return ProgramGenerate_URL;
     }
 
-    public String getVacation_URL() {
+    protected String getVacation_URL() {
         return Vacation_URL;
     }
 
+    //Files
+
+    public String getFileProgram() {
+        return FileProgram;
+    }
+
+    public String getFileEmployees() {
+        return FileEmployees;
+    }
 
     //toliptseT
-    public String getEmpty_URL() {
+    protected String getEmpty_URL() {
         return Empty_URL;
     }
 

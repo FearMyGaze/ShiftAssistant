@@ -3,7 +3,6 @@ package com.LAMPS.ShiftAssistant;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,12 +26,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
-
-import static java.lang.Boolean.FALSE;
 
 public class OWSLAProgram extends AppCompatActivity {
 
@@ -40,9 +35,7 @@ public class OWSLAProgram extends AppCompatActivity {
 
     protected ArrayList<String> Shifts = new ArrayList<>();
     protected ArrayList<JSONObject> Employees = new ArrayList<>();
-    protected ArrayList<Integer> Morning = new ArrayList<>();
-    protected ArrayList<Integer> Noon = new ArrayList<>();
-    protected ArrayList<Integer> Night = new ArrayList<>();
+
 
     protected int TotalEmployees = 0 , TotalWorkHours = 0 , finalMonday = 0 ,  finalTuesday = 0 ,  finalWednesday = 0 ,
             finalThursday = 0 ,  finalFriday = 0 , finalSaturday = 0 ,  finalSunday = 0;
@@ -59,17 +52,18 @@ public class OWSLAProgram extends AppCompatActivity {
 
     Button OWSLAProgramConfirm;
 
-    private static final String File_Name = "AlgorithmTest.json";
-    private static final String GeneratedSchedule = "Program.json";
-
     private String VAC_Check_URL;
+
+    //Links
+
+    GlobalVariables Links;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owsla_program);
 
-        GlobalVariables Links = new GlobalVariables();
+        Links = new GlobalVariables();
 
         Shifts.clear();
 
@@ -137,9 +131,9 @@ public class OWSLAProgram extends AppCompatActivity {
         CalculateEmployeesRequirements();
         this.OWSLAProgramTotalEmployees.setText(String.valueOf(this.TotalEmployees));
         this.OWSLAProgramTotalEmployeesHours.setText(String.valueOf(this.TotalWorkHours));
-        this.OWSLAProgramPercentageMorning.setText(String.format("%.2f ",(this.MorningRate/this.TotalEmployees)*100)+"%");
-        this.OWSLAProgramPercentageNoon.setText(String.format("%.2f ",(this.NoonRate/this.TotalEmployees)*100)+"%");
-        this.OWSLAProgramPercentageNight.setText(String.format("%.2f ",(this.NightRate/this.TotalEmployees)*100)+"%");
+//        this.OWSLAProgramPercentageMorning.setText(String.format("%.2f ",(this.MorningRate/this.TotalEmployees)*100)+"%");
+//        this.OWSLAProgramPercentageNoon.setText(String.format("%.2f ",(this.NoonRate/this.TotalEmployees)*100)+"%");
+//        this.OWSLAProgramPercentageNight.setText(String.format("%.2f ",(this.NightRate/this.TotalEmployees)*100)+"%");
 
     }
 
@@ -181,7 +175,7 @@ public class OWSLAProgram extends AppCompatActivity {
     public void CalculateEmployeesRequirements(){
         String json;
         try {
-            InputStream is = openFileInput(File_Name);
+            InputStream is = openFileInput(Links.getFileEmployees());
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
@@ -270,7 +264,7 @@ public class OWSLAProgram extends AppCompatActivity {
 
         try
         {
-            fos = openFileOutput(GeneratedSchedule,MODE_PRIVATE);
+            fos = openFileOutput(Links.getFileProgram(),MODE_PRIVATE);
 //            fos.write(skt.getBytes());
             try {
                 object.put("Monday",Monday);
@@ -316,7 +310,7 @@ public class OWSLAProgram extends AppCompatActivity {
 
                 fos.write(object.toString().getBytes());
                 fos.flush();
-                Toast.makeText(this,"saved to " + getFilesDir() + "/" + GeneratedSchedule,Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"saved to " + getFilesDir() + "/" + Links.getFileProgram(),Toast.LENGTH_LONG).show();
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -440,7 +434,7 @@ public class OWSLAProgram extends AppCompatActivity {
     public void get_json(){
         String json;
         try {
-            InputStream is = openFileInput(File_Name);
+            InputStream is = openFileInput(Links.getFileEmployees());
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
