@@ -18,7 +18,7 @@
                 android:right="5dp"
                 android:top="5dp">
             </padding>
-            <solid android:color="@color/Yellow"/>
+            <solid android:color="@color/colorPrimaryDark"/>
         </shape>
     </item>
 </layer-list>
