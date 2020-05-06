@@ -27,7 +27,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 
 import static java.lang.Boolean.FALSE;
 
@@ -37,9 +40,9 @@ public class OWSLAProgram extends AppCompatActivity {
 
     protected ArrayList<String> Shifts = new ArrayList<>();
     protected ArrayList<JSONObject> Employees = new ArrayList<>();
-    protected ArrayList<JSONObject> Morning = new ArrayList<>();
-    protected ArrayList<JSONObject> Noon = new ArrayList<>();
-    protected ArrayList<JSONObject> Night = new ArrayList<>();
+    protected ArrayList<Integer> Morning = new ArrayList<>();
+    protected ArrayList<Integer> Noon = new ArrayList<>();
+    protected ArrayList<Integer> Night = new ArrayList<>();
 
     protected int TotalEmployees = 0 , TotalWorkHours = 0 , finalMonday = 0 ,  finalTuesday = 0 ,  finalWednesday = 0 ,
             finalThursday = 0 ,  finalFriday = 0 , finalSaturday = 0 ,  finalSunday = 0;
@@ -59,7 +62,6 @@ public class OWSLAProgram extends AppCompatActivity {
     private static final String File_Name = "AlgorithmTest.json";
     private static final String GeneratedSchedule = "Program.json";
 
-    private String FetchEmployees_URL;
     private String VAC_Check_URL;
 
     @Override
@@ -110,8 +112,6 @@ public class OWSLAProgram extends AppCompatActivity {
         final String UserEmail = getIntent().getStringExtra("GOATdm5");
 
         //Links
-
-        FetchEmployees_URL = Links.getFetchEmployees_URL();
         VAC_Check_URL = Links.getProgramGenerate_URL();
 
         //ClickListener's
@@ -122,10 +122,9 @@ public class OWSLAProgram extends AppCompatActivity {
                 GetText();
                 if(!weHaveMissingFields()) {
                     if(restriction(Shifts)){
-                        FetchEmployeesData(UserEmail);
-                        ProgramEntry(finalMonday,finalTuesday,finalWednesday,finalThursday,finalFriday,finalSaturday,finalSunday);
+                        ProgramEntry();
                         VacationCheck(UserEmail);
-                        ClearText();
+                        //ClearText();
                     } else {
                         Toast.makeText(getApplicationContext(),"Υou have exceeded the limit of available employees, Please check the fields and try again",Toast.LENGTH_LONG).show();
                     }
@@ -178,82 +177,6 @@ public class OWSLAProgram extends AppCompatActivity {
         return result;
     }
 
-    private void FetchEmployeesData(final String Email){
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, FetchEmployees_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        if(response.isEmpty()){
-                            Toast.makeText(OWSLAProgram.this,
-                                    "This account does not exist.", Toast.LENGTH_SHORT)
-                                    .show();
-                        } else {
-                            try {
-                                JSONObject jsonObject = new JSONObject(response);
-                                String success = jsonObject.getString("success");
-                                if (success.equals("1")) {
-                                    FileOutputStream fos = null;
-                                    JSONObject object = new JSONObject();
-                                    try
-                                    {
-                                        fos = openFileOutput(File_Name,MODE_PRIVATE);
-                                        try {
-                                            object.put("Employees",jsonObject.get("Employees"));
-                                            fos.write(object.toString().getBytes());
-                                            fos.flush();
-                                            //Toast.makeText(getApplicationContext(),"Saved to" + getFilesDir() + "/" + File_Name,Toast.LENGTH_LONG).show();
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-
-                                    }
-                                    catch(FileNotFoundException e){
-                                        e.printStackTrace();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                    finally {
-                                        if (fos != null){
-                                            try {
-                                                fos.close();
-                                            } catch (IOException e) {
-                                                e.printStackTrace();
-                                            }
-                                        }
-                                    }
-                                }
-                                else{
-                                    Toast.makeText(OWSLAProgram.this,
-                                            "There are no records in the Database", Toast.LENGTH_SHORT)
-                                            .show();
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                                Toast.makeText(OWSLAProgram.this, "An Error came through" +e.toString(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(OWSLAProgram.this, "Failed connection" +error.toString(), Toast.LENGTH_SHORT).show();
-
-                    }
-                })
-        {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("Email",Email);
-                return params;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-    }
 
     public void CalculateEmployeesRequirements(){
         String json;
@@ -270,25 +193,9 @@ public class OWSLAProgram extends AppCompatActivity {
             getEmployees(object.getJSONArray("Employees").length());
 
             for(int i = 0; i < object.getJSONArray("Employees").length();i++) {
-                if(object.getJSONArray("Employees").getJSONObject(i).getString("Shift_Type").equals("MORNING")){
-                    this.MorningRate++;
-                    //   this.Morning.add(object.getJSONArray("Employees").getJSONObject(i));
-                } else if (object.getJSONArray("Employees").getJSONObject(i).getString("Shift_Type").equals("NOON")) {
-                    this.NoonRate++;
-                    //    this.Noon.add(object.getJSONArray("Employees").getJSONObject(i));
-                } else {
-                    this.NightRate++;
-                    //   this.Night.add(object.getJSONArray("Employees").getJSONObject(i));
-                }
                 this.TotalWorkHours = Integer.valueOf(object.getJSONArray("Employees").getJSONObject(i).getString("WorkHours")) + this.TotalWorkHours;
                 this.Employees.add(object.getJSONArray("Employees").getJSONObject(i));
-//                if (object.getJSONArray("Employees").getJSONObject(i).getString("VacationStatus").equals("1")) {
-//                    this.Employees.remove(i);
-//                }
             }
-
-
-
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -340,7 +247,17 @@ public class OWSLAProgram extends AppCompatActivity {
         }
     }
 
-    private void ProgramEntry(int monday, int tuesday, int wednesday, int thursday, int friday, int saturday, int sunday){
+    private void theOne(JSONArray Day,int shiftSize){
+        Random randomas = new Random();
+        int rEmployee;
+        for(int i = 0; i < shiftSize; i++) {
+            rEmployee = randomas.nextInt(Employees.size());
+            Day.put(Employees.get(rEmployee));
+            Employees.remove(Employees.remove(rEmployee));
+        }
+    }
+
+    private void ProgramEntry(){
         FileOutputStream fos = null;
         JSONObject object = new JSONObject();
         JSONArray Monday = new JSONArray();
@@ -364,32 +281,43 @@ public class OWSLAProgram extends AppCompatActivity {
                 object.put("Saturday",Saturday);
                 object.put("Sunday",Sunday);
 
+                for(int i = 0 ; i < Shifts.size() ; i++){
+                    if(i <= 2){
+                        theOne(Monday,Integer.valueOf(Shifts.get(i)));
+                        refreshShifts(i);
+                        //checkFor2ble(Monday);
+                    }  else if(i <= 5){
+                        theOne(Tuesday,Integer.valueOf(Shifts.get(i)));
+                        refreshShifts(i);
+                        //checkFor2ble(Tuesday);
+                    } else if(i <= 8){
+                        theOne(Wednesday,Integer.valueOf(Shifts.get(i)));
+                        refreshShifts(i);
+                        //checkFor2ble(Wednesday);
+                    } else if(i <= 11){
+                        theOne(Thursday,Integer.valueOf(Shifts.get(i)));
+                        refreshShifts(i);
+                        //checkFor2ble(Thursday);
+                    } else if(i <= 14){
+                        theOne(Friday,Integer.valueOf(Shifts.get(i)));
+                        refreshShifts(i);
+                        //checkFor2ble(Friday);
+                    } else if(i <= 17){
+                        theOne(Saturday,Integer.valueOf(Shifts.get(i)));
+                        refreshShifts(i);
+                        //checkFor2ble(Saturday);
+                    } else {
+                        theOne(Sunday,Integer.valueOf(Shifts.get(i)));
+                        refreshShifts(i);
+                        //checkFor2ble(Sunday);
+                    }
 
-                for(int i = 0; i<monday; i++){
-                    Monday.put(this.Employees.get(i));
-                }
-                for(int i = 0; i<tuesday; i++){
-                    Tuesday.put(this.Employees.get(i));
-                }
-                for(int i = 0; i<wednesday; i++){
-                    Wednesday.put(this.Employees.get(i));
-                }
-                for(int i = 0; i<thursday; i++){
-                    Thursday.put(this.Employees.get(i));
-                }
-                for(int i = 0; i<friday; i++){
-                    Friday.put(this.Employees.get(i));
-                }
-                for(int i = 0; i<saturday; i++){
-                    Saturday.put(this.Employees.get(i));
-                }
-                for(int i = 0; i<sunday; i++){
-                    Sunday.put(this.Employees.get(i));
                 }
 
                 fos.write(object.toString().getBytes());
                 fos.flush();
                 Toast.makeText(this,"saved to " + getFilesDir() + "/" + GeneratedSchedule,Toast.LENGTH_LONG).show();
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -410,6 +338,36 @@ public class OWSLAProgram extends AppCompatActivity {
             }
         }
 
+    }
+
+    public void refreshShifts(int shift){
+        switch(shift){
+
+            case 2:
+            case 5:
+            case 8:
+            case 11:
+            case 14:
+            case 17:
+            case 20:
+                this.Employees.clear();
+                CalculateEmployeesRequirements();
+                break;
+        }
+    }
+
+    public void checkFor2ble(JSONArray day){
+        for (int i = 0; i < day.length(); i++) {
+            for (int j = i + 1 ; j < day.length(); j++) {
+                try {
+                    if (day.getJSONObject(i).toString().equals(day.getJSONObject(j).toString())) {
+                        System.out.println("Ayyy lmao = "+day.getJSONObject(i).toString()+" = "+day.getJSONObject(j).toString());
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public void ClearText(){
@@ -531,3 +489,33 @@ public class OWSLAProgram extends AppCompatActivity {
 //            }
 //        }
 //    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//                if(object.getJSONArray("Employees").getJSONObject(i).getString("Shift_Type").equals("MORNING")){
+//                    this.MorningRate++;
+//                    //   this.Morning.add(object.getJSONArray("Employees").getJSONObject(i));
+//                } else if (object.getJSONArray("Employees").getJSONObject(i).getString("Shift_Type").equals("NOON")) {
+//                    this.NoonRate++;
+//                    //    this.Noon.add(object.getJSONArray("Employees").getJSONObject(i));
+//                } else {
+//                    this.NightRate++;
+//                    //   this.Night.add(object.getJSONArray("Employees").getJSONObject(i));
+//                }
+
+
+//                if (object.getJSONArray("Employees").getJSONObject(i).getString("VacationStatus").equals("1")) {
+//                    this.Employees.remove(i);
+//                }

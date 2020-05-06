@@ -8,10 +8,27 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class OWSLA extends AppCompatActivity {
 
@@ -23,11 +40,16 @@ public class OWSLA extends AppCompatActivity {
 
     Button OWSLAWorkers , OWSLAAssistants , OWSLATeams , OWSLAPrograms , OWSLASettings;
 
+    //Links
+    String FetchEmployees_URL;
 
+    private static final String File_Name = "AlgorithmTest.json";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owsla);
+
+        GlobalVariables Links = new GlobalVariables();
 
         //Handler's
         final Handler DateTime = new Handler(getMainLooper());
@@ -45,6 +67,9 @@ public class OWSLA extends AppCompatActivity {
         OWSLAWorkers = findViewById(R.id.OWSLAWorkers);
         OWSLASettings = findViewById(R.id.OWSLASettings);
 
+        //Links
+        FetchEmployees_URL = Links.getFetchEmployees_URL();
+
         //Intend's
 
         final String UserName = getIntent().getStringExtra("DeadMau5");
@@ -53,7 +78,7 @@ public class OWSLA extends AppCompatActivity {
         OWSLAUserName.setText(UserName);
 
 
-
+        FetchEmployeesData(UserEmail);
 
         //ByPassers
         OWSLAWorkers.setOnClickListener(new View.OnClickListener() {
@@ -105,6 +130,82 @@ public class OWSLA extends AppCompatActivity {
                 DateTime.postDelayed(this, 1000);
             }
         }, 10);
+    }
+    private void FetchEmployeesData(final String Email){
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, FetchEmployees_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if(response.isEmpty()){
+                            Toast.makeText(getApplicationContext(),
+                                    "This account does not exist.", Toast.LENGTH_SHORT)
+                                    .show();
+                        } else {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                String success = jsonObject.getString("success");
+                                if (success.equals("1")) {
+                                    FileOutputStream fos = null;
+                                    JSONObject object = new JSONObject();
+                                    try
+                                    {
+                                        fos = openFileOutput(File_Name,MODE_PRIVATE);
+                                        try {
+                                            object.put("Employees",jsonObject.get("Employees"));
+                                            fos.write(object.toString().getBytes());
+                                            fos.flush();
+                                            //Toast.makeText(getApplicationContext(),"Saved to" + getFilesDir() + "/" + File_Name,Toast.LENGTH_LONG).show();
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                    }
+                                    catch(FileNotFoundException e){
+                                        e.printStackTrace();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                    finally {
+                                        if (fos != null){
+                                            try {
+                                                fos.close();
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }
+                                }
+                                else{
+                                    Toast.makeText(getApplicationContext(),
+                                            "There are no records in the Database", Toast.LENGTH_SHORT)
+                                            .show();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Toast.makeText(getApplicationContext(), "An Error came through" +e.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Failed connection" +error.toString(), Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Email",Email);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 
 }
