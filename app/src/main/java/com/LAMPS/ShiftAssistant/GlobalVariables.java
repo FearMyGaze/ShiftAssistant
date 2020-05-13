@@ -48,6 +48,7 @@ public class GlobalVariables {
 
     private String ProgramGenerate = "/Shifts/ProgramGen.php";
     private String Vacation = "/Shifts/Vacation.php";
+    private String EndVacation = "/Shifts/EndVacation.php";
 
     //Files
 
@@ -94,7 +95,7 @@ public class GlobalVariables {
     //Program
     private String ProgramGenerate_URL = Protocol + IP + ProgramGenerate;
     private String Vacation_URL = Protocol + IP + Vacation;
-
+    private String EndVacation_URL = Protocol + IP + EndVacation;
 
     //TestPilot
     private String Empty = "0";
@@ -204,6 +205,11 @@ public class GlobalVariables {
     protected String getVacation_URL() {
         return Vacation_URL;
     }
+
+    protected String getEndVacation_URL() {
+        return EndVacation_URL;
+    }
+
 
     //Files
 

@@ -77,7 +77,7 @@ public class OWSLA extends AppCompatActivity {
 
         OWSLAUserName.setText(UserName);
 
-
+        EndVacation();
         FetchEmployeesData(UserEmail);
 
         //ByPassers
@@ -155,7 +155,6 @@ public class OWSLA extends AppCompatActivity {
                                             object.put("Employees",jsonObject.get("Employees"));
                                             fos.write(object.toString().getBytes());
                                             fos.flush();
-                                            //Toast.makeText(getApplicationContext(),"Saved to" + getFilesDir() + "/" + File_Name,Toast.LENGTH_LONG).show();
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
@@ -208,4 +207,45 @@ public class OWSLA extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
+    public void EndVacation(){
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,  Links.getEndVacation_URL(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            if (success.equals("0")) {
+                                Toast.makeText(getApplicationContext(), "Vacation status updated", Toast.LENGTH_LONG).show();
+                            }
+                            else if (success.equals("1")) {
+                                Toast.makeText(getApplicationContext(), "Vacation status failed to update", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getApplicationContext(), "Field trash." + e.toString(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Failed connection" + error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+
+    }
+
 }
+
