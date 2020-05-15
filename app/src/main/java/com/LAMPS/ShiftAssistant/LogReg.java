@@ -43,13 +43,13 @@ public class LogReg extends AppCompatActivity {
 
     EditText RegisterName , RegisterSurname , RegisterAFM , RegisterEmail , RegisterPassword , RegisterConfirmPassword ,
             RegisterGender , RegisterLandLine , RegisterCellPhone , RegisterStreetAddress , RegisterNumber , RegisterPostalCode ,
-            RegisterBirthDate , RegisterNationality , RegisterTeamCode , RegisterWorkHours;
+            RegisterBirthDate , RegisterNationality , RegisterTeamCode , RegisterWorkHours , RegisterShiftType;
 
     Button RegisterButton , RegisterConfirmButton;
 
     Switch RegisterUserType;
 
-    LinearLayout RegisterWorkHoursForm, RegisterTeamCodeForm;
+    LinearLayout RegisterWorkHoursForm, RegisterTeamCodeForm , RegisterShiftTypeForm;
 
     //==============================================Login form=======================================================================
 
@@ -73,7 +73,6 @@ public class LogReg extends AppCompatActivity {
     private String LoginOwner_URL;
     private String RegisterEmployees_URL;
     private String RegisterOwners_URL;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +125,9 @@ public class LogReg extends AppCompatActivity {
         RegisterNationality = findViewById(R.id.RegisterNationality);
         RegisterTeamCode = findViewById(R.id.RegisterTeamCode);
         RegisterWorkHours = findViewById(R.id.RegisterWorkHours);
+        RegisterShiftType = findViewById(R.id.RegisterShiftType);
         RegisterWorkHoursForm = findViewById(R.id.RegisterWorkHoursForm);
+        RegisterShiftTypeForm = findViewById(R.id.RegisterShiftTypeForm);
         RegisterTeamCodeForm = findViewById(R.id.RegisterTeamCodeForm);
 
         //Forget Form
@@ -180,11 +181,13 @@ public class LogReg extends AppCompatActivity {
                 if (RegisterUserType.isChecked()){
                     RegisterNationality.setImeOptions(EditorInfo.IME_ACTION_DONE);
                     RegisterWorkHoursForm.setVisibility(View.GONE);
+                    RegisterShiftTypeForm.setVisibility(View.GONE);
                     RegisterTeamCodeForm.setVisibility(View.GONE);
                 }
                 else{
                     RegisterNationality.setImeOptions(EditorInfo.IME_ACTION_NEXT);
                     RegisterWorkHoursForm.setVisibility(View.VISIBLE);
+                    RegisterShiftTypeForm.setVisibility(View.VISIBLE);
                     RegisterTeamCodeForm.setVisibility(View.VISIBLE);
                 }
             }
@@ -209,10 +212,10 @@ public class LogReg extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(RegisterUserType.isChecked()) {
-                    RegisterOwners();
+                    RegisterOwners("0");
                 }
                 else{
-                    RegisterEmployees();
+                    RegisterEmployees("0");
                 }
             }
         });
@@ -254,9 +257,37 @@ public class LogReg extends AppCompatActivity {
             }
         });
 
+        RegisterShiftType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final PopupMenu ShiftType = new PopupMenu(LogReg.this,v);
+                ShiftType.getMenuInflater().inflate(R.menu.shift_type_menu,ShiftType.getMenu());
+
+                ShiftType.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()){
+
+                            case R.id.MenuShiftTypeMorning:
+                                RegisterShiftType.setText(R.string.MenuShiftTypeMorningIF);
+                                return true;
+                            case R.id.MenuShiftTypeNoon:
+                                RegisterShiftType.setText(R.string.MenuShiftTypeNoonIF);
+                                return true;
+                            case R.id.MenuShiftTypeNight:
+                                RegisterShiftType.setText(R.string.MenuShiftTypeNightIF);
+                                return true;
+                        }
+                        return true;
+                    }
+                });
+                ShiftType.show();
+            }
+        });
+
     }
 
-    private void RegisterEmployees(){
+    private void RegisterEmployees(final String Switcher){
         final String RegisterName = this.RegisterName.getText().toString().trim();
         final String RegisterSurname = this.RegisterSurname.getText().toString().trim();
         final String RegisterAFM = this.RegisterAFM.getText().toString().trim();
@@ -334,7 +365,7 @@ public class LogReg extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    private void RegisterOwners(){
+    private void RegisterOwners(final String Switcher){
         final String RegisterName = this.RegisterName.getText().toString().trim();
         final String RegisterSurname = this.RegisterSurname.getText().toString().trim();
         final String RegisterAFM = this.RegisterAFM.getText().toString().trim();

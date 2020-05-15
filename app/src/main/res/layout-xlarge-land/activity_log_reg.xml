@@ -896,16 +896,18 @@
                         </LinearLayout>//WorkHours
 
                         <LinearLayout
+                            android:id="@+id/RegisterShiftTypeForm"
                             android:layout_width="300sp"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:layout_gravity="center"
-                            android:visibility="invisible">
+                            android:visibility="visible">
 
                             <TextView
                                 android:layout_width="125sp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="15sp"
+                                android:text="@string/RegisterShiftType"
                                 android:textColor="@color/White"
                                 android:textAlignment="center"
                                 android:textSize="20sp"
@@ -914,6 +916,7 @@
                             </TextView>
 
                             <EditText
+                                android:id="@+id/RegisterShiftType"
                                 android:layout_width="160sp"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
@@ -922,8 +925,7 @@
                                 android:textAlignment="center"
                                 android:textColor="@color/White"
                                 android:textSize="25sp"
-                                android:background="@color/BlackTransparent"
-                                android:visibility="invisible">
+                                android:background="@color/BlackTransparent">
 
                             </EditText>
 

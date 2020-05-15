@@ -10,6 +10,7 @@
     <string name="LoginForgotPassword">Επανάλ. κωδικού</string>
     <string name="LoginForgotPasswordNew">Νέος Κωδικός</string>
     ================================Register========================================================
+    <string name="RegisterID">ID</string>
     <string name="RegisterName">Όνομα</string>
     <string name="RegisterSurname">Επώνυμο</string>
     <string name="RegisterAFM">ΑΦΜ</string>
@@ -64,9 +65,9 @@
     <string name="OWSLAProgramParagraph">Κάλυψη κενού για να υπάρχει κάτι εδώ μέσα</string>
     <string name="OWSLAProgramTotalEmployees">Συνολικός αριθμός εργαζομένων: </string>
     <string name="OWSLAProgramTotalEmployeesHours">Εργατικό δυναμικό (Ώρες): </string>
-    <string name="OWSLAProgramPercentageMorning">Ποσοστό προτίμησης Πρ.βάρδιας: </string>
-    <string name="OWSLAProgramPercentageNoon">Ποσοστό προτίμησης Μεσ.βάρδιας: </string>
-    <string name="OWSLAProgramPercentageNight">Ποσοστό προτίμησης Βραδ.βάρδιας: </string>
+    <string name="OWSLAProgramPercentageMorning">Πρωινής βάρδιας: </string>
+    <string name="OWSLAProgramPercentageNoon">Μεσημεριανής βάρδιας: </string>
+    <string name="OWSLAProgramPercentageNight">Βραδινής βάρδιας: </string>
     ================================Worker==========================================================
     <string name="WorkerLeave">Ρεπό</string>
     <string name="WorkerUnPaidLeave">Ρεπό άνευ αποδοχών</string>

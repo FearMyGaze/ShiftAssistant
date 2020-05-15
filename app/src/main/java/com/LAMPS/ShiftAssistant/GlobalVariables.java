@@ -34,7 +34,7 @@ public class GlobalVariables {
     private String SearchAssistants = "/Shifts/SearchAssistant.php";
     private String NextAssistant = "/Shifts/NextAssistant.php";
     private String PreviousAssistant = "/Shifts/PrevAssistant.php";
-    private String NewAssistant = "/Shifts/NewAssistant.php";
+    private String NewAssistant = "/Shifts/RegisterOwners.php";
 
     //Worker
 
@@ -42,7 +42,7 @@ public class GlobalVariables {
     private String SearchWorker = "/Shifts/SearchWorker.php";
     private String NextWorker = "/Shifts/NextWorker.php";
     private String PreviousWorker = "/Shifts/PrevWorker.php";
-    private String NewWorker = "/Shifts/";
+    private String NewWorker = "/Shifts/RegisterEmployees.php";
 
     //Vacation
 

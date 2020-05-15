@@ -10,6 +10,7 @@
     <string name="LoginForgotPassword">Forgot Password</string>
     <string name="LoginForgotPasswordNew">New Password</string>
     ================================Register========================================================
+    <string name="RegisterID">ID</string>
     <string name="RegisterName">Name</string>
     <string name="RegisterSurname">Surname</string>
     <string name="RegisterAFM">TIN</string>
@@ -64,9 +65,9 @@
     <string name="OWSLAProgramParagraph">Covering empty space so i can have something to see</string>
     <string name="OWSLAProgramTotalEmployees">Total Number of Employees</string>
     <string name="OWSLAProgramTotalEmployeesHours">Total Workforce (Hours): </string>
-    <string name="OWSLAProgramPercentageMorning">Selection rate of Morning shift</string>
-    <string name="OWSLAProgramPercentageNoon">Selection rate of Noon shift</string>
-    <string name="OWSLAProgramPercentageNight">Selection rate of Night shift</string>
+    <string name="OWSLAProgramPercentageMorning">Morning shift</string>
+    <string name="OWSLAProgramPercentageNoon">Noon shift</string>
+    <string name="OWSLAProgramPercentageNight">Night shift</string>
     ================================Worker==========================================================
     <string name="WorkerLeave">Day off</string>
     <string name="WorkerUnPaidLeave">Unpaid day off</string>

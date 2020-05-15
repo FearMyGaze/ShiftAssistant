@@ -103,6 +103,7 @@ public class OWSLATeam extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DelTeams(DeleteTeam);
+                Toast.makeText(getApplicationContext(),"Not yet implemented",Toast.LENGTH_LONG).show();
             }
         });
 
