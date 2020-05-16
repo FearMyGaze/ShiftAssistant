@@ -303,11 +303,13 @@ public class LogReg extends AppCompatActivity {
         final String RegisterNationality = this.RegisterNationality.getText().toString().trim();
         final String RegisterTeamCode = this.RegisterTeamCode.getText().toString().trim();
         final String RegisterWorkHours = this.RegisterWorkHours.getText().toString().trim();
+        final String RegisterShiftType = this.RegisterShiftType.getText().toString().trim();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,  RegisterEmployees_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        System.out.println(response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("success");
@@ -327,6 +329,7 @@ public class LogReg extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Registration failed! Invalid Department Code", Toast.LENGTH_LONG).show();
                             }
                         } catch (JSONException e) {
+
                             e.printStackTrace();
                             Toast.makeText(LogReg.this, "Field trash." + e.toString(), Toast.LENGTH_LONG).show();
                         }
@@ -357,6 +360,8 @@ public class LogReg extends AppCompatActivity {
                 params.put("RegisterNationality",RegisterNationality);
                 params.put("RegisterTeamCode",RegisterTeamCode);
                 params.put("RegisterWorkHours",RegisterWorkHours);
+                params.put("RegisterShiftType",RegisterShiftType);
+                params.put("Switcher",Switcher);
                 return params;
             }
         };
@@ -428,6 +433,7 @@ public class LogReg extends AppCompatActivity {
                 params.put("RegisterPostalCode",RegisterPostalCode);
                 params.put("RegisterBirthDate",RegisterBirthDate);
                 params.put("RegisterNationality",RegisterNationality);
+                params.put("Switcher",Switcher);
                 return params;
             }
         };
