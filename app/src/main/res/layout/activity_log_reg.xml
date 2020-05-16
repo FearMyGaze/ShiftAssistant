@@ -1010,7 +1010,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="15sp"
                                     android:textColor="@color/White"
-                                    android:text="@string/RegisterWorkHours"
+                                    android:text="@string/RegisterShiftType"
                                     android:textAlignment="center"
                                     android:textSize="20sp"
                                     android:gravity="center_horizontal">

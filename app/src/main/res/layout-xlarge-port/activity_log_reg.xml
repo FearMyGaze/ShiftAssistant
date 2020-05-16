@@ -223,7 +223,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -950,6 +950,8 @@
                             android:id="@+id/RegisterShiftType"
                             android:layout_width="160sp"
                             android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:focusable="false"
                             android:gravity="center"
                             android:inputType="number"
                             android:maxLines="1"

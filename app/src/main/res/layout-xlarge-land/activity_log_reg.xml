@@ -919,6 +919,8 @@
                                 android:id="@+id/RegisterShiftType"
                                 android:layout_width="160sp"
                                 android:layout_height="wrap_content"
+                                android:clickable="false"
+                                android:focusable="false"
                                 android:gravity="center"
                                 android:maxLines="1"
                                 android:imeOptions="actionDone"

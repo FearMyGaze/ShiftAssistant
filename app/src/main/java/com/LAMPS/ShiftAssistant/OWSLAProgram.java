@@ -36,11 +36,19 @@ public class OWSLAProgram extends AppCompatActivity {
     protected ArrayList<String> Shifts = new ArrayList<>();
     protected ArrayList<JSONObject> Employees = new ArrayList<>();
 
+    protected ArrayList<JSONObject> MorningEmployees = new ArrayList<>();
+    protected ArrayList<JSONObject> NoonEmployees = new ArrayList<>();
+    protected ArrayList<JSONObject> NightEmployees = new ArrayList<>();
+
+    //Program Variables
 
     protected int TotalEmployees = 0 , TotalWorkHours = 0 , finalMonday = 0 ,  finalTuesday = 0 ,  finalWednesday = 0 ,
             finalThursday = 0 ,  finalFriday = 0 , finalSaturday = 0 ,  finalSunday = 0;
 
     protected double MorningRate = 0 , NoonRate = 0 , NightRate = 0;
+
+
+    //Program EditText's
 
     EditText OWSLAProgramMondayMorning , OWSLAProgramMondayNoon , OWSLAProgramMondayNight , OWSLAProgramTuesdayMorning ,
             OWSLAProgramTuesdayNoon , OWSLAProgramTuesdayNight , OWSLAProgramWednesdayMorning , OWSLAProgramWednesdayNoon ,
@@ -50,7 +58,13 @@ public class OWSLAProgram extends AppCompatActivity {
             OWSLAProgramSundayNight ,OWSLAProgramTotalEmployees , OWSLAProgramTotalEmployeesHours , OWSLAProgramPercentageMorning ,
             OWSLAProgramPercentageNoon , OWSLAProgramPercentageNight;
 
+    //Program Button's
+    boolean Rates2NumberMorning = true;
+    boolean Rates2NumberNoon = true;
+    boolean Rates2NumberNight = true;
     Button OWSLAProgramConfirm;
+
+    //URL
 
     private String VAC_Check_URL;
 
@@ -62,6 +76,7 @@ public class OWSLAProgram extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owsla_program);
+
 
         Links = new GlobalVariables();
 
@@ -112,13 +127,27 @@ public class OWSLAProgram extends AppCompatActivity {
         OWSLAProgramConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int scenario;
                 Shifts.clear();
                 GetText();
                 if(!weHaveMissingFields()) {
                     if(restriction(Shifts)){
-                        ProgramEntry();
-                        VacationCheck(UserEmail);
-                        //ClearText();
+                        scenario = ProgramEntry();
+                        switch(scenario){
+                            case 0:
+                                VacationCheck(UserEmail);
+                                ClearText();
+                                break;
+                            case 3:
+                                Toast.makeText(getApplicationContext(),"You have exceeded the maximum number of Morning Shift Employees",Toast.LENGTH_SHORT).show();
+                                break;
+                            case 5:
+                                Toast.makeText(getApplicationContext(),"You have exceeded the maximum number of Noon Shift Employees",Toast.LENGTH_SHORT).show();
+                                break;
+                            case 15:
+                                Toast.makeText(getApplicationContext(),"You have exceeded the maximum number of Night Shift Employees",Toast.LENGTH_SHORT).show();
+                                break;
+                        }
                     } else {
                         Toast.makeText(getApplicationContext(),"Υou have exceeded the limit of available employees, Please check the fields and try again",Toast.LENGTH_LONG).show();
                     }
@@ -131,6 +160,48 @@ public class OWSLAProgram extends AppCompatActivity {
         CalculateEmployeesRequirements();
         this.OWSLAProgramTotalEmployees.setText(String.valueOf(this.TotalEmployees));
         this.OWSLAProgramTotalEmployeesHours.setText(String.valueOf(this.TotalWorkHours));
+
+        OWSLAProgramPercentageMorning.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Rates2NumberMorning) {
+                    OWSLAProgramPercentageMorning.setText((int) MorningRate + "/" + TotalEmployees);
+                    Rates2NumberMorning = false;
+                } else {
+                    OWSLAProgramPercentageMorning.setText(String.format("%.2f ",(MorningRate/TotalEmployees)*100)+"%");
+                    Rates2NumberMorning = true;
+                }
+
+            }
+        });
+
+        OWSLAProgramPercentageNoon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Rates2NumberNoon){
+                    OWSLAProgramPercentageNoon.setText((int)NoonRate + "/" + TotalEmployees);
+                    Rates2NumberNoon = false;
+                }else {
+                    OWSLAProgramPercentageNoon.setText(String.format("%.2f ",(NoonRate/TotalEmployees)*100)+"%");
+                    Rates2NumberNoon = true;
+                }
+            }
+        });
+
+        OWSLAProgramPercentageNight.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if(Rates2NumberNight){
+                    OWSLAProgramPercentageNight.setText((int)NightRate + "/" + TotalEmployees);
+                    Rates2NumberNight = false;
+                }else{
+                    OWSLAProgramPercentageNight.setText(String.format("%.2f ",(NightRate/TotalEmployees)*100)+"%");
+                    Rates2NumberNight = true;
+                }
+            }
+        });
+
         this.OWSLAProgramPercentageMorning.setText(String.format("%.2f ",(this.MorningRate/this.TotalEmployees)*100)+"%");
         this.OWSLAProgramPercentageNoon.setText(String.format("%.2f ",(this.NoonRate/this.TotalEmployees)*100)+"%");
         this.OWSLAProgramPercentageNight.setText(String.format("%.2f ",(this.NightRate/this.TotalEmployees)*100)+"%");
@@ -189,13 +260,13 @@ public class OWSLAProgram extends AppCompatActivity {
             for(int i = 0; i < object.getJSONArray("Employees").length();i++) {
                 if(object.getJSONArray("Employees").getJSONObject(i).getString("ShiftType").equals("MORNING")){
                     this.MorningRate++;
-                    //   this.Morning.add(object.getJSONArray("Employees").getJSONObject(i));
+                    this.MorningEmployees.add(object.getJSONArray("Employees").getJSONObject(i));
                 } else if (object.getJSONArray("Employees").getJSONObject(i).getString("ShiftType").equals("NOON")) {
                     this.NoonRate++;
-                    //    this.Noon.add(object.getJSONArray("Employees").getJSONObject(i));
+                    this.NoonEmployees.add(object.getJSONArray("Employees").getJSONObject(i));
                 } else {
                     this.NightRate++;
-                    //   this.Night.add(object.getJSONArray("Employees").getJSONObject(i));
+                    this.NightEmployees.add(object.getJSONArray("Employees").getJSONObject(i));
                 }
                 this.TotalWorkHours = Integer.valueOf(object.getJSONArray("Employees").getJSONObject(i).getString("WorkHours")) + this.TotalWorkHours;
                 this.Employees.add(object.getJSONArray("Employees").getJSONObject(i));
@@ -251,17 +322,77 @@ public class OWSLAProgram extends AppCompatActivity {
         }
     }
 
-    private void FillRandomEmployees(JSONArray Day,int shiftSize){
+    private int FillRandomEmployees(JSONArray Day,int shiftSize,int a){
+        int result = 0;
         Random randomas = new Random();
         int rEmployee;
-        for(int i = 0; i < shiftSize; i++) {
-            rEmployee = randomas.nextInt(Employees.size());
-            Day.put(Employees.get(rEmployee));
-            Employees.remove(Employees.remove(rEmployee));
+        switch (a){
+            case 0:
+            case 3:
+            case 6:
+            case 9:
+            case 12:
+            case 15:
+            case 18:
+
+                if(Integer.valueOf(this.Shifts.get(a)) <= this.MorningEmployees.size()){
+                    for (int i = 0; i < shiftSize; i++) {
+                        rEmployee = randomas.nextInt(MorningEmployees.size());
+                        Day.put(MorningEmployees.get(rEmployee));
+                        MorningEmployees.remove(MorningEmployees.remove(rEmployee));
+                    }
+                    result = 0;
+                } else {
+                    result = 3;
+                }
+
+                break;
+            case 1:
+            case 4:
+            case 7:
+            case 10:
+            case 13:
+            case 16:
+            case 19:
+
+                if(Integer.valueOf(this.Shifts.get(a)) <= this.NoonEmployees.size()){
+                    for (int i = 0; i < shiftSize; i++) {
+                        rEmployee = randomas.nextInt(NoonEmployees.size());
+                        Day.put(NoonEmployees.get(rEmployee));
+                        NoonEmployees.remove(NoonEmployees.remove(rEmployee));
+                    }
+                    result = 0;
+                } else {
+                    result = 5;
+                }
+
+                break;
+            case 2:
+            case 5:
+            case 8:
+            case 11:
+            case 14:
+            case 17:
+            case 20:
+
+                if(Integer.valueOf(this.Shifts.get(a)) <= this.NightEmployees.size()){
+                    for (int i = 0; i < shiftSize; i++) {
+                        rEmployee = randomas.nextInt(NightEmployees.size());
+                        Day.put(NightEmployees.get(rEmployee));
+                        NightEmployees.remove(NightEmployees.remove(rEmployee));
+                    }
+                    result = 0;
+                } else {
+                    result = 15;
+                }
+
+                break;
         }
+        return result;
     }
 
-    private void ProgramEntry(){
+    private int ProgramEntry(){
+        int let = 0;
         FileOutputStream fos = null;
         JSONObject object = new JSONObject();
         JSONArray Monday = new JSONArray();
@@ -287,37 +418,63 @@ public class OWSLAProgram extends AppCompatActivity {
 
                 for(int i = 0 ; i < Shifts.size() ; i++){
                     if(i <= 2){
-                        FillRandomEmployees(Monday,Integer.valueOf(Shifts.get(i)));
-                        refreshShifts(i);
+                        let = FillRandomEmployees(Monday, Integer.valueOf(Shifts.get(i)), i);
+                        if(let != 0){
+                            return let;
+                        } else {
+                            refreshShifts();
+                        }
                         //checkFor2ble(Monday);
                     }  else if(i <= 5){
-                        FillRandomEmployees(Tuesday,Integer.valueOf(Shifts.get(i)));
-                        refreshShifts(i);
+                        let = FillRandomEmployees(Tuesday, Integer.valueOf(Shifts.get(i)), i);
+                        if(let != 0){
+                            return let;
+                        } else {
+                            refreshShifts();
+                        }
                         //checkFor2ble(Tuesday);
                     } else if(i <= 8){
-                        FillRandomEmployees(Wednesday,Integer.valueOf(Shifts.get(i)));
-                        refreshShifts(i);
+                        let = FillRandomEmployees(Wednesday, Integer.valueOf(Shifts.get(i)), i);
+                        if(let != 0){
+                            return let;
+                        } else {
+                            refreshShifts();
+                        }
                         //checkFor2ble(Wednesday);
                     } else if(i <= 11){
-                        FillRandomEmployees(Thursday,Integer.valueOf(Shifts.get(i)));
-                        refreshShifts(i);
+                        let = FillRandomEmployees(Thursday, Integer.valueOf(Shifts.get(i)), i);
+                        if(let != 0){
+                            return let;
+                        } else {
+                            refreshShifts();
+                        }
                         //checkFor2ble(Thursday);
                     } else if(i <= 14){
-                        FillRandomEmployees(Friday,Integer.valueOf(Shifts.get(i)));
-                        refreshShifts(i);
+                        let = FillRandomEmployees(Friday, Integer.valueOf(Shifts.get(i)), i);
+                        if(let != 0){
+                            return let;
+                        } else {
+                            refreshShifts();
+                        }
                         //checkFor2ble(Friday);
                     } else if(i <= 17){
-                        FillRandomEmployees(Saturday,Integer.valueOf(Shifts.get(i)));
-                        refreshShifts(i);
+                        let = FillRandomEmployees(Saturday, Integer.valueOf(Shifts.get(i)), i);
+                        if(let != 0){
+                            return let;
+                        } else {
+                            refreshShifts();
+                        }
                         //checkFor2ble(Saturday);
                     } else {
-                        FillRandomEmployees(Sunday,Integer.valueOf(Shifts.get(i)));
-                        refreshShifts(i);
+                        let = FillRandomEmployees(Sunday, Integer.valueOf(Shifts.get(i)), i);
+                        if(let != 0){
+                            return let;
+                        } else {
+                            refreshShifts();
+                        }
                         //checkFor2ble(Sunday);
                     }
-
                 }
-
                 fos.write(object.toString().getBytes());
                 fos.flush();
                 Toast.makeText(this,"saved to " + getFilesDir() + "/" + Links.getFileProgram(),Toast.LENGTH_LONG).show();
@@ -342,22 +499,18 @@ public class OWSLAProgram extends AppCompatActivity {
             }
         }
 
+        return let;
     }
 
-    public void refreshShifts(int shift){
-        switch(shift){
+    public void refreshShifts(){
 
-            case 2:
-            case 5:
-            case 8:
-            case 11:
-            case 14:
-            case 17:
-            case 20:
-                this.Employees.clear();
-                CalculateEmployeesRequirements();
-                break;
-        }
+        this.MorningEmployees.clear();
+
+        this.NoonEmployees.clear();
+
+        this.NightEmployees.clear();
+
+        CalculateEmployeesRequirements();
     }
 
     public void checkFor2ble(JSONArray day){
@@ -365,7 +518,7 @@ public class OWSLAProgram extends AppCompatActivity {
             for (int j = i + 1 ; j < day.length(); j++) {
                 try {
                     if (day.getJSONObject(i).toString().equals(day.getJSONObject(j).toString())) {
-                        System.out.println("Ayyy lmao = "+day.getJSONObject(i).toString()+" = "+day.getJSONObject(j).toString());
+                        System.out.println("Double = "+day.getJSONObject(i).toString()+" = "+day.getJSONObject(j).toString());
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -467,17 +620,3 @@ public class OWSLAProgram extends AppCompatActivity {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
