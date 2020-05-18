@@ -212,10 +212,10 @@ public class LogReg extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(RegisterUserType.isChecked()) {
-                    RegisterOwners("0");
+                    RegisterOwners("5");
                 }
                 else{
-                    RegisterEmployees("0");
+                    RegisterEmployees("5");
                 }
             }
         });

@@ -47,6 +47,9 @@ public class OWSLAWorker extends AppCompatActivity {
 
     private String CreateWorker , DeleteWorker , SearchWorker , NextWorker , PreviousWorker;
 
+    //Helpers
+    String employeeID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,22 +97,13 @@ public class OWSLAWorker extends AppCompatActivity {
         OWSLAWorkerAdd = findViewById(R.id.OWSLAWorkerAdd);
         OWSLAWorkerRemove = findViewById(R.id.OWSLAWorkerRemove);
 
-        //Method's
-
-        NewWorkers(CreateWorker,"1");
-
-
-
-
-
-
-
         //ClickListener's
 
         OWSLAWorkerAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewWorkers(CreateWorker,"1");
+                ClearText();
+                NewWorkers(CreateWorker,"0");
                 OWSLAWorkerConfirmButton.setText(R.string.OWSLATeamConfirmButtonADD);
                 OWSLAWorkerConfirmButton.setVisibility(View.VISIBLE);
             }
@@ -126,7 +120,7 @@ public class OWSLAWorker extends AppCompatActivity {
         OWSLAWorkerConfirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewWorkers(CreateWorker,"0");
+                NewWorkers(CreateWorker,"2");
             }
         });
 
@@ -146,7 +140,7 @@ public class OWSLAWorker extends AppCompatActivity {
 
         OWSLAWorkerNext.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { ClearText(); NextWorker(NextWorker);
+            public void onClick(View v) { NextWorker(NextWorker);
 
             }
         });
@@ -156,6 +150,10 @@ public class OWSLAWorker extends AppCompatActivity {
             public void onClick(View v) { PrevWorker(PreviousWorker);
             }
         });
+
+        //Methods
+
+        NewWorkers(CreateWorker,"0");
 
         //Popup Menu's
         OWSLAWorkerWorkHours.setOnClickListener(new View.OnClickListener() {
@@ -232,7 +230,7 @@ public class OWSLAWorker extends AppCompatActivity {
         final String WorkerBirthDate = this.OWSLAWorkerBirthDate.getText().toString().trim();
         final String WorkerNationality = this.OWSLAWorkerNationality.getText().toString().trim();
         final String WorkerWorkHours = this.OWSLAWorkerWorkHours.getText().toString().trim();
-        final String WorkerSearchBox = this.OWSLAWorkerSearchBox.getText().toString().trim();
+        final String ShiftType = this.OWSLAWorkerShiftType.getText().toString().trim();
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, CreateLink, new Response.Listener<String>() {
@@ -241,10 +239,10 @@ public class OWSLAWorker extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String success = jsonObject.getString("success");
-                    if (Switcher.equals("1")) {
+                    if (Switcher.equals("0")){
                         String id = jsonObject.getString("ID");
-                        OWSLAWorkerAFM.setText(String.valueOf(Integer.valueOf(id) + 1));
-                        OWSLAWorkerSearchBox.setText(OWSLAWorkerAFM.getText());
+                        setEmployeeID(id);
+                        //System.out.println(employeeID);
                     } else {
                         if (success.equals("0")) {
                             Toast.makeText(getApplicationContext(), "Creating worker succeed.", Toast.LENGTH_LONG).show();
@@ -263,32 +261,30 @@ public class OWSLAWorker extends AppCompatActivity {
                 Toast.makeText(OWSLAWorker.this, "Failed connection" + error.toString(), Toast.LENGTH_LONG).show();
             }
         })
-    {
-        @Override
-        protected Map<String , String> getParams() throws AuthFailureError{
-            Map<String , String> params = new HashMap<>();
-            params.put("Firstname", WorkerName);
-            params.put("Lastname", WorkerSurname);
-            params.put("User_Password", WorkerPassword);
-            params.put("Gender", WorkerGender);
-            params.put("Birthday" ,WorkerBirthDate);
-            params.put("Citizenship", WorkerNationality);
-            //params.put("Reg_date");
-            //params.put("LastVacation");
-            //params.put("VacationStatus");
-            params.put("Email", WorkerEmail);
-            params.put("Landline" , WorkerLandLine);
-            params.put("Mobile" , WorkerCellPhone);
-            params.put("Address_Street" , WorkerStreetAddress);
-            params.put("Address_Number" , WorkerNumber);
-            params.put("Postal_Code" , WorkerPostalCode);
-            params.put("TIN" , WorkerAFM);
-            params.put("WorkHours" , WorkerWorkHours);
-            params.put("Teams_Code" , WorkerTeamCode);
-            params.put("Switcher" , Switcher);
-            return params;
-        }
-    };
+        {
+            @Override
+            protected Map<String , String> getParams() throws AuthFailureError{
+                Map<String , String> params = new HashMap<>();
+                params.put("RegisterName", WorkerName);
+                params.put("RegisterSurname", WorkerSurname);
+                params.put("RegisterPassword", WorkerPassword);
+                params.put("RegisterGender", WorkerGender);
+                params.put("RegisterBirthDate" ,WorkerBirthDate);
+                params.put("RegisterNationality", WorkerNationality);
+                params.put("RegisterEmail", WorkerEmail);
+                params.put("RegisterLandLine" , WorkerLandLine);
+                params.put("RegisterCellPhone" , WorkerCellPhone);
+                params.put("RegisterStreetAddress" , WorkerStreetAddress);
+                params.put("RegisterNumber" , WorkerNumber);
+                params.put("RegisterPostalCode" , WorkerPostalCode);
+                params.put("RegisterAFM" , WorkerAFM);
+                params.put("RegisterWorkHours" , WorkerWorkHours);
+                params.put("RegisterShiftType" , ShiftType);
+                params.put("RegisterTeamCode" , WorkerTeamCode);
+                params.put("Switcher" , Switcher);
+                return params;
+            }
+        };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
@@ -383,7 +379,6 @@ public class OWSLAWorker extends AppCompatActivity {
     }
 
     protected void NextWorker(String NextWorker){
-        final String WorkerAFM = this.OWSLAWorkerAFM.getText().toString().trim();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, NextWorker, new Response.Listener<String>() {
             @Override
@@ -405,6 +400,8 @@ public class OWSLAWorker extends AppCompatActivity {
                     String Citizenship;
                     String WorkHours;
                     String Teams_Code;
+                    String ShiftType;
+                    String ID;
 
                     if (success.equals("1")) {
                         Firstname = jsonObject.getString("Firstname");
@@ -421,6 +418,9 @@ public class OWSLAWorker extends AppCompatActivity {
                         Citizenship = jsonObject.getString("Citizenship");
                         WorkHours = jsonObject.getString("WorkHours");
                         Teams_Code = jsonObject.getString("Teams_Code");
+                        ShiftType = jsonObject.getString("ShiftType");
+                        ID = jsonObject.getString("ID");
+                        setEmployeeID(ID);
 
                         OWSLAWorkerName.setText(Firstname);
                         OWSLAWorkerSurname.setText(Lastname);
@@ -436,10 +436,12 @@ public class OWSLAWorker extends AppCompatActivity {
                         OWSLAWorkerNationality.setText(Citizenship);
                         OWSLAWorkerWorkHours.setText(WorkHours);
                         OWSLAWorkerTeamCode.setText(Teams_Code);
-                        OWSLAWorkerSearchBox.setText(String.valueOf(Integer.valueOf(OWSLAWorkerSearchBox.getText().toString().trim()) + 1));
+                        OWSLAWorkerShiftType.setText(ShiftType);
+                        // OWSLAWorkerSearchBox.setText(String.valueOf(Integer.valueOf(OWSLAWorkerSearchBox.getText().toString().trim()) + 1));
 
                     } else if (success.equals("2")) {
                         Toast.makeText(getApplicationContext(), "This is the last worker created", Toast.LENGTH_LONG).show();
+                        System.out.println(employeeID);
                     } else if (success.equals("3")) {
                         Toast.makeText(getApplicationContext(), "There are no workers", Toast.LENGTH_LONG).show();
                     } else if (success.equals("view")) {
@@ -461,7 +463,7 @@ public class OWSLAWorker extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("TIN",WorkerAFM);
+                params.put("WorkerID",employeeID);
                 return params;
             }
         };
@@ -470,7 +472,7 @@ public class OWSLAWorker extends AppCompatActivity {
     }
 
     protected void PrevWorker(String PreviousWorker){
-        final String WorkerAFM = this.OWSLAWorkerAFM.getText().toString().trim();
+
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, PreviousWorker, new Response.Listener<String>() {
             @Override
@@ -493,6 +495,8 @@ public class OWSLAWorker extends AppCompatActivity {
                     String Citizenship;
                     String WorkHours;
                     String Teams_Code;
+                    String ShiftType;
+                    String ID;
 
                     if (success.equals("-1")) {
                         Firstname = jsonObject.getString("Firstname");
@@ -509,6 +513,9 @@ public class OWSLAWorker extends AppCompatActivity {
                         Citizenship = jsonObject.getString("Citizenship");
                         WorkHours = jsonObject.getString("WorkHours");
                         Teams_Code = jsonObject.getString("Teams_Code");
+                        ShiftType = jsonObject.getString("ShiftType");
+                        ID = jsonObject.getString("ID");
+                        setEmployeeID(ID);
 
                         OWSLAWorkerName.setText(Firstname);
                         OWSLAWorkerSurname.setText(Lastname);
@@ -524,10 +531,12 @@ public class OWSLAWorker extends AppCompatActivity {
                         OWSLAWorkerNationality.setText(Citizenship);
                         OWSLAWorkerWorkHours.setText(WorkHours);
                         OWSLAWorkerTeamCode.setText(Teams_Code);
-                        OWSLAWorkerSearchBox.setText(String.valueOf(Integer.valueOf(OWSLAWorkerSearchBox.getText().toString().trim()) + 1));
+                        OWSLAWorkerShiftType.setText(ShiftType);
+                        //OWSLAWorkerSearchBox.setText(String.valueOf(Integer.valueOf(OWSLAWorkerSearchBox.getText().toString().trim()) + 1));
 
                     } else if (success.equals("-2")) {
                         Toast.makeText(getApplicationContext(), "This is the first worker created", Toast.LENGTH_LONG).show();
+                        System.out.println(employeeID);
                     } else if (success.equals("-3")) {
                         Toast.makeText(getApplicationContext(), "There are no workers", Toast.LENGTH_LONG).show();
                     } else if (success.equals("view")) {
@@ -547,12 +556,16 @@ public class OWSLAWorker extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("TIN",WorkerAFM);
+                params.put("WorkerID",String.valueOf(Integer.valueOf(employeeID)));
                 return params;
             }
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+    private void setEmployeeID(String eID){
+        this.employeeID = eID;
     }
 
     public void ClearText(){
