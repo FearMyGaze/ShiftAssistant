@@ -39,8 +39,8 @@ public class ProgramListAdapter extends ArrayAdapter<ProgramGetterSetter> {
         String Shift = getItem(position).getShiftID();
         String Worker = getItem(position).getWorkerID();
 
-        int Team = getItem(position).getTeamID();
-        int TilVAC = getItem(position).getTilVAC();
+        String Team = getItem(position).getTeamID();
+        String TilVAC = getItem(position).getTilVAC();
 
         final View Result;
 

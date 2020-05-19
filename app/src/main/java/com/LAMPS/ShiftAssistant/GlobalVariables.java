@@ -50,6 +50,11 @@ public class GlobalVariables {
     private String Vacation = "/Shifts/Vacation.php";
     private String EndVacation = "/Shifts/EndVacation.php";
 
+    //Program
+
+    private String uploadProgramToDB = "/Shifts/RegisterProgram.php";
+    private String DownloadProgramFromDB = "/Shifts/viewProgram.php";
+
     //Files
 
     private String FileProgram = "Program.json";
@@ -96,6 +101,8 @@ public class GlobalVariables {
     private String ProgramGenerate_URL = Protocol + IP + ProgramGenerate;
     private String Vacation_URL = Protocol + IP + Vacation;
     private String EndVacation_URL = Protocol + IP + EndVacation;
+    private String UploadProgramToDB_URL = Protocol + IP + uploadProgramToDB;
+    private String DownloadProgramFromDB_URL = Protocol + IP + DownloadProgramFromDB;
 
     //TestPilot
     private String Empty = "0";
@@ -210,14 +217,23 @@ public class GlobalVariables {
         return EndVacation_URL;
     }
 
+    protected String getUploadProgramToDB_URL() {
+        return UploadProgramToDB_URL;
+    }
+
+    protected String getDownloadProgramFromDB_URL() {
+        return DownloadProgramFromDB_URL;
+    }
+
+
 
     //Files
 
-    public String getFileProgram() {
+    protected String getFileProgram() {
         return FileProgram;
     }
 
-    public String getFileEmployees() {
+    protected String getFileEmployees() {
         return FileEmployees;
     }
 

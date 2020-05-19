@@ -6,10 +6,10 @@ public class ProgramGetterSetter {
     private String ShiftID = "0";
     private String WorkerID = "0";
 
-    private int TeamID = 0;
-    private int TilVAC = 0;
+    private String TeamID = "0";
+    private String TilVAC = "0";
 
-    protected ProgramGetterSetter(String date, String shiftID, String workerID, int teamID, int tilVAC) {
+    protected ProgramGetterSetter(String date, String shiftID, String workerID, String teamID, String tilVAC) {
         Date = date;
         ShiftID = shiftID;
         WorkerID = workerID;
@@ -31,11 +31,11 @@ public class ProgramGetterSetter {
         return WorkerID;
     }
 
-    protected int getTeamID() {
+    protected String getTeamID() {
         return TeamID;
     }
 
-    protected int getTilVAC() {
+    protected String getTilVAC() {
         return TilVAC;
     }
 
@@ -53,11 +53,11 @@ public class ProgramGetterSetter {
         WorkerID = workerID;
     }
 
-    public void setTeamID(int teamID) {
+    public void setTeamID(String teamID) {
         TeamID = teamID;
     }
 
-    public void setTilVAC(int tilVAC) {
+    public void setTilVAC(String tilVAC) {
         TilVAC = tilVAC;
     }
 

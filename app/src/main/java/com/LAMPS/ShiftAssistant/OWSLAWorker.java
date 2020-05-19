@@ -103,7 +103,6 @@ public class OWSLAWorker extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ClearText();
-                NewWorkers(CreateWorker,"0");
                 OWSLAWorkerConfirmButton.setText(R.string.OWSLATeamConfirmButtonADD);
                 OWSLAWorkerConfirmButton.setVisibility(View.VISIBLE);
             }
@@ -134,7 +133,7 @@ public class OWSLAWorker extends AppCompatActivity {
 
         OWSLAWorkerSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { SearchWorker(SearchWorker);
+            public void onClick(View v) { SearchWorker(SearchWorker,"0","0");
             }
         });
 
@@ -242,6 +241,7 @@ public class OWSLAWorker extends AppCompatActivity {
                     if (Switcher.equals("0")){
                         String id = jsonObject.getString("ID");
                         setEmployeeID(id);
+                        SearchWorker(SearchWorker,employeeID,"1");
                         //System.out.println(employeeID);
                     } else {
                         if (success.equals("0")) {
@@ -293,7 +293,7 @@ public class OWSLAWorker extends AppCompatActivity {
 
     }
 
-    protected void SearchWorker(String SearchWorker){
+    protected void SearchWorker(String SearchWorker, final String WorkerID,final String pointer){
         final String WorkerAFM = this.OWSLAWorkerSearchBox.getText().toString().trim();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, SearchWorker, new Response.Listener<String>() {
@@ -317,6 +317,8 @@ public class OWSLAWorker extends AppCompatActivity {
                     String Citizenship;
                     String WorkHours;
                     String Teams_Code;
+                    String ShiftType;
+                    String ID;
 
                     if (success.equals("1")) {
                         Firstname = jsonObject.getString("Firstname");
@@ -334,6 +336,9 @@ public class OWSLAWorker extends AppCompatActivity {
                         Citizenship = jsonObject.getString("Citizenship");
                         WorkHours = jsonObject.getString("WorkHours");
                         Teams_Code = jsonObject.getString("Teams_Code");
+                        ShiftType = jsonObject.getString("ShiftType");
+                        ID = jsonObject.getString("ID");
+                        setEmployeeID(ID);
 
                         OWSLAWorkerName.setText(Firstname);
                         OWSLAWorkerSurname.setText(Lastname);
@@ -350,6 +355,7 @@ public class OWSLAWorker extends AppCompatActivity {
                         OWSLAWorkerNationality.setText(Citizenship);
                         OWSLAWorkerWorkHours.setText(WorkHours);
                         OWSLAWorkerTeamCode.setText(Teams_Code);
+                        OWSLAWorkerShiftType.setText(ShiftType);
                         //Needs shift
 
                     } else {
@@ -370,7 +376,9 @@ public class OWSLAWorker extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
+                params.put("ID",WorkerID);
                 params.put("TIN",WorkerAFM);
+                params.put("pointer",pointer);
                 return params;
             }
         };
@@ -437,7 +445,7 @@ public class OWSLAWorker extends AppCompatActivity {
                         OWSLAWorkerWorkHours.setText(WorkHours);
                         OWSLAWorkerTeamCode.setText(Teams_Code);
                         OWSLAWorkerShiftType.setText(ShiftType);
-                        // OWSLAWorkerSearchBox.setText(String.valueOf(Integer.valueOf(OWSLAWorkerSearchBox.getText().toString().trim()) + 1));
+                        OWSLAWorkerSearchBox.setText("");
 
                     } else if (success.equals("2")) {
                         Toast.makeText(getApplicationContext(), "This is the last worker created", Toast.LENGTH_LONG).show();
@@ -532,7 +540,7 @@ public class OWSLAWorker extends AppCompatActivity {
                         OWSLAWorkerWorkHours.setText(WorkHours);
                         OWSLAWorkerTeamCode.setText(Teams_Code);
                         OWSLAWorkerShiftType.setText(ShiftType);
-                        //OWSLAWorkerSearchBox.setText(String.valueOf(Integer.valueOf(OWSLAWorkerSearchBox.getText().toString().trim()) + 1));
+                        OWSLAWorkerSearchBox.setText("");
 
                     } else if (success.equals("-2")) {
                         Toast.makeText(getApplicationContext(), "This is the first worker created", Toast.LENGTH_LONG).show();

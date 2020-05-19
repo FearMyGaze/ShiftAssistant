@@ -464,6 +464,7 @@ public class LogReg extends AppCompatActivity {
                                     String id = "0";
                                     String vacation_status = "0";
                                     String Teams_Code = "0";
+                                    String ShiftType = "0";
                                     for (int i = 0; i < jsonArray.length(); i++) {
 
                                         JSONObject object = jsonArray.getJSONObject(i);
@@ -478,6 +479,8 @@ public class LogReg extends AppCompatActivity {
                                             vacation_status = object.getString("VacationStatus").trim();
 
                                             Teams_Code = object.getString("team_code").trim();
+
+                                            ShiftType = object.getString("ShiftType").trim();
                                         }
 
                                         Toast.makeText(LogReg.this,
@@ -487,11 +490,12 @@ public class LogReg extends AppCompatActivity {
                                     }
                                     if (url.equals(LoginEmployees_URL)) {
                                         Intent LoginEmployee = new Intent(LogReg.this, Worker.class);
-                                        LoginEmployee.putExtra("DeadMauFive",name);
-                                        LoginEmployee.putExtra("TestPilot",email);
-                                        LoginEmployee.putExtra("goat1",id);
-                                        LoginEmployee.putExtra("goat3",vacation_status);
-                                        LoginEmployee.putExtra("goat4",Teams_Code);
+                                        LoginEmployee.putExtra("ShiftType",ShiftType);
+                                        LoginEmployee.putExtra("email",email);
+                                        LoginEmployee.putExtra("id",id);
+                                        LoginEmployee.putExtra("vacation_status",vacation_status);
+                                        LoginEmployee.putExtra("Teams_Code",Teams_Code);
+                                        LoginEmployee.putExtra("Name",name);
                                         startActivity(LoginEmployee);
 
                                     }

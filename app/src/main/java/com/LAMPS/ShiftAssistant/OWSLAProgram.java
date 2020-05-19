@@ -47,6 +47,8 @@ public class OWSLAProgram extends AppCompatActivity {
 
     protected double MorningRate = 0 , NoonRate = 0 , NightRate = 0;
 
+    String UserName;
+    String UserEmail;
 
     //Program EditText's
 
@@ -117,8 +119,8 @@ public class OWSLAProgram extends AppCompatActivity {
 
         //Intend's
 
-        String UserName = getIntent().getStringExtra("DeadMau5");
-        final String UserEmail = getIntent().getStringExtra("GOATdm5");
+        UserName = getIntent().getStringExtra("DeadMau5");
+        UserEmail = getIntent().getStringExtra("GOATdm5");
 
         //Links
         VAC_Check_URL = Links.getProgramGenerate_URL();
@@ -136,6 +138,7 @@ public class OWSLAProgram extends AppCompatActivity {
                         switch(scenario){
                             case 0:
                                 VacationCheck(UserEmail);
+                                fetchProgram();
                                 ClearText();
                                 break;
                             case 3:
@@ -155,8 +158,10 @@ public class OWSLAProgram extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(),"Please fill all the fields",Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
+
         CalculateEmployeesRequirements();
         this.OWSLAProgramTotalEmployees.setText(String.valueOf(this.TotalEmployees));
         this.OWSLAProgramTotalEmployeesHours.setText(String.valueOf(this.TotalWorkHours));
@@ -586,6 +591,104 @@ public class OWSLAProgram extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("Email",Email);
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void fetchProgram(){
+        String workerID,Shift;
+
+        String json;
+        try {
+            InputStream is = openFileInput(Links.getFileProgram());
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+
+            json = new String(buffer,"UTF-8");
+            JSONObject object = new JSONObject(json);
+
+            for(int i = 0; i < object.getJSONArray("Monday").length();i++) {
+                workerID = object.getJSONArray("Monday").getJSONObject(i).get("ID").toString();
+                Shift = object.getJSONArray("Monday").getJSONObject(i).get("ShiftType").toString();
+                uploadLastProgram("Monday",workerID,this.UserEmail,Shift);
+            }
+            for(int i = 0; i < object.getJSONArray("Tuesday").length();i++) {
+                workerID = object.getJSONArray("Tuesday").getJSONObject(i).get("ID").toString();
+                Shift = object.getJSONArray("Tuesday").getJSONObject(i).get("ShiftType").toString();
+                uploadLastProgram("Tuesday",workerID,this.UserEmail,Shift);
+            }
+            for(int i = 0; i < object.getJSONArray("Wednesday").length();i++) {
+                workerID = object.getJSONArray("Wednesday").getJSONObject(i).get("ID").toString();
+                Shift = object.getJSONArray("Wednesday").getJSONObject(i).get("ShiftType").toString();
+                uploadLastProgram("Wednesday",workerID,this.UserEmail,Shift);
+            }
+            for(int i = 0; i < object.getJSONArray("Thursday").length();i++) {
+                workerID = object.getJSONArray("Thursday").getJSONObject(i).get("ID").toString();
+                Shift = object.getJSONArray("Thursday").getJSONObject(i).get("ShiftType").toString();
+                uploadLastProgram("Thursday",workerID,this.UserEmail,Shift);
+            }
+            for(int i = 0; i < object.getJSONArray("Friday").length();i++) {
+                workerID = object.getJSONArray("Friday").getJSONObject(i).get("ID").toString();
+                Shift = object.getJSONArray("Friday").getJSONObject(i).get("ShiftType").toString();
+                uploadLastProgram("Friday",workerID,this.UserEmail,Shift);
+            }
+            for(int i = 0; i < object.getJSONArray("Saturday").length();i++) {
+                workerID = object.getJSONArray("Saturday").getJSONObject(i).get("ID").toString();
+                Shift = object.getJSONArray("Saturday").getJSONObject(i).get("ShiftType").toString();
+                uploadLastProgram("Saturday",workerID,this.UserEmail,Shift);
+            }
+            for(int i = 0; i < object.getJSONArray("Sunday").length();i++) {
+                workerID = object.getJSONArray("Sunday").getJSONObject(i).get("ID").toString();
+                Shift = object.getJSONArray("Sunday").getJSONObject(i).get("ShiftType").toString();
+                uploadLastProgram("Sunday",workerID,this.UserEmail,Shift);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void uploadLastProgram(final String nameOfTheDay, final String ID, final String Email, final String Shift){
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,  Links.getUploadProgramToDB_URL(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            if (success.equals("1")) {
+                                Toast.makeText(getApplicationContext(), "Error during uploading", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getApplicationContext(), "Field trash." + e.toString(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Failed connection" + error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("nameOfTheDay",nameOfTheDay);
+                params.put("ID",ID);
+                params.put("Email",Email);
+                params.put("Shift",Shift);
                 return params;
             }
         };
