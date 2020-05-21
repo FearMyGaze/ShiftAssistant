@@ -54,6 +54,7 @@ public class GlobalVariables {
 
     private String uploadProgramToDB = "/Shifts/RegisterProgram.php";
     private String DownloadProgramFromDB = "/Shifts/viewProgram.php";
+    private String DropLastProgram = "/Shifts/deleteProgram.php";
 
     //Files
 
@@ -103,6 +104,7 @@ public class GlobalVariables {
     private String EndVacation_URL = Protocol + IP + EndVacation;
     private String UploadProgramToDB_URL = Protocol + IP + uploadProgramToDB;
     private String DownloadProgramFromDB_URL = Protocol + IP + DownloadProgramFromDB;
+    private String DropLastProgram_URL = Protocol + IP + DropLastProgram;
 
     //TestPilot
     private String Empty = "0";
@@ -224,6 +226,8 @@ public class GlobalVariables {
     protected String getDownloadProgramFromDB_URL() {
         return DownloadProgramFromDB_URL;
     }
+
+    protected String getDropLastProgram_URL() { return DropLastProgram_URL; }
 
 
 

@@ -24,7 +24,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.CollationElementIterator;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,6 +54,7 @@ public class Worker extends AppCompatActivity {
 
     int size = 0;
 
+    ArrayList<Integer> sorting = new ArrayList<Integer>();
 
     //Link's
     GlobalVariables Links;
@@ -62,19 +65,20 @@ public class Worker extends AppCompatActivity {
 
     private static final String File_Name = "Program.json";
 
-    String ID,TeamsCode,Email,Shift,VacationStatus,Name;
+    String ID,TeamName,Email,Shift,VacationStatus,Name;
 
     //ProgramSetters
 
     ArrayList<ProgramGetterSetter> Days = new ArrayList<>();
 
-    ProgramGetterSetter Monday = new ProgramGetterSetter("Monday", Shift, Name, TeamsCode, VacationStatus);
-    ProgramGetterSetter Tuesday = new ProgramGetterSetter("Tuesday", Shift, Name, TeamsCode, VacationStatus);
-    ProgramGetterSetter Wednesday = new ProgramGetterSetter("Wednesday", Shift, Name, TeamsCode, VacationStatus);
-    ProgramGetterSetter Thursday = new ProgramGetterSetter("Thursday", Shift, Name, TeamsCode, VacationStatus);
-    ProgramGetterSetter Friday = new ProgramGetterSetter("Friday", Shift, Name, TeamsCode, VacationStatus);
-    ProgramGetterSetter Saturday = new ProgramGetterSetter("Saturday", Shift, Name, TeamsCode, VacationStatus);
-    ProgramGetterSetter Sunday = new ProgramGetterSetter("Sunday", Shift, Name, TeamsCode, VacationStatus);
+    ProgramGetterSetter Monday = new ProgramGetterSetter("Monday", Shift, Name, TeamName, VacationStatus);
+    ProgramGetterSetter Tuesday = new ProgramGetterSetter("Tuesday", Shift, Name, TeamName, VacationStatus);
+    ProgramGetterSetter Wednesday = new ProgramGetterSetter("Wednesday", Shift, Name, TeamName, VacationStatus);
+    ProgramGetterSetter Thursday = new ProgramGetterSetter("Thursday", Shift, Name, TeamName, VacationStatus);
+    ProgramGetterSetter Friday = new ProgramGetterSetter("Friday", Shift, Name, TeamName, VacationStatus);
+    ProgramGetterSetter Saturday = new ProgramGetterSetter("Saturday", Shift, Name, TeamName, VacationStatus);
+    ProgramGetterSetter Sunday = new ProgramGetterSetter("Sunday", Shift, Name, TeamName, VacationStatus);
+
 
 
     ArrayList<ProgramGetterSetter> ProgramArrayList;
@@ -83,7 +87,7 @@ public class Worker extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ID = getIntent().getStringExtra("id");
-        TeamsCode = getIntent().getStringExtra("Teams_Code");
+        TeamName = getIntent().getStringExtra("TeamName");
         Email = getIntent().getStringExtra("email");
         Shift = getIntent().getStringExtra("ShiftType");
         VacationStatus = getIntent().getStringExtra("vacation_status");
@@ -216,6 +220,7 @@ public class Worker extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        System.out.println(response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("success");
@@ -228,18 +233,25 @@ public class Worker extends AppCompatActivity {
 
                                 for(int i = 0 ; i < Shifts.size(); i++){
                                     if(Shifts.get(i).get("DayOfTheWeek").toString().equals("Monday")){
+                                        sorting.add(0);
                                         Days.add(Monday);
                                     } else if(Shifts.get(i).get("DayOfTheWeek").toString().equals("Tuesday")){
+                                        sorting.add(1);
                                         Days.add(Tuesday);
                                     } else if(Shifts.get(i).get("DayOfTheWeek").toString().equals("Wednesday")){
+                                        sorting.add(2);
                                         Days.add(Wednesday);
                                     } else if(Shifts.get(i).get("DayOfTheWeek").toString().equals("Thursday")){
+                                        sorting.add(3);
                                         Days.add(Thursday);
                                     } else if(Shifts.get(i).get("DayOfTheWeek").toString().equals("Friday")){
+                                        sorting.add(4);
                                         Days.add(Friday);
                                     } else if(Shifts.get(i).get("DayOfTheWeek").toString().equals("Saturday")){
+                                        sorting.add(5);
                                         Days.add(Saturday);
                                     } else {
+                                        sorting.add(6);
                                         Days.add(Sunday);
                                     }
                                 }
@@ -248,13 +260,56 @@ public class Worker extends AppCompatActivity {
                                     Days.get(i).setDate(Shifts.get(i).get("DayOfTheWeek").toString());
                                     Days.get(i).setShiftID(Shifts.get(i).get("Shift").toString());
                                     Days.get(i).setWorkerID(Name);
-                                    Days.get(i).setTilVAC(VacationStatus);
-                                    Days.get(i).setTeamID(TeamsCode);
+                                    if(VacationStatus.equals("1")){
+                                        Days.get(i).setTilVAC("Yes");
+                                    }
+                                    else {
+                                        Days.get(i).setTilVAC("No");
+                                    }
+                                    Days.get(i).setTeamID(TeamName);
                                 }
 
                                 for(int i = 0 ; i < Days.size(); i++) {
-                                    ProgramArrayList.add(Days.get(i));
+                                    switch(sorting.get(i)){
+                                        case 0:
+                                            if(Days.get(i).getDate().equals("Monday")){
+                                                ProgramArrayList.add(Days.get(i));
+                                            }
+                                            break;
+                                        case 1:
+                                            if(Days.get(i).getDate().equals("Tuesday")){
+                                                ProgramArrayList.add(Days.get(i));
+                                            }
+                                            break;
+                                        case 2:
+                                            if(Days.get(i).getDate().equals("Wednesday")){
+                                                ProgramArrayList.add(Days.get(i));
+                                            }
+                                            break;
+                                        case 3:
+                                            if(Days.get(i).getDate().equals("Thursday")){
+                                                ProgramArrayList.add(Days.get(i));
+                                            }
+                                            break;
+                                        case 4:
+                                            if(Days.get(i).getDate().equals("Friday")){
+                                                ProgramArrayList.add(Days.get(i));
+                                            }
+                                            break;
+                                        case 5:
+                                            if(Days.get(i).getDate().equals("Saturday")){
+                                                ProgramArrayList.add(Days.get(i));
+                                            }
+                                            break;
+                                        case 6:
+                                            if(Days.get(i).getDate().equals("Sunday")){
+                                                ProgramArrayList.add(Days.get(i));
+                                            }
+                                            break;
+                                    }
                                 }
+
+
 
                                 ProgramListAdapter adapter = new ProgramListAdapter(getApplicationContext(),R.layout.adapter_worker_program,ProgramArrayList);
                                 WorkerProgramListView.setAdapter(adapter);

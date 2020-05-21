@@ -463,8 +463,9 @@ public class LogReg extends AppCompatActivity {
                                     String email = "0";
                                     String id = "0";
                                     String vacation_status = "0";
-                                    String Teams_Code = "0";
+                                    String TeamName = "0";
                                     String ShiftType = "0";
+
                                     for (int i = 0; i < jsonArray.length(); i++) {
 
                                         JSONObject object = jsonArray.getJSONObject(i);
@@ -478,7 +479,7 @@ public class LogReg extends AppCompatActivity {
 
                                             vacation_status = object.getString("VacationStatus").trim();
 
-                                            Teams_Code = object.getString("team_code").trim();
+                                            TeamName = object.getString("TeamName").trim();
 
                                             ShiftType = object.getString("ShiftType").trim();
                                         }
@@ -493,8 +494,9 @@ public class LogReg extends AppCompatActivity {
                                         LoginEmployee.putExtra("ShiftType",ShiftType);
                                         LoginEmployee.putExtra("email",email);
                                         LoginEmployee.putExtra("id",id);
+                                        System.out.println(id);
                                         LoginEmployee.putExtra("vacation_status",vacation_status);
-                                        LoginEmployee.putExtra("Teams_Code",Teams_Code);
+                                        LoginEmployee.putExtra("TeamName",TeamName);
                                         LoginEmployee.putExtra("Name",name);
                                         startActivity(LoginEmployee);
 

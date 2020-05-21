@@ -397,6 +397,7 @@ public class OWSLAProgram extends AppCompatActivity {
     }
 
     private int ProgramEntry(){
+        dropLastProgram();
         int let = 0;
         FileOutputStream fos = null;
         JSONObject object = new JSONObject();
@@ -407,7 +408,6 @@ public class OWSLAProgram extends AppCompatActivity {
         JSONArray Friday = new JSONArray();
         JSONArray Saturday = new JSONArray();
         JSONArray Sunday = new JSONArray();
-
         try
         {
             fos = openFileOutput(Links.getFileProgram(),MODE_PRIVATE);
@@ -601,7 +601,6 @@ public class OWSLAProgram extends AppCompatActivity {
 
     private void fetchProgram(){
         String workerID,Shift;
-
         String json;
         try {
             InputStream is = openFileInput(Links.getFileProgram());
@@ -721,5 +720,38 @@ public class OWSLAProgram extends AppCompatActivity {
         catch (JSONException e){
             e.printStackTrace();
         }
+    }
+
+    public void dropLastProgram() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Links.getDropLastProgram_URL(),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            if (success.equals("1")) {
+                                Toast.makeText(getApplicationContext(), "There are no older program generations", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getApplicationContext(), "Field trash." + e.toString(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Failed connection" + error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 }
