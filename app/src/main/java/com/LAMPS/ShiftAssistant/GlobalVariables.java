@@ -6,7 +6,6 @@ public class GlobalVariables {
     private String Protocol = "http://";
     private String IP = "192.168.1.8";//Change with your IP
 
-
     //Employees
 
     private String LoginEmployees = "/Shifts/LoginEmployee.php";
@@ -18,7 +17,6 @@ public class GlobalVariables {
     private String LoginOwners ="/Shifts/LoginOwner.php";
     private String RegisterOwners = "/Shifts/RegisterOwners.php";
     private String FetchOwners = "0";
-
 
     //Teams
 
@@ -44,15 +42,12 @@ public class GlobalVariables {
     private String PreviousWorker = "/Shifts/PrevWorker.php";
     private String NewWorker = "/Shifts/RegisterEmployees.php";
 
-    //Vacation
+    //Program
 
     private String ProgramGenerate = "/Shifts/ProgramGen.php";
     private String Vacation = "/Shifts/Vacation.php";
     private String EndVacation = "/Shifts/EndVacation.php";
-
-    //Program
-
-    private String uploadProgramToDB = "/Shifts/RegisterProgram.php";
+    private String UploadProgramToDB = "/Shifts/RegisterProgram.php";
     private String DownloadProgramFromDB = "/Shifts/viewProgram.php";
     private String DropLastProgram = "/Shifts/deleteProgram.php";
 
@@ -102,13 +97,9 @@ public class GlobalVariables {
     private String ProgramGenerate_URL = Protocol + IP + ProgramGenerate;
     private String Vacation_URL = Protocol + IP + Vacation;
     private String EndVacation_URL = Protocol + IP + EndVacation;
-    private String UploadProgramToDB_URL = Protocol + IP + uploadProgramToDB;
+    private String UploadProgramToDB_URL = Protocol + IP + UploadProgramToDB;
     private String DownloadProgramFromDB_URL = Protocol + IP + DownloadProgramFromDB;
     private String DropLastProgram_URL = Protocol + IP + DropLastProgram;
-
-    //TestPilot
-    private String Empty = "0";
-    private String Empty_URL = Protocol + IP + Empty;
 
     //==================================================Getters=====================================
     //Employees
@@ -181,7 +172,6 @@ public class GlobalVariables {
         return NewAssistant;
     }
 
-
     //Workers
 
     protected String getDeleteWorker_URL() {
@@ -203,7 +193,6 @@ public class GlobalVariables {
     protected String getNewWorker_URL() {
         return NewWorker_URL;
     }
-
 
     //Program
 
@@ -229,8 +218,6 @@ public class GlobalVariables {
 
     protected String getDropLastProgram_URL() { return DropLastProgram_URL; }
 
-
-
     //Files
 
     protected String getFileProgram() {
@@ -240,10 +227,4 @@ public class GlobalVariables {
     protected String getFileEmployees() {
         return FileEmployees;
     }
-
-    //toliptseT
-    protected String getEmpty_URL() {
-        return Empty_URL;
-    }
-
 }

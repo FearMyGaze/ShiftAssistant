@@ -762,7 +762,8 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/RegisterConfirm"
                                 android:textAlignment="center"
-                                android:gravity="center_horizontal">
+                                android:gravity="center_horizontal"
+                                android:visibility="invisible">
 
                             </Button>
 

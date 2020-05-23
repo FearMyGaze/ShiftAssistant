@@ -78,6 +78,10 @@ public class OWSLATeam extends AppCompatActivity {
         OWSLATeamAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                OWSLATeamName.setText(" ");
+                OWSLATeamCapacity.setText(" ");
+                OWSLATeamShiftStart.setText(" ");
+                OWSLATeamShiftEnd.setText(" ");
                 NewTeams(CreateTeam,"1");
                 OWSLATeamConfirm.setText(R.string.OWSLATeamConfirmButtonADD);
                 OWSLATeamConfirm.setVisibility(View.VISIBLE);

@@ -356,7 +356,6 @@ public class OWSLAWorker extends AppCompatActivity {
                         OWSLAWorkerWorkHours.setText(WorkHours);
                         OWSLAWorkerTeamCode.setText(Teams_Code);
                         OWSLAWorkerShiftType.setText(ShiftType);
-                        //Needs shift
 
                     } else {
                         Toast.makeText(getApplicationContext(), "Cannot find a employee with ID: " + WorkerAFM, Toast.LENGTH_LONG).show();
@@ -449,7 +448,7 @@ public class OWSLAWorker extends AppCompatActivity {
 
                     } else if (success.equals("2")) {
                         Toast.makeText(getApplicationContext(), "This is the last worker created", Toast.LENGTH_LONG).show();
-                        System.out.println(employeeID);
+                        //System.out.println(employeeID);
                     } else if (success.equals("3")) {
                         Toast.makeText(getApplicationContext(), "There are no workers", Toast.LENGTH_LONG).show();
                     } else if (success.equals("view")) {
@@ -480,7 +479,6 @@ public class OWSLAWorker extends AppCompatActivity {
     }
 
     protected void PrevWorker(String PreviousWorker){
-
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, PreviousWorker, new Response.Listener<String>() {
             @Override
