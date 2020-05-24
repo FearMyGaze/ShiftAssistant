@@ -318,11 +318,11 @@ public class Worker extends AppCompatActivity {
 
                             }
                             else if (success.equals("1")) {
-                                Toast.makeText(getApplicationContext(), "Failed to download the weekly program", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "You are not included to the program", Toast.LENGTH_LONG).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(getApplicationContext(), "Field stauros." + e.toString(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Field trash." + e.toString(), Toast.LENGTH_LONG).show();
                         }
                     }
                 },

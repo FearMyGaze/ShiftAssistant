@@ -72,7 +72,7 @@ public class OWSLATeam extends AppCompatActivity {
 
         //Method's
 
-        NewTeams(CreateTeam,"1");
+        NewTeams(CreateTeam,"3");
 
         //ClickListener's
         OWSLATeamAdd.setOnClickListener(new View.OnClickListener() {
@@ -99,15 +99,14 @@ public class OWSLATeam extends AppCompatActivity {
         OWSLATeamConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewTeams(CreateTeam,"0");
+                NewTeams(CreateTeam,"2");
             }
         });
 
         OWSLATeamRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DelTeams(DeleteTeam);
-                Toast.makeText(getApplicationContext(),"Not yet implemented",Toast.LENGTH_LONG).show();
+                DelTeams();
             }
         });
 
@@ -120,10 +119,6 @@ public class OWSLATeam extends AppCompatActivity {
         OWSLATeamNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OWSLATeamName.setText(" ");
-                OWSLATeamCapacity.setText(" ");
-                OWSLATeamShiftStart.setText(" ");
-                OWSLATeamShiftEnd.setText(" ");
                 NextTeam(NextTeam);
             }
         });
@@ -143,7 +138,7 @@ public class OWSLATeam extends AppCompatActivity {
         final String TeamCapacity = this.OWSLATeamCapacity.getText().toString().trim();
         final String TeamShiftStart= this.OWSLATeamShiftStart.getText().toString().trim();
         final String TeamShiftEnd = this.OWSLATeamShiftEnd.getText().toString().trim();
-
+        final String id = this.OWSLATeamID.getText().toString().trim();
         StringRequest stringRequest = new StringRequest(Request.Method.POST,CreateLink ,
                 new Response.Listener<String>() {
                     @Override
@@ -155,29 +150,54 @@ public class OWSLATeam extends AppCompatActivity {
                                 String id = jsonObject.getString("ID");
                                 OWSLATeamID.setText(String.valueOf(Integer.valueOf(id)+1));
                                 OWSLATeamSearchBox.setText(OWSLATeamID.getText());
-                            }else{
+                            }else if(Switcher.equals("2")){
                                 if (success.equals("0")) {
-                                    Toast.makeText(getApplicationContext(), "Creating team succeed.", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "Creating team succeed.", Toast.LENGTH_SHORT).show();
                                 }else{
-                                    Toast.makeText(getApplicationContext(),"Failed creating team .", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(),"Failed creating team .", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                String id = jsonObject.getString("ID");
+                                String TeamName = jsonObject.getString("TeamName");
+                                String Capacity = jsonObject.getString("Capacity");
+                                String Shift_Start = jsonObject.getString("Shift_Start");
+                                String Shift_End = jsonObject.getString("Shift_End");
+
+                                if(id.equals("0") && TeamName.equals("0") && Capacity.equals("0") && Shift_Start.equals("0") && Shift_End.equals("0")){
+                                    OWSLATeamID.setText("");
+                                    OWSLATeamName.setText("");
+                                    OWSLATeamCapacity.setText("");
+                                    OWSLATeamShiftStart.setText("");
+                                    OWSLATeamShiftEnd.setText("");
+                                    Toast.makeText(getApplicationContext(), "There are no teams to preview", Toast.LENGTH_SHORT).show();
+                                } else {
+
+                                    OWSLATeamID.setText(id);
+                                    OWSLATeamSearchBox.setText(id);
+                                    OWSLATeamName.setText(TeamName);
+                                    OWSLATeamCapacity.setText(Capacity);
+                                    OWSLATeamShiftStart.setText(Shift_Start);
+                                    OWSLATeamShiftEnd.setText(Shift_End);
                                 }
                             }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(OWSLATeam.this, "Field trash." + e.toString(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(OWSLATeam.this, "Field trash." + e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(OWSLATeam.this, "Failed connection" + error.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(OWSLATeam.this, "Failed connection" + error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 })
         {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
+                params.put("ID",id);
                 params.put("TeamName",TeamName);
                 params.put("Capacity",TeamCapacity);
                 params.put("Shift_Start",TeamShiftStart);
@@ -191,8 +211,8 @@ public class OWSLATeam extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    protected void DelTeams(String DeleteLink){
-
+    protected void DelTeams(){
+        deleteTeam();
     }
 
     protected void SearchTeam(String SearchTeam){
@@ -202,6 +222,7 @@ public class OWSLATeam extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("success");
@@ -224,19 +245,19 @@ public class OWSLATeam extends AppCompatActivity {
                                 OWSLATeamShiftEnd.setText(Shift_End);
 
                             } else {
-                                Toast.makeText(getApplicationContext(),"Cannot find a team with ID: "+TeamCode, Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),"Cannot find a team with ID: "+TeamCode, Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(OWSLATeam.this, "Field trash." + e.toString(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(OWSLATeam.this, "Field trash." + e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(OWSLATeam.this, "Failed connection" + error.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(OWSLATeam.this, "Failed connection" + error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 })
         {
@@ -281,23 +302,23 @@ public class OWSLATeam extends AppCompatActivity {
                                 OWSLATeamSearchBox.setText(String.valueOf(Integer.valueOf(OWSLATeamSearchBox.getText().toString().trim())+1));
 
                             } else if(success.equals("2")) {
-                                Toast.makeText(getApplicationContext(),"This is the last team created", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),"This is the last team created", Toast.LENGTH_SHORT).show();
                             } else if(success.equals("3")) {
-                                Toast.makeText(getApplicationContext(),"There are no teams", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),"There are no teams", Toast.LENGTH_SHORT).show();
                             } else if(success.equals("view")) {
-                                Toast.makeText(getApplicationContext(),"Error during converting ", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),"Error during converting ", Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(OWSLATeam.this, "Field trash." + e.toString(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(OWSLATeam.this, "Field trash." + e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(OWSLATeam.this, "Failed connection" + error.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(OWSLATeam.this, "Failed connection" + error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 })
         {
@@ -343,23 +364,23 @@ public class OWSLATeam extends AppCompatActivity {
                                 OWSLATeamSearchBox.setText(String.valueOf(Integer.valueOf(OWSLATeamSearchBox.getText().toString().trim())-1));
 
                             } else if(success.equals("-2")) {
-                                Toast.makeText(getApplicationContext(),"This is the first team created", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),"This is the first team created", Toast.LENGTH_SHORT).show();
                             } else if(success.equals("-3")) {
-                                Toast.makeText(getApplicationContext(),"There are no teams", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),"There are no teams", Toast.LENGTH_SHORT).show();
                             } else if(success.equals("view")) {
-                                Toast.makeText(getApplicationContext(),"Error during converting ", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),"Error during converting ", Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(OWSLATeam.this, "Field trash." + e.toString(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(OWSLATeam.this, "Field trash." + e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(OWSLATeam.this, "Failed connection" + error.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(OWSLATeam.this, "Failed connection" + error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 })
         {
@@ -373,4 +394,51 @@ public class OWSLATeam extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
+
+    protected void deleteTeam(){
+        final String TeamCode = this.OWSLATeamSearchBox.getText().toString().trim();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, DeleteTeam,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        System.out.println(response);
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            if (success.equals("0")) {
+                                Toast.makeText(getApplicationContext(), "Team deleted successfully", Toast.LENGTH_SHORT).show();
+                                OWSLATeamID.setText("");
+                                OWSLATeamName.setText("");
+                                OWSLATeamCapacity.setText("");
+                                OWSLATeamShiftStart.setText("");
+                                OWSLATeamShiftEnd.setText("");
+                                PrevTeam(PreviousTeam);
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Failed to delete the team", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(OWSLATeam.this, "Field trash." + e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(OWSLATeam.this, "Failed connection" + error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("TeamID",TeamCode);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
 }

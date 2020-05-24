@@ -126,8 +126,7 @@ public class OWSLAWorker extends AppCompatActivity {
         OWSLAWorkerRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DelWorkers(DeleteWorker);
-                Toast.makeText(getApplicationContext(),"Not yet implemented",Toast.LENGTH_LONG).show();
+                DelWorkers();
             }
         });
 
@@ -236,13 +235,18 @@ public class OWSLAWorker extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
+                    System.out.println(response);
                     JSONObject jsonObject = new JSONObject(response);
                     String success = jsonObject.getString("success");
-                    if (Switcher.equals("0")){
-                        String id = jsonObject.getString("ID");
-                        setEmployeeID(id);
-                        SearchWorker(SearchWorker,employeeID,"1");
-                        //System.out.println(employeeID);
+
+                    if (Switcher.equals("0")) {
+                        if(success.equals("0")) {
+                            String id = jsonObject.getString("ID");
+                            setEmployeeID(id);
+                            SearchWorker(SearchWorker, employeeID, "1");
+                        } else {
+                            Toast.makeText(getApplicationContext(), "There are no employees", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
                         if (success.equals("0")) {
                             Toast.makeText(getApplicationContext(), "Creating worker succeed.", Toast.LENGTH_LONG).show();
@@ -289,8 +293,44 @@ public class OWSLAWorker extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    protected void DelWorkers(String DeleteLink){
+    protected void DelWorkers(){
 
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, DeleteWorker,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            if (success.equals("0")) {
+                                Toast.makeText(getApplicationContext(), "Employee deleted successfully", Toast.LENGTH_SHORT).show();
+                                ClearText();
+                                PrevWorker(PreviousWorker);
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Failed to delete the Employee", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getApplicationContext(), "Field trash." + e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Failed connection" + error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("EmployeeID",employeeID);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 
     protected void SearchWorker(String SearchWorker, final String WorkerID,final String pointer){

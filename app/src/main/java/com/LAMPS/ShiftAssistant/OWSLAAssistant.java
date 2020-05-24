@@ -113,20 +113,19 @@ public class OWSLAAssistant extends AppCompatActivity {
 
         OWSLAAssistantConfirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {NewAssistants(CreateAssistant,"2");}
+            public void onClick(View v) {NewAssistants("0");}
         });
 
         OWSLAAssistantRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DelAssistants(DeleteAssistant);
-                Toast.makeText(getApplicationContext(),"Not yet implemented",Toast.LENGTH_LONG).show();
+                DelAssistants();
             }
         });
 
         OWSLAAssistantSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {SearchAssistant(SearchAssistant,"0","0");}
+            public void onClick(View v) {SearchAssistant();}
         });
 
         OWSLAAssistantNext.setOnClickListener(new View.OnClickListener() {
@@ -137,20 +136,19 @@ public class OWSLAAssistant extends AppCompatActivity {
 
         OWSLAAssistantPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { PrevAssistant(PreviousAssistant);
+            public void onClick(View v) {
+                PrevAssistant();
+
             }
         });
 
         //Method's
 
-        NewAssistants(CreateAssistant,"0");
+        NewAssistants("1");
 
     }
 
-
-
-
-    protected void NewAssistants(String CreateLink , final String Switcher){
+    protected void NewAssistants(final String switcher){
         final String AssistantName = this.OWSLAAssistantName.getText().toString().trim();
         final String AssistantSurname = this.OWSLAAssistantSurname.getText().toString().trim();
         final String AssistantAFM = this.OWSLAAssistantAFM.getText().toString().trim();
@@ -166,29 +164,72 @@ public class OWSLAAssistant extends AppCompatActivity {
         final String AssistantBirthDate = this.OWSLAAssistantBirthDate.getText().toString().trim();
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, CreateLink, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, CreateAssistant, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String success = jsonObject.getString("success");
-
-                    if (Switcher.equals("0")) {
-                        String ID = jsonObject.getString("ID");
+                    String Firstname;
+                    String Lastname;
+                    String TIN;
+                    String User_Password;
+                    String Landline;
+                    String Mobile;
+                    String Address_Street;
+                    String Address_Number;
+                    String Postal_Code;
+                    String Gender;
+                    String Birthday;
+                    String Citizenship;
+                    String Email;
+                    String ID;
+                    if(switcher.equals("1")){
+                        Firstname = jsonObject.getString("Firstname");
+                        Lastname = jsonObject.getString("SurName");
+                        Email = jsonObject.getString("Email");
+                        TIN = jsonObject.getString("TIN");
+                        User_Password = jsonObject.getString("Owner_Password");
+                        Landline = jsonObject.getString("LandLine");
+                        Mobile = jsonObject.getString("Mobile");
+                        Address_Street = jsonObject.getString("Address_Street");
+                        Address_Number = jsonObject.getString("Address_Number");
+                        Postal_Code = jsonObject.getString("Postal_Code");
+                        Gender = jsonObject.getString("Gender");
+                        Birthday = jsonObject.getString("Birthday");
+                        Citizenship = jsonObject.getString("Citizenship");
+                        ID = jsonObject.getString("ID");
                         SetAssistantID(ID);
-                        SearchAssistant(SearchAssistant, AssistantID, "1");
-                        //System.out.println(AssistantID);
+                        if(!ID.equals("0")) {
+                            OWSLAAssistantName.setText(Firstname);
+                            OWSLAAssistantSurname.setText(Lastname);
+                            OWSLAAssistantEmail.setText(Email);
+                            OWSLAAssistantAFM.setText(TIN);
+                            OWSLAAssistantPassword.setText(User_Password);
+                            OWSLAAssistantLandLine.setText(Landline);
+                            OWSLAAssistantCellPhone.setText(Mobile);
+                            OWSLAAssistantStreetAddress.setText(Address_Street);
+                            OWSLAAssistantNumber.setText(Address_Number);
+                            OWSLAAssistantPostalCode.setText(Postal_Code);
+                            OWSLAAssistantGender.setText(Gender);
+                            OWSLAAssistantBirthDate.setText(Birthday);
+                            OWSLAAssistantNationality.setText(Citizenship);
+                            OWSLAAssistantSearchBox.setText(ID);
+                            SetAssistantID(ID);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "There are no assistants registered", Toast.LENGTH_SHORT).show();
+                            ClearText();
+                        }
                     } else {
                         if (success.equals("0")) {
-                            Toast.makeText(getApplicationContext(), "Creating Assistant succeed.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Creating Assistant succeed.", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(getApplicationContext(), "Failed creating Assistant .", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Failed creating Assistant .", Toast.LENGTH_SHORT).show();
                         }
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Field trash." + e.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Field trash." + e.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -197,38 +238,73 @@ public class OWSLAAssistant extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Failed connection" + error.toString(), Toast.LENGTH_LONG).show();
             }
         })
-      {
-          protected Map<String , String> getParams() throws AuthFailureError{
-              Map<String , String> params = new HashMap<>();
-//              params.put("RegisterName", AssistantName);
-//              params.put("RegisterSurname", AssistantSurname);
-//              params.put("RegisterPassword", AssistantPassword);
-//              params.put("RegisterGender", AssistantGender);
-//              params.put("RegisterBirthDate" ,AssistantBirthDate);
-//              params.put("RegisterNationality", AssistantNationality);
-//              params.put("RegisterEmail", AssistantEmail);
-//              params.put("RegisterLandLine" , AssistantLandLine);
-//              params.put("RegisterCellPhone" , AssistantCellPhone);
-//              params.put("RegisterStreetAddress" , AssistantStreetAddress);
-//              params.put("RegisterNumber" , AssistantNumber);
-//              params.put("RegisterPostalCode" , AssistantPostalCode);
-//              params.put("RegisterAFM" , AssistantAFM);
-//              params.put("Switcher" , Switcher);
-              return params;
-          }
-      };
+        {
+            protected Map<String , String> getParams() throws AuthFailureError{
+                Map<String , String> params = new HashMap<>();
+                params.put("RegisterName", AssistantName);
+                params.put("RegisterSurname", AssistantSurname);
+                params.put("RegisterPassword", AssistantPassword);
+                params.put("RegisterGender", AssistantGender);
+                params.put("RegisterBirthDate" ,AssistantBirthDate);
+                params.put("RegisterNationality", AssistantNationality);
+                params.put("RegisterEmail", AssistantEmail);
+                params.put("RegisterLandLine" , AssistantLandLine);
+                params.put("RegisterCellPhone" , AssistantCellPhone);
+                params.put("RegisterStreetAddress" , AssistantStreetAddress);
+                params.put("RegisterNumber" , AssistantNumber);
+                params.put("RegisterPostalCode" , AssistantPostalCode);
+                params.put("RegisterAFM" , AssistantAFM);
+                params.put("Switcher",switcher);
+                return params;
+            }
+        };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
 
-    protected void DelAssistants(String DeleteLink){
-
+    protected void DelAssistants(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, DeleteAssistant,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            if (success.equals("0")) {
+                                Toast.makeText(getApplicationContext(), "Assistant deleted successfully", Toast.LENGTH_SHORT).show();
+                                ClearText();
+                                PrevAssistant();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Failed to delete the Assistant", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getApplicationContext(), "Field trash." + e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Failed connection" + error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("AssistantID",AssistantID);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 
-    protected void SearchAssistant(String SearchLink , final String AssistantID , final String Pointer){
-        final String AssistantAFM = this.OWSLAAssistantAFM.getText().toString().trim();
+    protected void SearchAssistant(){
+        final String id = this.OWSLAAssistantSearchBox.getText().toString().trim();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, SearchLink, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SearchAssistant, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -251,11 +327,11 @@ public class OWSLAAssistant extends AppCompatActivity {
 
                     if (success.equals("1")) {
                         Firstname = jsonObject.getString("Firstname");
-                        Lastname = jsonObject.getString("Lastname");
+                        Lastname = jsonObject.getString("SurName");
                         Email = jsonObject.getString("Email");
                         TIN = jsonObject.getString("TIN");
-                        User_Password = jsonObject.getString("User_Password");
-                        Landline = jsonObject.getString("Landline");
+                        User_Password = jsonObject.getString("Owner_Password");
+                        Landline = jsonObject.getString("LandLine");
                         Mobile = jsonObject.getString("Mobile");
                         Address_Street = jsonObject.getString("Address_Street");
                         Address_Number = jsonObject.getString("Address_Number");
@@ -280,25 +356,23 @@ public class OWSLAAssistant extends AppCompatActivity {
                         OWSLAAssistantBirthDate.setText(Birthday);
                         OWSLAAssistantNationality.setText(Citizenship);
                     } else {
-                        Toast.makeText(getApplicationContext(), "Cannot find a Assistant with ID: " + AssistantAFM, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Cannot find a Assistant with ID: " + id, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Field trash." + e.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Field trash." + e.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Failed connection" + error.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Failed connection" + error.toString(), Toast.LENGTH_SHORT).show();
             }
         })
         {
             protected Map<String , String> getParams() throws AuthFailureError{
                 Map<String, String> params = new HashMap<>();
-                params.put("ID",AssistantID);
-                params.put("TIN",AssistantAFM);
-                params.put("pointer",Pointer);
+                params.put("ID",id);
                 return params;
             }
         };
@@ -315,6 +389,7 @@ public class OWSLAAssistant extends AppCompatActivity {
                     String success = jsonObject.getString("success");
                     String Firstname;
                     String Lastname;
+                    String Email;
                     String TIN;
                     String User_Password;
                     String Landline;
@@ -329,10 +404,11 @@ public class OWSLAAssistant extends AppCompatActivity {
 
                     if (success.equals("1")) {
                         Firstname = jsonObject.getString("Firstname");
-                        Lastname = jsonObject.getString("Lastname");
+                        Lastname = jsonObject.getString("SurName");
+                        Email = jsonObject.getString("Email");
                         TIN = jsonObject.getString("TIN");
-                        User_Password = jsonObject.getString("User_Password");
-                        Landline = jsonObject.getString("Landline");
+                        User_Password = jsonObject.getString("Owner_password");
+                        Landline = jsonObject.getString("LandLine");
                         Mobile = jsonObject.getString("Mobile");
                         Address_Street = jsonObject.getString("Address_Street");
                         Address_Number = jsonObject.getString("Address_Number");
@@ -345,6 +421,7 @@ public class OWSLAAssistant extends AppCompatActivity {
 
                         OWSLAAssistantName.setText(Firstname);
                         OWSLAAssistantSurname.setText(Lastname);
+                        OWSLAAssistantEmail.setText(Email);
                         OWSLAAssistantAFM.setText(TIN);
                         OWSLAAssistantPassword.setText(User_Password);
                         OWSLAAssistantLandLine.setText(Landline);
@@ -355,25 +432,23 @@ public class OWSLAAssistant extends AppCompatActivity {
                         OWSLAAssistantGender.setText(Gender);
                         OWSLAAssistantBirthDate.setText(Birthday);
                         OWSLAAssistantNationality.setText(Citizenship);
-                        OWSLAAssistantSearchBox.setText("");
 
                     } else if (success.equals("2")) {
-                        Toast.makeText(getApplicationContext(), "This is the last Assistant created", Toast.LENGTH_LONG).show();
-                        //System.out.println(AssistantID);
+                        Toast.makeText(getApplicationContext(), "This is the last Assistant created", Toast.LENGTH_SHORT).show();
                     } else if (success.equals("3")) {
-                        Toast.makeText(getApplicationContext(), "There are no Assistants", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "There are no Assistants", Toast.LENGTH_SHORT).show();
                     } else if (success.equals("view")) {
-                        Toast.makeText(getApplicationContext(), "Error during converting ", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Error during converting ", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(),"Field trash." + e.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Field trash." + e.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Failed connection" + error.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Failed connection" + error.toString(), Toast.LENGTH_SHORT).show();
             }
         })
         {
@@ -383,18 +458,20 @@ public class OWSLAAssistant extends AppCompatActivity {
                 return params;
             }
         };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 
-    protected void PrevAssistant(String PreviousLink){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, PreviousLink, new Response.Listener<String>() {
+    protected void PrevAssistant(){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, PreviousAssistant, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     String success = jsonObject.getString("success");
-
                     String Firstname;
                     String Lastname;
+                    String Email;
                     String TIN;
                     String User_Password;
                     String Landline;
@@ -409,10 +486,11 @@ public class OWSLAAssistant extends AppCompatActivity {
 
                     if (success.equals("-1")) {
                         Firstname = jsonObject.getString("Firstname");
-                        Lastname = jsonObject.getString("Lastname");
+                        Lastname = jsonObject.getString("SurName");
+                        Email = jsonObject.getString("Email");
                         TIN = jsonObject.getString("TIN");
-                        User_Password = jsonObject.getString("User_Password");
-                        Landline = jsonObject.getString("Landline");
+                        User_Password = jsonObject.getString("Owner_password");
+                        Landline = jsonObject.getString("LandLine");
                         Mobile = jsonObject.getString("Mobile");
                         Address_Street = jsonObject.getString("Address_Street");
                         Address_Number = jsonObject.getString("Address_Number");
@@ -425,6 +503,7 @@ public class OWSLAAssistant extends AppCompatActivity {
 
                         OWSLAAssistantName.setText(Firstname);
                         OWSLAAssistantSurname.setText(Lastname);
+                        OWSLAAssistantEmail.setText(Email);
                         OWSLAAssistantAFM.setText(TIN);
                         OWSLAAssistantPassword.setText(User_Password);
                         OWSLAAssistantLandLine.setText(Landline);
@@ -435,31 +514,30 @@ public class OWSLAAssistant extends AppCompatActivity {
                         OWSLAAssistantGender.setText(Gender);
                         OWSLAAssistantBirthDate.setText(Birthday);
                         OWSLAAssistantNationality.setText(Citizenship);
-                        OWSLAAssistantSearchBox.setText("");
+
 
                     } else if (success.equals("-2")) {
-                        Toast.makeText(getApplicationContext(), "This is the first Assistant created", Toast.LENGTH_LONG).show();
-                        System.out.println(AssistantID);
+                        Toast.makeText(getApplicationContext(), "This is the first Assistant created", Toast.LENGTH_SHORT).show();
                     } else if (success.equals("-3")) {
-                        Toast.makeText(getApplicationContext(), "There are no Assistant", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "There are no Assistant", Toast.LENGTH_SHORT).show();
                     } else if (success.equals("view")) {
-                        Toast.makeText(getApplicationContext(), "Error during converting ", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Error during converting ", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(), "Field trash." + e.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Field trash." + e.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Failed connection" + error.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Failed connection" + error.toString(), Toast.LENGTH_SHORT).show();
             }
         })
         {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("AssistantID",String.valueOf(Integer.valueOf(AssistantID)));
+                params.put("AssistantID",AssistantID);
                 return params;
             }
         };
@@ -472,19 +550,19 @@ public class OWSLAAssistant extends AppCompatActivity {
     }
 
     protected void ClearText(){
-        OWSLAAssistantSearchBox.setText(" ");
-        OWSLAAssistantName.setText(" ");
-        OWSLAAssistantSurname.setText(" ");
-        OWSLAAssistantAFM.setText(" ");
-        OWSLAAssistantEmail.setText(" ");
-        OWSLAAssistantPassword.setText(" ");
-        OWSLAAssistantGender.setText(" ");
-        OWSLAAssistantCellPhone.setText(" ");
-        OWSLAAssistantLandLine.setText(" ");
-        OWSLAAssistantStreetAddress.setText(" ");
-        OWSLAAssistantNumber.setText(" ");
-        OWSLAAssistantPostalCode.setText(" ");
-        OWSLAAssistantNationality.setText(" ");
-        OWSLAAssistantBirthDate.setText(" ");
+        OWSLAAssistantSearchBox.setText("");
+        OWSLAAssistantName.setText("");
+        OWSLAAssistantSurname.setText("");
+        OWSLAAssistantAFM.setText("");
+        OWSLAAssistantEmail.setText("");
+        OWSLAAssistantPassword.setText("");
+        OWSLAAssistantGender.setText("");
+        OWSLAAssistantCellPhone.setText("");
+        OWSLAAssistantLandLine.setText("");
+        OWSLAAssistantStreetAddress.setText("");
+        OWSLAAssistantNumber.setText("");
+        OWSLAAssistantPostalCode.setText("");
+        OWSLAAssistantNationality.setText("");
+        OWSLAAssistantBirthDate.setText("");
     }
 }

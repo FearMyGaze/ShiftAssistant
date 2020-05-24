@@ -220,7 +220,7 @@ public class OWSLA extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Vacation status updated", Toast.LENGTH_LONG).show();
                             }
                             else if (success.equals("1")) {
-                                Toast.makeText(getApplicationContext(), "Vacation status failed to update", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "There are no employees", Toast.LENGTH_LONG).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

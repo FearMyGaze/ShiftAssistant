@@ -36,7 +36,7 @@ public class GlobalVariables {
 
     //Worker
 
-    private String DeleteWorker = "/Shifts/";
+    private String DeleteWorker = "/Shifts/DeleteWorkers.php";
     private String SearchWorker = "/Shifts/SearchWorker.php";
     private String NextWorker = "/Shifts/NextWorker.php";
     private String PreviousWorker = "/Shifts/PrevWorker.php";
@@ -153,23 +153,23 @@ public class GlobalVariables {
     //Assistants
 
     protected String getDeleteAssistants() {
-        return DeleteAssistants;
+        return DeleteAssistants_URL;
     }
 
     protected String getSearchAssistants() {
-        return SearchAssistants;
+        return SearchAssistants_URL;
     }
 
     protected String getNextAssistant() {
-        return NextAssistant;
+        return NextAssistant_URL;
     }
 
     protected String getPreviousAssistant() {
-        return PreviousAssistant;
+        return PreviousAssistant_URL;
     }
 
     protected String getNewAssistant() {
-        return NewAssistant;
+        return NewAssistant_URL;
     }
 
     //Workers
