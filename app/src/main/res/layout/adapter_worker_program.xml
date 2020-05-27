@@ -47,13 +47,13 @@
 
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="200sp"
                     android:layout_height="30sp"
                     android:orientation="horizontal"
                     android:gravity="center">
 
                     <TextView
-                        android:layout_width="115sp"
+                        android:layout_width="100sp"
                         android:layout_height="match_parent"
                         android:layout_marginRight="10sp"
                         android:gravity="center"
@@ -65,7 +65,7 @@
 
                     <TextView
                         android:id="@+id/WorkerAdapterWorkerID"
-                        android:layout_width="150sp"
+                        android:layout_width="100sp"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="Worker id"
@@ -76,13 +76,13 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="200sp"
                     android:layout_height="30sp"
                     android:orientation="horizontal"
                     android:gravity="center">
 
                     <TextView
-                        android:layout_width="115sp"
+                        android:layout_width="100sp"
                         android:layout_height="match_parent"
                         android:layout_marginRight="10sp"
                         android:gravity="center"
@@ -94,7 +94,7 @@
 
                     <TextView
                         android:id="@+id/WorkerAdapterTeamID"
-                        android:layout_width="150sp"
+                        android:layout_width="100sp"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="Team ID"
@@ -114,13 +114,13 @@
                 android:layout_weight="25">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="200sp"
                     android:layout_height="30sp"
                     android:orientation="horizontal"
                     android:gravity="center">
 
                     <TextView
-                        android:layout_width="115sp"
+                        android:layout_width="100sp"
                         android:layout_height="match_parent"
                         android:layout_marginRight="10sp"
                         android:gravity="center"
@@ -132,10 +132,10 @@
 
                     <TextView
                         android:id="@+id/WorkerAdapterShiftID"
-                        android:layout_width="150sp"
+                        android:layout_width="100sp"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="Shift type"
+                        android:text="MESHMERI"
                         android:textStyle="italic"
                         android:textSize="14sp"
                         android:textColor="@color/White">
@@ -145,13 +145,13 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="200sp"
                     android:layout_height="30sp"
                     android:orientation="horizontal"
                     android:gravity="center">
 
                     <TextView
-                        android:layout_width="115sp"
+                        android:layout_width="100sp"
                         android:layout_height="match_parent"
                         android:layout_marginRight="10sp"
                         android:gravity="center"
@@ -160,12 +160,13 @@
                         android:text="@string/WorkerTilVacation">
 
                     </TextView>
+
                     <TextView
                         android:id="@+id/WorkerAdapterTilVacation"
-                        android:layout_width="150sp"
+                        android:layout_width="100sp"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="Days Til Vacation"
+                        android:text="Yes"
                         android:textColor="@color/White">
 
                     </TextView>
