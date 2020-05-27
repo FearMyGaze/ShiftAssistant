@@ -38,7 +38,7 @@ public class OWSLA extends AppCompatActivity {
 
     //Choices
 
-    Button OWSLAWorkers , OWSLAAssistants , OWSLATeams , OWSLAPrograms , OWSLASettings;
+    Button OWSLAWorkers , OWSLAAssistants , OWSLATeams , OWSLAPrograms;
 
     //Links
     String FetchEmployees_URL;
@@ -110,13 +110,6 @@ public class OWSLA extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent Activity = new Intent(OWSLA.this, OWSLAAssistant.class);
-                startActivity(Activity);
-            }
-        });
-        OWSLASettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent Activity = new Intent(OWSLA.this , OWSLASetting.class);
                 startActivity(Activity);
             }
         });
