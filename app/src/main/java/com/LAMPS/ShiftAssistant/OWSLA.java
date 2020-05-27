@@ -65,7 +65,6 @@ public class OWSLA extends AppCompatActivity {
         OWSLATeams = findViewById(R.id.OWSLATeams);
         OWSLAAssistants = findViewById(R.id.OWSLAAssistants);
         OWSLAWorkers = findViewById(R.id.OWSLAWorkers);
-        OWSLASettings = findViewById(R.id.OWSLASettings);
 
         //Links
         FetchEmployees_URL = Links.getFetchEmployees_URL();

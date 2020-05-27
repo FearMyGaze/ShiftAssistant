@@ -121,8 +121,4 @@
     ============================Switch==============================================================
     <string name="Owner">Owner</string>
     <string name="user">Simple User</string>
-    ============================Paragraphs==========================================================
-    <string name="WelcomeParagraph">Test</string>
-    <string name="ForgetParagraph">YeetUs</string>
-
 </resources>

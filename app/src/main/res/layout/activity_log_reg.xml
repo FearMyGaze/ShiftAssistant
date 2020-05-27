@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@drawable/custom_background">
 
@@ -46,18 +46,6 @@
                     </LinearLayout>//Name
 
                 </LinearLayout>//WelcomeString
-
-                <TextView
-                    android:id="@+id/WelcomeParagraph"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/WelcomeParagraph"
-                    android:textSize="15sp"
-                    android:textColor="@color/White">
-
-                </TextView>//WelcomeParagraph
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -130,31 +118,27 @@
                         android:orientation="horizontal"
                         android:gravity="center">
 
-                        <TextView
-                            android:layout_width="160sp"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="@string/LoginName"
-                            android:textColor="@color/White"
-                            android:textAlignment="center"
-                            android:textSize="20sp">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="300sp"
+                            android:layout_height="50sp"
+                            app:hintEnabled="false">
 
-                        </TextView>
+                            <EditText
+                                android:id="@+id/LoginName"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:inputType="textEmailAddress"
+                                android:imeOptions="actionNext"
+                                android:maxLines="1"
+                                android:hint="@string/LoginName"
+                                android:textColorHint="@color/White"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
 
-                        <EditText
-                            android:id="@+id/LoginName"
-                            android:layout_width="160sp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:inputType="textEmailAddress"
-                            android:imeOptions="actionNext"
-                            android:maxLines="1"
-                            android:textAlignment="center"
-                            android:textColor="@color/White"
-                            android:textSize="25sp"
-                            android:background="@color/BlackTransparent">
+                            </EditText>//LoginName
 
-                        </EditText>//LoginName
+                        </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>//LoginTranslate n LoginName
 
@@ -165,31 +149,30 @@
                         android:orientation="horizontal"
                         android:gravity="center">
 
-                        <TextView
-                            android:layout_width="160sp"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="@string/LoginPassword"
-                            android:textColor="@color/White"
-                            android:textAlignment="center"
-                            android:textSize="20sp">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="300sp"
+                            android:layout_height="50sp"
+                            app:passwordToggleEnabled="true"
+                            app:passwordToggleTint="@color/White"
+                            app:hintEnabled="false">
 
-                        </TextView>
+                            <EditText
+                                android:id="@+id/LoginPassword"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:inputType="textPassword"
+                                android:maxLines="1"
+                                android:hint="@string/LoginPassword"
+                                android:textColorHint="@color/White"
+                                android:imeOptions="actionGo"
+                                android:textColor="@color/White"
+                                android:textSize="25sp"
+                                android:background="@color/BlackTransparent">
 
-                        <EditText
-                            android:id="@+id/LoginPassword"
-                            android:layout_width="160sp"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:inputType="textPassword"
-                            android:maxLines="1"
-                            android:imeOptions="actionGo"
-                            android:textAlignment="center"
-                            android:textColor="@color/White"
-                            android:textSize="25sp"
-                            android:background="@color/BlackTransparent">
+                            </EditText>
 
-                        </EditText>
+                        </com.google.android.material.textfield.TextInputLayout>
+
 
                     </LinearLayout>PasswordTranslate n LoginPassword
 
@@ -1066,17 +1049,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="gone">
-
-                    <TextView
-                        android:id="@+id/ForgetParagraph"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/WelcomeParagraph"
-                        android:textSize="15sp"
-                        android:textColor="@color/White">
-
-                    </TextView>
 
                     <LinearLayout
                         android:layout_width="match_parent"

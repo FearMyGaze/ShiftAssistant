@@ -34,6 +34,8 @@ public class OWSLATeam extends AppCompatActivity {
     //Links
     private String CreateTeam , DeleteTeam , SearchTeam , NextTeam , PreviousTeam;
 
+    String ID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,6 +134,9 @@ public class OWSLATeam extends AppCompatActivity {
 
     }
 
+    private void setID(String id){
+        this.ID = id;
+    }
 
     protected void NewTeams(String CreateLink , final String Switcher){
         final String TeamName = this.OWSLATeamName.getText().toString().trim();
@@ -153,6 +158,11 @@ public class OWSLATeam extends AppCompatActivity {
                             }else if(Switcher.equals("2")){
                                 if (success.equals("0")) {
                                     Toast.makeText(getApplicationContext(), "Creating team succeed.", Toast.LENGTH_SHORT).show();
+                                    OWSLATeamID.setText("");
+                                    OWSLATeamName.setText("");
+                                    OWSLATeamCapacity.setText("");
+                                    OWSLATeamShiftStart.setText("");
+                                    OWSLATeamShiftEnd.setText("");
                                 }else{
                                     Toast.makeText(getApplicationContext(),"Failed creating team .", Toast.LENGTH_SHORT).show();
                                 }
@@ -162,6 +172,7 @@ public class OWSLATeam extends AppCompatActivity {
                                 String Capacity = jsonObject.getString("Capacity");
                                 String Shift_Start = jsonObject.getString("Shift_Start");
                                 String Shift_End = jsonObject.getString("Shift_End");
+                                setID(id);
 
                                 if(id.equals("0") && TeamName.equals("0") && Capacity.equals("0") && Shift_Start.equals("0") && Shift_End.equals("0")){
                                     OWSLATeamID.setText("");
@@ -363,6 +374,7 @@ public class OWSLATeam extends AppCompatActivity {
                                 OWSLATeamShiftEnd.setText(Shift_End);
                                 OWSLATeamSearchBox.setText(String.valueOf(Integer.valueOf(OWSLATeamSearchBox.getText().toString().trim())-1));
 
+
                             } else if(success.equals("-2")) {
                                 Toast.makeText(getApplicationContext(),"This is the first team created", Toast.LENGTH_SHORT).show();
                             } else if(success.equals("-3")) {
@@ -402,20 +414,33 @@ public class OWSLATeam extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        System.out.println(response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("success");
+                            String TeamName;
+                            String Capacity;
+                            String Shift_Start;
+                            String Shift_End;
+                            String ID;
                             if (success.equals("0")) {
                                 Toast.makeText(getApplicationContext(), "Team deleted successfully", Toast.LENGTH_SHORT).show();
-                                OWSLATeamID.setText("");
-                                OWSLATeamName.setText("");
-                                OWSLATeamCapacity.setText("");
-                                OWSLATeamShiftStart.setText("");
-                                OWSLATeamShiftEnd.setText("");
-                                PrevTeam(PreviousTeam);
-                            } else {
+                                ID = jsonObject.getString("ID");
+                                TeamName = jsonObject.getString("TeamName");
+                                Capacity = jsonObject.getString("Capacity");
+                                Shift_Start = jsonObject.getString("Shift_Start");
+                                Shift_End = jsonObject.getString("Shift_End");
+
+                                OWSLATeamID.setText(ID);
+                                OWSLATeamName.setText(TeamName);
+                                OWSLATeamCapacity.setText(Capacity);
+                                OWSLATeamShiftStart.setText(Shift_Start);
+                                OWSLATeamShiftEnd.setText(Shift_End);
+                                OWSLATeamSearchBox.setText(String.valueOf(Integer.valueOf(OWSLATeamSearchBox.getText().toString().trim())));
+
+                            } else if(success.equals("1")) {
                                 Toast.makeText(getApplicationContext(), "Failed to delete the team", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "You have reached the first Team", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

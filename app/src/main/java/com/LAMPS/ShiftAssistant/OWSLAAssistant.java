@@ -147,7 +147,7 @@ public class OWSLAAssistant extends AppCompatActivity {
         NewAssistants("1");
 
     }
-
+    
     protected void NewAssistants(final String switcher){
         final String AssistantName = this.OWSLAAssistantName.getText().toString().trim();
         final String AssistantSurname = this.OWSLAAssistantSurname.getText().toString().trim();

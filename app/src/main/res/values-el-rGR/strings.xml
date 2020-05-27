@@ -121,8 +121,4 @@
     ================================Switch==========================================================
     <string name="Owner">Ιδιοκτήτης</string>
     <string name="user">Απλός χρήστης</string>
-    ============================Paragraphs==========================================================
-    <string name="WelcomeParagraph">Τεστ Τεστ</string>
-    <string name="ForgetParagraph">Yeet</string>
-
-</resources>
+ </resources>

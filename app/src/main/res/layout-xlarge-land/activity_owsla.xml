@@ -106,18 +106,7 @@
 
                         </Button>
 
-                        <Button
-                            android:id="@+id/OWSLASettings"
-                            android:layout_width="180sp"
-                            android:layout_height="100sp"
-                            android:text="@string/OWSLASettings"
-                            android:textSize="20sp">
-
-                        </Button>
-
                     </LinearLayout>//Row 1
-
-
 
                 </LinearLayout>//You can touch
             </LinearLayout>//Inside Scroll don't touch
