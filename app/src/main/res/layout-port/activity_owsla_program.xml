@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10sp"
+        android:layout_margin="12sp"
         android:orientation="vertical">
 
         <ScrollView
@@ -64,7 +64,7 @@
                         </TextView>
 
                         <TextView
-                            android:layout_width="90sp"
+                            android:layout_width="85sp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5sp"
                             android:text="@string/MenuShiftTypeMorning"
@@ -75,7 +75,7 @@
                         </TextView>
 
                         <TextView
-                            android:layout_width="90sp"
+                            android:layout_width="85sp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5sp"
                             android:text="@string/MenuShiftTypeNoon"
@@ -86,7 +86,7 @@
                         </TextView>
 
                         <TextView
-                            android:layout_width="90sp"
+                            android:layout_width="85sp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5sp"
                             android:text="@string/MenuShiftTypeNight"
@@ -124,7 +124,7 @@
 
                         <EditText
                             android:id="@+id/OWSLAProgramMondayMorning"
-                            android:layout_width="90sp"
+                            android:layout_width="85sp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5sp"
                             android:gravity="center"
@@ -140,7 +140,7 @@
 
                         <EditText
                             android:id="@+id/OWSLAProgramMondayNoon"
-                            android:layout_width="90sp"
+                            android:layout_width="85sp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5sp"
                             android:gravity="center"
@@ -156,7 +156,7 @@
 
                         <EditText
                             android:id="@+id/OWSLAProgramMondayNight"
-                            android:layout_width="90sp"
+                            android:layout_width="85sp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5sp"
                             android:gravity="center"
@@ -190,7 +190,7 @@
 
                         <EditText
                             android:id="@+id/OWSLAProgramTuesdayMorning"
-                            android:layout_width="90sp"
+                            android:layout_width="85sp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5sp"
                             android:gravity="center"
@@ -206,7 +206,7 @@
 
                         <EditText
                             android:id="@+id/OWSLAProgramTuesdayNoon"
-                            android:layout_width="90sp"
+                            android:layout_width="85sp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5sp"
                             android:gravity="center"
@@ -222,7 +222,7 @@
 
                         <EditText
                             android:id="@+id/OWSLAProgramTuesdayNight"
-                            android:layout_width="90sp"
+                            android:layout_width="85sp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5sp"
                             android:gravity="center"
@@ -256,7 +256,7 @@
 
                         <EditText
                             android:id="@+id/OWSLAProgramWednesdayMorning"
-                            android:layout_width="90sp"
+                            android:layout_width="85sp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5sp"
                             android:gravity="center"
@@ -272,7 +272,7 @@
 
                         <EditText
                             android:id="@+id/OWSLAProgramWednesdayNoon"
-                            android:layout_width="90sp"
+                            android:layout_width="85sp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5sp"
                             android:gravity="center"
@@ -288,7 +288,7 @@
 
                         <EditText
                             android:id="@+id/OWSLAProgramWednesdayNight"
-                            android:layout_width="90sp"
+                            android:layout_width="85sp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5sp"
                             android:gravity="center"
@@ -322,7 +322,7 @@
 
                         <EditText
                             android:id="@+id/OWSLAProgramThursdayMorning"
-                            android:layout_width="90sp"
+                            android:layout_width="85sp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5sp"
                             android:gravity="center"
@@ -338,7 +338,7 @@
 
                         <EditText
                             android:id="@+id/OWSLAProgramThursdayNoon"
-                            android:layout_width="90sp"
+                            android:layout_width="85sp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5sp"
                             android:gravity="center"
@@ -354,7 +354,7 @@
 
                         <EditText
                             android:id="@+id/OWSLAProgramThursdayNight"
-                            android:layout_width="90sp"
+                            android:layout_width="85sp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5sp"
                             android:gravity="center"
@@ -388,7 +388,7 @@
 
                         <EditText
                             android:id="@+id/OWSLAProgramFridayMorning"
-                            android:layout_width="90sp"
+                            android:layout_width="85sp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5sp"
                             android:gravity="center"
@@ -404,7 +404,7 @@
 
                         <EditText
                             android:id="@+id/OWSLAProgramFridayNoon"
-                            android:layout_width="90sp"
+                            android:layout_width="85sp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5sp"
                             android:gravity="center"
@@ -420,7 +420,7 @@
 
                         <EditText
                             android:id="@+id/OWSLAProgramFridayNight"
-                            android:layout_width="90sp"
+                            android:layout_width="85sp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5sp"
                             android:gravity="center"
@@ -454,7 +454,7 @@
 
                         <EditText
                             android:id="@+id/OWSLAProgramSaturdayMorning"
-                            android:layout_width="90sp"
+                            android:layout_width="85sp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5sp"
                             android:gravity="center"
@@ -470,7 +470,7 @@
 
                         <EditText
                             android:id="@+id/OWSLAProgramSaturdayNoon"
-                            android:layout_width="90sp"
+                            android:layout_width="85sp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5sp"
                             android:gravity="center"
@@ -486,7 +486,7 @@
 
                         <EditText
                             android:id="@+id/OWSLAProgramSaturdayNight"
-                            android:layout_width="90sp"
+                            android:layout_width="85sp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5sp"
                             android:gravity="center"
@@ -520,7 +520,7 @@
 
                         <EditText
                             android:id="@+id/OWSLAProgramSundayMorning"
-                            android:layout_width="90sp"
+                            android:layout_width="85sp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5sp"
                             android:gravity="center"
@@ -536,7 +536,7 @@
 
                         <EditText
                             android:id="@+id/OWSLAProgramSundayNoon"
-                            android:layout_width="90sp"
+                            android:layout_width="85sp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5sp"
                             android:gravity="center"
@@ -552,7 +552,7 @@
 
                         <EditText
                             android:id="@+id/OWSLAProgramSundayNight"
-                            android:layout_width="90sp"
+                            android:layout_width="85sp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5sp"
                             android:gravity="center"
@@ -601,7 +601,7 @@
 
                         <Button
                             android:id="@+id/OWSLAProgramConfirm"
-                            android:layout_width="110sp"
+                            android:layout_width="100sp"
                             android:layout_height="40sp"
                             android:layout_marginLeft="5sp"
                             android:textSize="10sp"
