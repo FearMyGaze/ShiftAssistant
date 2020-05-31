@@ -1031,7 +1031,7 @@
                             android:id="@+id/ForgetSend"
                             android:layout_width="wrap_content"
                             android:layout_height="50sp"
-                            android:text="@string/Log">
+                            android:text="@string/ForgetSend">
 
                         </Button>//ForgetSend
 

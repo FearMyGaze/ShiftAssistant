@@ -54,7 +54,7 @@ public class Worker extends AppCompatActivity {
 
     int size = 0;
 
-    ArrayList<Integer> sorting = new ArrayList<Integer>();
+    ArrayList<Integer> sorting = new ArrayList<>();
 
     //Link's
     GlobalVariables Links;
@@ -71,13 +71,13 @@ public class Worker extends AppCompatActivity {
 
     ArrayList<ProgramGetterSetter> Days = new ArrayList<>();
 
-    ProgramGetterSetter Monday = new ProgramGetterSetter("Monday", Shift, Name, TeamName, VacationStatus);
-    ProgramGetterSetter Tuesday = new ProgramGetterSetter("Tuesday", Shift, Name, TeamName, VacationStatus);
-    ProgramGetterSetter Wednesday = new ProgramGetterSetter("Wednesday", Shift, Name, TeamName, VacationStatus);
-    ProgramGetterSetter Thursday = new ProgramGetterSetter("Thursday", Shift, Name, TeamName, VacationStatus);
-    ProgramGetterSetter Friday = new ProgramGetterSetter("Friday", Shift, Name, TeamName, VacationStatus);
-    ProgramGetterSetter Saturday = new ProgramGetterSetter("Saturday", Shift, Name, TeamName, VacationStatus);
-    ProgramGetterSetter Sunday = new ProgramGetterSetter("Sunday", Shift, Name, TeamName, VacationStatus);
+    ProgramGetterSetter Monday ;
+    ProgramGetterSetter Tuesday;
+    ProgramGetterSetter Wednesday;
+    ProgramGetterSetter Thursday ;
+    ProgramGetterSetter Friday ;
+    ProgramGetterSetter Saturday ;
+    ProgramGetterSetter Sunday ;
 
 
 
@@ -117,6 +117,15 @@ public class Worker extends AppCompatActivity {
 
         WorkerProgramListView = findViewById(R.id.WorkerProgramListView);
 
+        Monday = new ProgramGetterSetter(getResources().getString(R.string.Monday), Shift, Name, TeamName, VacationStatus);
+        Tuesday = new ProgramGetterSetter(getResources().getString(R.string.Tuesday), Shift, Name, TeamName, VacationStatus);
+        Wednesday = new ProgramGetterSetter(getResources().getString(R.string.Wednesday), Shift, Name, TeamName, VacationStatus);
+        Thursday = new ProgramGetterSetter(getResources().getString(R.string.Thursday), Shift, Name, TeamName, VacationStatus);
+        Friday = new ProgramGetterSetter(getResources().getString(R.string.Friday), Shift, Name, TeamName, VacationStatus);
+        Saturday = new ProgramGetterSetter(getResources().getString(R.string.Saturday), Shift, Name, TeamName, VacationStatus);
+        Sunday = new ProgramGetterSetter(getResources().getString(R.string.Sunday), Shift, Name, TeamName, VacationStatus);
+
+        System.out.print(Monday.getDate() + " " + Tuesday.getDate());
         //Links
         VAC_URL = Links.getVacation_URL();
 
@@ -220,7 +229,6 @@ public class Worker extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        System.out.println(response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String success = jsonObject.getString("success");
@@ -232,22 +240,22 @@ public class Worker extends AppCompatActivity {
                                 }
 
                                 for(int i = 0 ; i < Shifts.size(); i++){
-                                    if(Shifts.get(i).get("DayOfTheWeek").toString().equals("Monday")){
+                                    if(Shifts.get(i).get("DayOfTheWeek").toString().equals("Monday") || Shifts.get(i).get("DayOfTheWeek").toString().equals("Δευτέρα")){
                                         sorting.add(0);
                                         Days.add(Monday);
-                                    } else if(Shifts.get(i).get("DayOfTheWeek").toString().equals("Tuesday")){
+                                    } else if(Shifts.get(i).get("DayOfTheWeek").toString().equals("Tuesday") || Shifts.get(i).get("DayOfTheWeek").toString().equals("Τρίτη")){
                                         sorting.add(1);
                                         Days.add(Tuesday);
-                                    } else if(Shifts.get(i).get("DayOfTheWeek").toString().equals("Wednesday")){
+                                    } else if(Shifts.get(i).get("DayOfTheWeek").toString().equals("Wednesday") || Shifts.get(i).get("DayOfTheWeek").toString().equals("Τετάρτη")){
                                         sorting.add(2);
                                         Days.add(Wednesday);
-                                    } else if(Shifts.get(i).get("DayOfTheWeek").toString().equals("Thursday")){
+                                    } else if(Shifts.get(i).get("DayOfTheWeek").toString().equals("Thursday") || Shifts.get(i).get("DayOfTheWeek").toString().equals("Πέμπτη")){
                                         sorting.add(3);
                                         Days.add(Thursday);
-                                    } else if(Shifts.get(i).get("DayOfTheWeek").toString().equals("Friday")){
+                                    } else if(Shifts.get(i).get("DayOfTheWeek").toString().equals("Friday") || Shifts.get(i).get("DayOfTheWeek").toString().equals("Παρασκευή")){
                                         sorting.add(4);
                                         Days.add(Friday);
-                                    } else if(Shifts.get(i).get("DayOfTheWeek").toString().equals("Saturday")){
+                                    } else if(Shifts.get(i).get("DayOfTheWeek").toString().equals("Saturday") || Shifts.get(i).get("DayOfTheWeek").toString().equals("Σάββατο")){
                                         sorting.add(5);
                                         Days.add(Saturday);
                                     } else {
@@ -272,38 +280,45 @@ public class Worker extends AppCompatActivity {
                                 for(int i = 0 ; i < Days.size(); i++) {
                                     switch(sorting.get(i)){
                                         case 0:
-                                            if(Days.get(i).getDate().equals("Monday")){
+                                            if(Days.get(i).getDate().equals("Monday") || Days.get(i).getDate().equals("Δευτέρα")){
                                                 ProgramArrayList.add(Days.get(i));
+                                                Days.get(i).setDate(getResources().getString(R.string.Monday));
                                             }
                                             break;
                                         case 1:
-                                            if(Days.get(i).getDate().equals("Tuesday")){
+                                            if(Days.get(i).getDate().equals("Tuesday") || Days.get(i).getDate().equals("Τρίτη")){
                                                 ProgramArrayList.add(Days.get(i));
+                                                Days.get(i).setDate(getResources().getString(R.string.Tuesday));
                                             }
                                             break;
                                         case 2:
-                                            if(Days.get(i).getDate().equals("Wednesday")){
+                                            if(Days.get(i).getDate().equals("Wednesday") || Days.get(i).getDate().equals("Τετάρτη")){
                                                 ProgramArrayList.add(Days.get(i));
+                                                Days.get(i).setDate(getResources().getString(R.string.Wednesday));
                                             }
                                             break;
                                         case 3:
-                                            if(Days.get(i).getDate().equals("Thursday")){
+                                            if(Days.get(i).getDate().equals("Thursday") || Days.get(i).getDate().equals("Πέμπτη")){
                                                 ProgramArrayList.add(Days.get(i));
+                                                Days.get(i).setDate(getResources().getString(R.string.Thursday));
                                             }
                                             break;
                                         case 4:
-                                            if(Days.get(i).getDate().equals("Friday")){
+                                            if(Days.get(i).getDate().equals("Friday") || Days.get(i).getDate().equals("Παρασκευή")){
                                                 ProgramArrayList.add(Days.get(i));
+                                                Days.get(i).setDate(getResources().getString(R.string.Friday));
                                             }
                                             break;
                                         case 5:
-                                            if(Days.get(i).getDate().equals("Saturday")){
+                                            if(Days.get(i).getDate().equals("Saturday") || Days.get(i).getDate().equals("Σάββατο")){
                                                 ProgramArrayList.add(Days.get(i));
+                                                Days.get(i).setDate(getResources().getString(R.string.Saturday));
                                             }
                                             break;
                                         case 6:
-                                            if(Days.get(i).getDate().equals("Sunday")){
+                                            if(Days.get(i).getDate().equals("Sunday") || Days.get(i).getDate().equals("Κυριακή")){
                                                 ProgramArrayList.add(Days.get(i));
+                                                Days.get(i).setDate(getResources().getString(R.string.Sunday));
                                             }
                                             break;
                                     }

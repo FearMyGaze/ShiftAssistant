@@ -284,7 +284,7 @@ public class OWSLATeam extends AppCompatActivity {
     }
 
     protected void NextTeam(String NextTeam){
-        final String TeamCode = this.OWSLATeamID.getText().toString().trim();
+        final String TeamCode = this.OWSLATeamSearchBox.getText().toString().trim();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, NextTeam,
                 new Response.Listener<String>() {
@@ -345,7 +345,7 @@ public class OWSLATeam extends AppCompatActivity {
     }
 
     protected void PrevTeam(String PreviousTeam){
-        final String TeamCode = this.OWSLATeamID.getText().toString().trim();
+        final String TeamCode = this.OWSLATeamSearchBox.getText().toString().trim();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, PreviousTeam,
                 new Response.Listener<String>() {
