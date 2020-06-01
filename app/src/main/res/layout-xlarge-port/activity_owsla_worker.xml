@@ -648,7 +648,7 @@
                                 android:layout_width="160sp"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:inputType="phone"
+                                android:inputType="text"
                                 android:maxLines="1"
                                 android:imeOptions="actionNext"
                                 android:textAlignment="center"

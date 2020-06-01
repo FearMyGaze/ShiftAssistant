@@ -147,7 +147,7 @@ public class OWSLAAssistant extends AppCompatActivity {
         NewAssistants("1");
 
     }
-    
+
     protected void NewAssistants(final String switcher){
         final String AssistantName = this.OWSLAAssistantName.getText().toString().trim();
         final String AssistantSurname = this.OWSLAAssistantSurname.getText().toString().trim();
@@ -223,6 +223,7 @@ public class OWSLAAssistant extends AppCompatActivity {
                     } else {
                         if (success.equals("0")) {
                             Toast.makeText(getApplicationContext(), "Creating Assistant succeed.", Toast.LENGTH_SHORT).show();
+                            NewAssistants("1");
                         } else {
                             Toast.makeText(getApplicationContext(), "Failed creating Assistant .", Toast.LENGTH_SHORT).show();
                         }

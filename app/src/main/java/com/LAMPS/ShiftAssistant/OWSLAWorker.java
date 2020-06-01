@@ -249,6 +249,7 @@ public class OWSLAWorker extends AppCompatActivity {
                         }
                     } else {
                         if (success.equals("0")) {
+                            NewWorkers(CreateWorker,"0");
                             Toast.makeText(getApplicationContext(), "Creating worker succeed.", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(getApplicationContext(), "Failed creating worker .", Toast.LENGTH_LONG).show();
@@ -617,6 +618,7 @@ public class OWSLAWorker extends AppCompatActivity {
     public void ClearText(){
         OWSLAWorkerName.setText("");
         OWSLAWorkerSurname.setText("");
+        OWSLAWorkerAFM.setText("");
         OWSLAWorkerEmail.setText("");
         OWSLAWorkerPassword.setText("");
         OWSLAWorkerGender.setText("");
@@ -629,6 +631,7 @@ public class OWSLAWorker extends AppCompatActivity {
         OWSLAWorkerBirthDate.setText("");
         OWSLAWorkerNationality.setText("");
         OWSLAWorkerWorkHours.setText("");
+        OWSLAWorkerShiftType.setText("");
     }
 
 }

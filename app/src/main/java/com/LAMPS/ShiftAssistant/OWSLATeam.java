@@ -158,11 +158,6 @@ public class OWSLATeam extends AppCompatActivity {
                             }else if(Switcher.equals("2")){
                                 if (success.equals("0")) {
                                     Toast.makeText(getApplicationContext(), "Creating team succeed.", Toast.LENGTH_SHORT).show();
-                                    OWSLATeamID.setText("");
-                                    OWSLATeamName.setText("");
-                                    OWSLATeamCapacity.setText("");
-                                    OWSLATeamShiftStart.setText("");
-                                    OWSLATeamShiftEnd.setText("");
                                 }else{
                                     Toast.makeText(getApplicationContext(),"Failed creating team .", Toast.LENGTH_SHORT).show();
                                 }
