@@ -123,6 +123,14 @@ public class OWSLA extends AppCompatActivity {
             }
         }, 10);
     }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(this,LogReg.class);
+        finish();
+        startActivity(intent);
+    }
+
     private void FetchEmployeesData(final String Email){
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, FetchEmployees_URL,

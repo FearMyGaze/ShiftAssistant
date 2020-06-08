@@ -4,7 +4,7 @@ public class GlobalVariables {
 
     //Setup
     private String Protocol = "http://";
-    private String IP = "192.168.1.8";//Change with your IP
+    private String IP = "192.168.1.6";//Change with your IP
 
     //Employees
 
