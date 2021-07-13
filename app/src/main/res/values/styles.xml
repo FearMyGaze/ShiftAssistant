@@ -1,9 +1,0 @@
-<resources>
-    <!-- Application theme without bar-->
-    <style name="NoBar" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">#120028</item> //Toolbar color
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-</resources>
